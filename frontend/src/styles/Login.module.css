@@ -1,0 +1,113 @@
+/* Left side of Login screen */
+.appName {
+    font-size: 4rem;
+    color: var(--accent-color);
+    font-weight: 900;
+}
+
+.blurb {
+    font-size: 1.5rem;
+}
+
+/* Right side of Login screen */
+.loginContainer {
+    border: 0.5px solid rgb(201, 201, 201); 
+    padding: 1.3rem;
+    border-radius: 0.5rem;
+    box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.1);
+}
+
+.loginText {
+    display: flex;
+    justify-content: center;
+    font-size: 3.5rem;
+    font-weight: 500;
+}
+
+.thirdPartySignInButton {
+    width: 20rem;
+}
+
+.googleSignInButton {
+    background-color: #4884ec;
+}
+
+.googleSignInButton:hover {
+    background-color: #4884ec;
+    opacity: 0.9;
+}
+
+.loginButton {
+    width: 20rem;
+    padding-block: 0.5rem;
+    background: var(--accent-color);
+    border: none;
+}
+
+.loginButton:hover {
+    background: var(--accent-color);
+    opacity: 0.9;
+}
+
+.textInput {
+    width: 20rem;
+}
+
+.link {
+    text-decoration: none;
+    color: var(--accent-color);
+}
+
+.link:hover {
+    text-decoration: underline;
+}
+
+.signUpButton {
+    background-color: var(--accent-color);
+    border: none;
+}
+
+.signUpButton:hover {
+    background-color: var(--accent-color);
+    opacity: 0.9;
+}
+
+/* Registration Form */
+.registrationFormContainer {
+
+}
+
+.registrationBodyContainer {
+
+}
+
+.nameInput {
+    padding-inline: 0.4rem;
+}
+
+.terms {
+    font-size: 0.8rem;
+}
+
+.signupButton {
+    background-color: rgb(0, 186, 0);
+    font-size: 1.3rem;
+    font-weight: 600;
+    border: none;
+}
+
+.signupButton:hover {
+    background-color: rgb(0, 186, 0);
+    opacity: 0.9;
+}
+
+.signupText {
+    font-size: 2rem;
+    font-weight: 700;
+}
+
+.profilePicture {
+    width: 4rem;
+    height: auto;
+    border-radius: 50%;
+}

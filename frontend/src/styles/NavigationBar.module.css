@@ -1,0 +1,17 @@
+.loginButton {
+    background-color: var(--accent-color);
+    color: white;
+    border-radius: 5px;
+    padding-block: 7px;
+    width: 100px;
+}
+
+.loginButton:hover {
+    color: white;
+    opacity: 0.9;
+}
+
+.brand {
+    color: var(--accent-color);
+    font-weight: 900;
+}
