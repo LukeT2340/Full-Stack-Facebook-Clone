@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { useLogin } from '../hooks/useLogin'
+import { useRegister } from '../hooks/useRegister'
 import { Link } from 'react-router-dom'
 import { Form, Button, Modal, FormGroup, FormLabel } from 'react-bootstrap'
 import { FaGoogle, FaApple } from 'react-icons/fa'
@@ -18,7 +19,7 @@ const Login = () => {
 // Left side of login page
 const LeftSide = () => {
     return (
-        <div className={`col-xl-4 col-lg-4 col-md-4 col-sm-none`}>
+        <div className={`col-xl-4 col-lg-4 col-md-4 col-sm-none mx-4`}>
             <h1 className={`${styles.appName}`}>headbook</h1>
             <p className={`${styles.blurb}`}>Headbook helps you connect and share with the people in your life.</p>
         </div>
@@ -28,7 +29,7 @@ const LeftSide = () => {
 // Right side of login page
 const RightSide = () => {
     return (
-        <div className={`${styles.loginContainer} col-xl-3 col-lg-6 col-md-8 col-sm-11`}>   
+        <div className={`${styles.loginContainer} col-xl-4 col-lg-6 col-md-8 col-sm-11 mx-4`}>   
             {/* Email and password sign-in */}
             <EmailLogin />
 
@@ -117,7 +118,7 @@ const EmailLogin = () => {
                 />
             </Form.Group>
 
-            <Button type="submit" className={`${styles.loginButton} mt-2`}>
+            <Button type="submit" className={`${styles.loginButton} mt-2`} disabled={isLoading}>
                 {/* Show loading text when isLoading */}
                 {isLoading ? 'Logging in...' : 'Login'}
             </Button>
@@ -157,21 +158,33 @@ const RegistrationModal = ({ show, handleClose }) => {
     const [lastName, setLastName] = useState("")
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
-    const { login, error, isLoading } = useLogin()
+    const { register, error, isLoading } = useRegister()
     const [selectedImage, setSelectedImage] = useState(null);
+    const [imagePreview, setImagePreview] = useState(null);
 
     // Handle Profile Picture Change
     const handleImageChange = (e) => {
-      const file = e.target.files[0];
-      if (file) {
+        const file = e.target.files[0];
+        
+        // Check if a file is selected
+        if (!file) {
+            return;
+        }
+    
+        // Check if the selected file is a valid instance of Blob or File
+        if (!(file instanceof Blob) && !(file instanceof File)) {
+            return;
+        }
+    
+        // Proceed with handling the valid file
         const reader = new FileReader();
-        reader.onloadend = () => {
-          setSelectedImage(reader.result);
+            reader.onloadend = () => {
+            setImagePreview(reader.result);
+            setSelectedImage(file);
         };
         reader.readAsDataURL(file);
-      }
     };
-  
+    
     // Handle First Name Change 
     const handleFirstNameChange = (e) => {
         setFirstName(e.target.value)
@@ -195,7 +208,7 @@ const RegistrationModal = ({ show, handleClose }) => {
     // Handle Login
     const submitForm = async (e) => {
         e.preventDefault()
-        await login(email, password)
+        await register(selectedImage, firstName, lastName, email, password)
     }
 
     return (
@@ -208,7 +221,7 @@ const RegistrationModal = ({ show, handleClose }) => {
                     <Form.Label>About you</Form.Label>
                     { /* Profile picture */ }
                     {selectedImage ? (
-                        <img className={`${styles.profilePicture}`} src={selectedImage} alt="Profile Preview" />
+                        <img className={`${styles.profilePicture}`} src={imagePreview} alt="Profile Preview" />
                     ) : (
                         <Form.Group controlId="formBasicProfilePicture" className={`${styles.textInput}`}>
                             <Form.Control 
@@ -268,16 +281,17 @@ const RegistrationModal = ({ show, handleClose }) => {
 
                     <p className={styles.terms}> In vitae maximus dolor. Phasellus pharetra, nisi vel tristique sagittis, lectus erat egestas tellus, in vestibulum sem elit eu nibh. Nunc id massa dolor. Praesent non fermentum tellus. Morbi eget risus mi. Sed tortor nunc, viverra at elementum vel, lobortis ut ipsum. Proin tellus sem, tempus eu diam vel, venenatis ultrices sapien.</p>
 
-                    <Button type="submit" className={`${styles.signupButton} mt-2`}>
+                    <Button type="submit" className={`${styles.signupButton} mt-2`} disabled={isLoading}>
                         {/* Show loading text when isLoading */}
                         {isLoading ? 'Signing Up...' : 'Sign Up'}
                     </Button>
                     {error && (
-                        <p>{error}</p>)
+                        <p>{error.message}</p>)
                     } 
                 </Form>
             </Modal.Body>
         </Modal>
     )
 }
+
 export default Login;

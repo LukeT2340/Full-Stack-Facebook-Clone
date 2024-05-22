@@ -6,7 +6,7 @@ export const useLogin = () => {
     const [isLoading, setIsLoading] = useState(null);
     const { dispatch } = useAuthContext();
     
-    const login = async(email, password) => {
+    const login = async (email, password) => {
         setIsLoading(true);
         setError(null);
         
@@ -15,35 +15,36 @@ export const useLogin = () => {
             password: password.trim()
         };
 
-        const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/user/login`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(userData)
-        });
+        try {
+            const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/user/login`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(userData)
+            });
 
-        // Handle unsuccessful sign up
-        if (!response.ok) {
-            const errorData = await response.json();
-            setIsLoading(false);
-            setError(errorData.errorMessage || 'Unknown server error. Please try again later.');
-            
-        }
+            // Handle unsuccessful login
+            if (!response.ok) {
+                const errorData = await response.json();
+                throw new Error(errorData.message || 'Unknown server error. Please try again later.');
+            }
 
-        // Handle successful sign up
-        if (response.ok) {
+            // Handle successful login
             const json = await response.json();
-            
-            // Save the use to local storage
+
+            // Save the user to local storage
             localStorage.setItem('user', JSON.stringify(json));
 
             // Update auth context
-            dispatch({type: 'LOGIN', payload: json});
-        
+            dispatch({ type: 'LOGIN', payload: json });
+
             setIsLoading(false);
+        } catch (error) {
+            setIsLoading(false);
+            setError(error.message);
         }
-    }
+    };
 
     return { login, isLoading, error };
 };

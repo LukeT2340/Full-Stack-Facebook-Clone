@@ -6,12 +6,32 @@
     width: 100px;
 }
 
-.loginButton:hover {
+.loginButton:hover, .loginButton:focus {
     color: white;
     opacity: 0.9;
+}
+
+.logoutButton {
+    border-radius: 5px;
+    padding-block: 7px;
+    width: 100px;
+    border: none;
+    background-color: white;
+    color: gray;
+}
+
+.logoutButton:hover, .logoutButton:focus {
+    background-color: white;
+    opacity: 0.9;
+    color: black;
 }
 
 .brand {
     color: var(--accent-color);
     font-weight: 900;
+}
+
+.brand:hover {
+    color: var(--accent-color);
+    opacity: 0.9;
 }
