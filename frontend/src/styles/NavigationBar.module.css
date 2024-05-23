@@ -1,31 +1,11 @@
-.loginButton {
-    background-color: var(--accent-color);
-    color: white;
-    border-radius: 5px;
-    padding-block: 7px;
-    width: 100px;
+.navBar {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center; 
 }
 
-.loginButton:hover, .loginButton:focus {
-    color: white;
-    opacity: 0.9;
-}
-
-.logoutButton {
-    border-radius: 5px;
-    padding-block: 7px;
-    width: 100px;
-    border: none;
-    background-color: white;
-    color: gray;
-}
-
-.logoutButton:hover, .logoutButton:focus {
-    background-color: white;
-    opacity: 0.9;
-    color: black;
-}
-
+/* Left */
 .brand {
     color: var(--accent-color);
     font-weight: 900;
@@ -34,4 +14,117 @@
 .brand:hover {
     color: var(--accent-color);
     opacity: 0.9;
+}
+
+.searchBarContainer {
+    display: flex;
+    align-items: center;
+    background: #f0f2f5;
+    padding-block: 8px;
+    padding-inline: 15px;
+    border-radius: 20px;
+}
+
+.searchBar {
+    border: none;
+    background: #f0f2f5;
+    padding-left: 5px;
+}
+
+.searchBar:focus {
+    outline: none;
+}
+
+.searchIcon {
+    color: gray;
+    font-weight: 100;
+}
+
+
+/* Right */
+.buttonContainer {
+    display: flex;
+    align-items: center;
+    padding: 12px; 
+    background-color: #f0f2f5; 
+    border-radius: 50%;
+    cursor: pointer; 
+    transition: background-color 0.3s;
+    margin-right: 7px;
+}
+
+.buttonContainer:hover {
+    background-color: #e0e0e0; 
+}
+
+.button {
+    color: black; 
+    font-size: 20px; 
+}
+
+.profilePictureContainer {
+    border: none;
+    background: none;
+}
+
+.profilePicture {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+}
+
+/* Profile Options */
+.profileOptionsContainer {
+    position: absolute;
+    top: 70px;
+    right: 48px;
+    background: white;
+    box-shadow: 5px 5px 4px rgb(0,0,0,0.1);
+    z-index: 1; 
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.optionContainer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 1.4rem;
+    margin: 10px;
+    background: white;
+    border: none;
+}
+
+.optionLeftPart {
+    display: flex;
+    align-items: center;
+}
+
+.optionContainer p {
+    margin: 0 0 0 15px;
+}
+
+.icon {
+    display: flex;
+    align-items: center;
+    padding: 12px; 
+    background-color: #f0f2f5; 
+    border-radius: 50%;
+    cursor: pointer; 
+    transition: background-color 0.3s;
+    margin-right: 7px;
+}
+
+.profileContainer {
+    display: flex;
+    align-items: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+    border-radius: 10px;
+}
+
+.profileContainer p {
+    font-size: 1.3rem;
+    font-weight: 500;
+    color: black;
+    margin: 0 0 0 15px;
 }

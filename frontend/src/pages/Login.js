@@ -2,14 +2,14 @@ import React, { useState } from 'react'
 import { useLogin } from '../hooks/useLogin'
 import { useRegister } from '../hooks/useRegister'
 import { Link } from 'react-router-dom'
-import { Form, Button, Modal, FormGroup, FormLabel } from 'react-bootstrap'
+import { Form, Button, Modal } from 'react-bootstrap'
 import { FaGoogle, FaApple } from 'react-icons/fa'
 import styles from '../styles/Login.module.css';
 
 // Login Page Root
 const Login = () => {
     return (
-        <div className={`${styles.page} d-flex align-items-center justify-content-center vh-100`}>
+        <div className={`${styles.page} d-md-flex d-sm-block align-items-center justify-content-center vh-100 `}>
             <LeftSide />
             <RightSide />
         </div>
@@ -19,7 +19,7 @@ const Login = () => {
 // Left side of login page
 const LeftSide = () => {
     return (
-        <div className={`col-xl-4 col-lg-4 col-md-4 col-sm-none mx-4`}>
+        <div className={`col-xl-4 col-lg-4 col-md-4 col-sm-8 mx-md-0 mx-sm-auto`}>
             <h1 className={`${styles.appName}`}>headbook</h1>
             <p className={`${styles.blurb}`}>Headbook helps you connect and share with the people in your life.</p>
         </div>
@@ -29,7 +29,7 @@ const LeftSide = () => {
 // Right side of login page
 const RightSide = () => {
     return (
-        <div className={`${styles.loginContainer} col-xl-4 col-lg-6 col-md-8 col-sm-11 mx-4`}>   
+        <div className={`${styles.loginContainer} col-lg-3 col-md-8 col-sm-11 mx-4`}>   
             {/* Email and password sign-in */}
             <EmailLogin />
 

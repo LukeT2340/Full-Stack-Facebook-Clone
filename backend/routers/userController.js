@@ -77,7 +77,7 @@ router.post('/signup', upload.single('profilePicture'), async (req, res) => {
     const newUser = new User({
       firstName: req.body.firstName,
       lastName: req.body.lastName,
-      email: req.body.email,
+      email: req.body.email.toLowerCase(),
       password: hashedPassword,
       profilePictureUrl: profilePictureUrl
     });
@@ -93,7 +93,7 @@ router.post('/signup', upload.single('profilePicture'), async (req, res) => {
     console.error('Signup error:', error);
     res.status(500).json({ message: 'Internal server error' });
   }
-});
+})
 
 
 // Login route
@@ -117,6 +117,54 @@ router.post('/login', async (req, res) => {
     res.status(200).json({ user_id: user._id, email: user.email, token: token });
   } catch (error) {
     res.status(500).json({ message: 'Internal server error' });
+  }
+})
+
+// Fetch non-sensitive information of one user
+router.get("/getOne", async (req, res) => {
+  const userId = req.query.userId
+  try {
+    // Try to fetch user
+    const user = await User.findOne({ _id: userId }, { firstName: 1, lastName: 1, profilePictureUrl: 1 })
+
+    // If user is found, send user data
+    if (user) {
+      res.status(200).json(user)
+    } else {
+      // Handle case where user is not found
+      res.status(404).json({ message: 'User not found' })
+    }
+  } catch (error) {
+    // Handle error
+    res.status(500).json({ message: 'Internal server error' })
+  }
+});
+
+// Fetch non-sensitive information of multiple users
+router.get("/getMany", async (req, res) => {
+  let limit = req.query.limit
+  let user_id = req.query.user_id
+
+  // Validate limit
+  if (!limit || limit > 20) {
+    limit = 20
+  }
+  try {
+    // Try to fetch users
+    const users = await User.find({ _id: { $ne: user_id }}, { _id: 1, firstName: 1, lastName: 1, profilePictureUrl: 1 })
+      .sort({ createdAt: -1 })
+      .limit(limit)
+
+    // If users are found, send user data
+    if (users) {
+      res.status(200).json(users)
+    } else {
+      // Handle case where users is not found
+      res.status(404).json({ message: 'No users found' })
+    }
+  } catch (error) {
+    // Handle error
+    res.status(500).json({ message: 'Internal server error' })
   }
 });
 

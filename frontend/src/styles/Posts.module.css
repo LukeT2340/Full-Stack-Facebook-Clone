@@ -1,0 +1,117 @@
+.postContainer {
+    background: white;
+    margin-bottom: 10px;
+    border-radius: 15px;
+    padding: 15px;
+}
+
+.nameAndDateContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    padding-bottom: 15px;
+}
+
+.name {
+    margin: 0;
+    padding: 0;
+    font-weight: 600;
+}
+
+.postDate {
+    margin: 0;
+    padding: 0;
+    color: #8b8b8b;
+    font-weight: 500;
+}
+
+.postBodyContainer p {
+    font-size: 1.3rem;
+}
+
+.media {
+    width: 100%;
+    height: auto;
+}
+
+.likesAndCommentsContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.reactions {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    font-size: 1.1rem;
+}
+
+.reactionsCount {
+    margin: 0;
+    color: gray;
+    font-weight: 600;
+}
+
+.commentCount p {
+    margin: 0;
+    color: gray;
+    font-weight: 600;
+}
+
+.feedbackContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.feedbackButton {
+    display: flex;
+    align-items: center;
+    background: none;
+    border: none;
+    font-size: 1rem;
+    color: rgb(82, 82, 82);
+}
+
+.feedbackButton p {
+    padding-left: 10px;
+    margin: 0;
+}
+
+.profilePicture {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    margin-right: 0.5rem;
+}
+
+/* Comment section */
+.newCommentContainer {
+    display: flex;
+    align-items: center;
+}
+
+.commentInputContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #f1f2f5;
+    padding: 10px;
+    border-radius: 25px;
+    width: 100%;
+}
+
+.commentInputContainer input {
+    border: none;
+    outline: none;
+    background: #f1f2f5;
+    width: 100%;
+}
+
+.commentSectionProfilePicture {
+    width: 2.6rem;
+    height: 2.6rem;
+    border-radius: 50%;
+    margin-right: 0.5rem;
+}

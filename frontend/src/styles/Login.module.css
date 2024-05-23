@@ -18,7 +18,7 @@
 }
 
 .thirdPartySignInButton {
-    width: 20rem;
+    width: 15rem;
 }
 
 .googleSignInButton {
@@ -31,7 +31,7 @@
 }
 
 .loginButton {
-    width: 20rem;
+    width: 15rem;
     padding-block: 0.5rem;
     background: var(--accent-color);
     border: none;
@@ -43,7 +43,7 @@
 }
 
 .textInput {
-    width: 20rem;
+    width: 15rem;
 }
 
 .link {

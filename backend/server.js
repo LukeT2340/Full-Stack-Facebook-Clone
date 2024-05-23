@@ -1,10 +1,11 @@
 // Required libraries
-const express = require('express');
-const cors = require('cors');
-const userController = require('./routers/userController');
-const cookieParser = require('cookie-parser');
-require('dotenv').config();
-const mongoose = require('mongoose');
+const express = require('express')
+const cors = require('cors')
+const userController = require('./routers/userController')
+const statusController = require('./routers/statusController')
+const cookieParser = require('cookie-parser')
+require('dotenv').config()
+const mongoose = require('mongoose')
 
 // Connection URI for your MongoDB database
 const mongoURI = 'mongodb://localhost:27017/mydatabase';
@@ -42,6 +43,9 @@ app.use(cookieParser());
 
 // Use signup routes
 app.use('/user', userController);
+
+// Use status routes
+app.use('/status', statusController)
 
 // Start listening
 const port = process.env.PORT || 3002;

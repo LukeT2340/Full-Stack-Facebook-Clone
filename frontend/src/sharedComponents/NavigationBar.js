@@ -6,73 +6,154 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import styles from '../styles/NavigationBar.module.css'
 import { useAuthContext } from "../hooks/useAuthContext"
 import { useLogout } from "../hooks/useLogout"
+import { FaComment, FaBell, FaSearch, FaCog, FaChevronRight, FaQuestionCircle, FaMoon, FaSignOutAlt, FaCommentSlash } from 'react-icons/fa';
 
 // Navigation Bar
-const NavigationBar = () => {
+const NavigationBar = ({profile}) => {
     return (
-        <Navbar data-bs-theme="light" className={`${styles.navBar} border-bottom`} expand='md'>
+        <Navbar data-bs-theme="light" className={`border-bottom`} expand='md'>
             <Navbar.Brand href="/home" className={`mx-3 ${styles.brand}`}>headbook</Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" className='mx-3' />
 
-            <NavBarLeft />
-            <NavBarRight />
+            <div className={styles.navBar}>
+                <NavBarLeft />
+                <NavBarMiddle />
+                <NavBarRight profile={profile}/>
+            </div>
         </Navbar>
       );
     
 };
 
-{/* Navigation Bar Left Side / Navigation Bar for small screens */}
+{/* Navigation Bar Left Side */}
 const NavBarLeft = () => {
-    const location = useLocation()
-    const { user } = useAuthContext()
+    const [searchText, setSearchText] = useState("")
 
-    const isActive = (path) => {
-        if (user) {
-            return location.pathname === path ? styles.activeNavLink : ''
-        }
-        return 'd-none'
+    // Handle search text change
+    const handleSearchTextChange = (e) => {
+        setSearchText(e.target.value)
     }
 
     return (
         <Navbar.Collapse id="basic-navbar-nav" className="mx-3">
-            <Nav className="mr-auto align-items-left">
-                <Nav.Link href="/home" className={`d-flex align-items-center ${styles.navLink} ${isActive('/home')}`}>
-                    Home
-                </Nav.Link>
+            <Nav>
+                <div className={`d-none d-md-flex ${styles.searchBarContainer}`}>
+                    <FaSearch className={`${styles.searchIcon}`} />
+                    <input 
+                        type='text' 
+                        placeholder='Search Headbook' 
+                        className={`${styles.searchBar}`} 
+                        value={searchText} 
+                        onChange={handleSearchTextChange}
+                    />   
+                </div>
             </Nav>
         </Navbar.Collapse>
     )
 }
 
+{/* Navigation Bar Middle */}
+const NavBarMiddle = () => {
+    return (
+        <Nav className='d-flex'>
+          
+        </Nav>
+    )
+}
+
 {/* Navigation Bar Right Side */}
-const NavBarRight = () => {
+const NavBarRight = ({profile}) => {
     const location = useLocation()
-    const { user } = useAuthContext()
-    const { logout } = useLogout()
+    const [showProfileOptions, setShowProfileOptions] = useState(false)
     const isActive = (path) => {
         return location.pathname === path ? 'd-none' : ''
     }
 
-    const handleLogout = () => {
-        logout();
-        window.location.reload();
+    // Handle Profile Button Clicked (show options)
+    const handleProfileButtonClicked = () => {
+        setShowProfileOptions(!showProfileOptions)
     }
 
-
     return (
-        <Nav className="d-none d-lg-flex ml-auto mx-3">
-            {user ? (
-                <Button className={`d-flex justify-content-center ${styles.logoutButton} me-3`} onClick={handleLogout}>
-                    Logout
-                </Button>
-            ) : (
-                <Nav.Link href="/login" className={`d-flex justify-content-center ${styles.loginButton} ${isActive('/login')} me-3`}>
-                    Login
-                </Nav.Link>
+        <Nav className="d-none d-md-flex mx-3">
+            <div className={styles.buttonContainer}>
+                <FaComment className={styles.button}/>
+            </div>
+            <div className={styles.buttonContainer}>
+                <FaBell className={styles.button}/>
+            </div>
+            <button className={styles.profilePictureContainer} onClick={handleProfileButtonClicked}>
+                <img className={styles.profilePicture} src={profile.profilePictureUrl} alt="Profile picture"></img>
+            </button>
+
+            {showProfileOptions && (
+                <ProfileOptions profile={profile} visible/>
             )}
         </Nav>
     );
 }
 
+{/* Profile Options */}
+const ProfileOptions = ({profile}) => {
+    const { logout } = useLogout()
+
+    // Handle Logout
+    const handleLogout = () => {
+        logout();
+        window.location.reload();
+    }
+
+    return (
+        <div className={`${styles.profileOptionsContainer} d-flex flex-column`}>
+            <Nav.Link className={`${styles.profileContainer}`}>
+                <img src={profile.profilePictureUrl} className={styles.profilePicture} alt="profile picture"></img>
+                <p>{profile.firstName} {profile.lastName}</p>
+            </Nav.Link>
+            <Nav.Link className={styles.optionContainer}>
+                <div className={styles.optionLeftPart}>
+                    <div className={styles.icon}>
+                        <FaCog />
+                    </div>
+                    <p>Settings & privacy</p>
+                </div>
+                <FaChevronRight />
+            </Nav.Link>
+            <Nav.Link className={styles.optionContainer}>
+                <div className={styles.optionLeftPart}>
+                    <div className={styles.icon}>
+                        <FaQuestionCircle />
+                    </div>
+                    <p>Help & support</p>
+                </div>
+                <FaChevronRight />
+            </Nav.Link>
+            <Nav.Link className={styles.optionContainer}>
+                <div className={styles.optionLeftPart}>
+                    <div className={styles.icon}>
+                        <FaMoon />
+                    </div>
+                    <p>Display & accessibility</p>
+                </div>
+                <FaChevronRight />
+            </Nav.Link>
+            <Nav.Link className={styles.optionContainer}>
+                <div className={styles.optionLeftPart}>
+                    <div className={styles.icon}>
+                        <FaCommentSlash />
+                    </div>
+                    <p>Give feedback</p>
+                </div>
+            </Nav.Link>
+            <button className={styles.optionContainer} onClick={logout}>
+                <div className={styles.optionLeftPart}>
+                    <div className={styles.icon}>
+                        <FaSignOutAlt />
+                    </div>
+                    <p>Logout</p>
+                </div>
+            </button>
+        </div>
+    )
+}
 
 export default NavigationBar;
