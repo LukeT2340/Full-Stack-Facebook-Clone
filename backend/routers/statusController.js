@@ -202,4 +202,36 @@ router.post("/:statusId/unlike", async (req, res) => {
 }
 });
 
+// Publish comment
+router.post("/:statusId/comment", async (req, res) => {
+  const statusId = req.params.statusId;
+  const text = req.body.text;
+  const userId = req.userId
+
+  try {
+      // Find the status by ID
+      const status = await Status.findById(statusId);
+      if (!status) {
+          return res.status(404).json({ message: 'Status not found' });
+      }
+
+      // Add the comment to the status
+      status.comments.push({
+          userId: userId, 
+          text: text,
+      });
+
+      // Save the updated status
+      await status.save();
+
+      // Respond with the newly added comment
+      const newComment = status.comments[status.comments.length - 1]; // Get the last comment in the array (the newly added one)
+      return res.status(201).json(newComment);
+  } catch (error) {
+      console.error(error);
+      return res.status(500).json({ message: 'Internal server error' });
+  }
+});
+
+
 module.exports = router;

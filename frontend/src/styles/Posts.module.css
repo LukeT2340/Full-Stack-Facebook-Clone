@@ -86,7 +86,7 @@
     margin-right: 0.5rem;
 }
 
-/* Comment section */
+/* New comment input */
 .newCommentContainer {
     display: flex;
     align-items: center;
@@ -114,4 +114,38 @@
     height: 2.6rem;
     border-radius: 50%;
     margin-right: 0.5rem;
+}
+
+.publishCommentButton {
+    border: none;
+    outline: none;
+    background-color: inherit;
+}
+
+/* Old comments */
+.commentContainer {
+    display: flex;
+}
+
+.nameAndCommentTextContainer {
+    display: flex;
+    flex-direction: column;
+    background: #f1f2f5;
+    border-radius: 15px;
+    padding: 10px;
+}
+
+.nameAndCommentTextContainer p {
+    margin: 0;
+    font-size: 0.9rem;
+}
+
+.commenterName {
+    font-weight: 600 ;
+}
+
+.commentDateTime {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color :gray;
 }

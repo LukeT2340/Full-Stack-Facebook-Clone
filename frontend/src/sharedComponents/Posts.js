@@ -2,8 +2,9 @@ import { FaHeart, FaLaugh, FaThumbsUp, FaComment, FaShare, FaArrowAltCircleUp } 
 import styles from "../styles/Posts.module.css"
 import { useFetchStatuses } from "../hooks/useFetchStatuses"
 import { useProfile } from "../hooks/useProfile"
-import { useLikeStatus } from '../hooks/useLikeStatus';
+import { useLikeStatus } from '../hooks/useLikeStatus'
 import { useState } from 'react'
+import { useComment } from '../hooks/useComment'
 
 // This section holds all the new statuses by the user and other users
 const Posts = ({profile}) => {
@@ -129,8 +130,8 @@ const Comments = ({status, open, profile}) => {
     return (
         <div className={styles.commentsContainer}>
             <hr className='m-2'></hr>
-            {status.comments.map((comment)=>{
-                <Comment comment={comment} />
+            {status.comments.map((comment) => {
+                return <Comment key={comment._id} comment={comment} />;
             })}
             <NewComment status={status} profile={profile}/>
         </div>
@@ -139,43 +140,81 @@ const Comments = ({status, open, profile}) => {
 
 // Individual comments
 const Comment = ({comment}) => {
+    const { profile, isProfileLoading } = useProfile(comment.userId) // Fetch profile of person who's comment it is
+
+    // Convert date to user friendly type
+    const userFriendlyDate = (dateString) => {
+        const date = new Date(dateString);
+    
+        // Get day of the month
+        const day = date.getDate();
+    
+        // Get month name
+        const month = date.toLocaleString('default', { month: 'short' });
+    
+        // Get hours and minutes
+        const hours = date.getHours().toString().padStart(2, '0');
+        const minutes = date.getMinutes().toString().padStart(2, '0');
+    
+        return `${day} ${month} at ${hours}:${minutes}`;
+    }
+
+    if (isProfileLoading) {
+        return (
+            <div className={styles.commentContainer}>Loading...</div>
+        )
+    }
+
     return (
-        <></>
+        <div className={styles.commentContainer}>
+            <img src={profile.profilePictureUrl} alt="Profile picture" className={styles.commentSectionProfilePicture}></img>
+            <div>
+                <div className={styles.nameAndCommentTextContainer}>
+                    <p className={styles.commenterName}>{profile.firstName} {profile.lastName}</p>
+                    <p>{comment.text}</p>
+                </div>
+                <p className={styles.commentDateTime}>{userFriendlyDate(comment.createdAt)}</p>
+            </div>
+        </div>
     )
 }
 
 // Write new comment
 const NewComment = ({status, profile}) => {
-    const [text, setText] = useState('')
-    const [isFocused, setIsFocused] = useState(false)
+    const [text, setText] = useState('');
+    const [isFocused, setIsFocused] = useState(false);
+    const { publishComment, isLoading } = useComment(status._id);
 
     // Handle text box focused
     const handleFocused = () => {
-        setIsFocused(true)
-    }
-
-    // Handle text box blurred
-    const handleBlur = () => {
-        setIsFocused(false)
-    }
+        setIsFocused(true);
+    };
 
     // Handle text change
     const handleTextChange = (e) => {
-        setText(e.target.value)
-    }
+        setText(e.target.value);
+    };
 
     // Publish comment
-    const publishComment = () => {
+    const handleComment = async () => {
+        try {
+            await publishComment(text);
+            setText('');
+        } catch (error) {
+            console.error('Error publishing comment:', error);
+        }   
+    };
 
-    }
 
     return (
         <div className={styles.newCommentContainer}>
             <img src={profile.profilePictureUrl} alt="Profile picture" className={styles.commentSectionProfilePicture}></img>
             <div className={styles.commentInputContainer}>
-                <input onSubmit={publishComment} onFocus={handleFocused} onBlur={handleBlur} type="text" value={text} placeholder="Submit your comment..." onChange={handleTextChange}></input>
+                <input onSubmit={publishComment} onFocus={handleFocused} type="text" value={text} placeholder="Submit your comment..." onChange={handleTextChange}></input>
                 {isFocused && (
-                    <FaArrowAltCircleUp size={24} className='me-1' color={'var(--accent-color)'}/>
+                    <button className={styles.publishCommentButton} onClick={handleComment}>
+                        <FaArrowAltCircleUp size={22} className='me-1' color={'var(--accent-color)'}/>
+                    </button>
                 )}
             </div>
         </div>
