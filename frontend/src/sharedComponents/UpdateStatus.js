@@ -29,13 +29,13 @@ const UpdateStatus = ({profile}) => {
             <hr className='mb-2 mt-3 p-0'></hr>
             <div className="d-flex">
                 <div className="col-4 d-flex align-items-center justify-content-center">
-                    <button className={styles.statusOptionButton}><FaVideo color="#f02848" className="me-2"/>Live video</button>
+                    <button className={styles.statusOptionButton}><FaVideo color="#f02848" className="me-1"/>Live video</button>
                 </div>
                 <div className="col-4 d-flex align-items-center justify-content-center">
-                    <button className={styles.statusOptionButton}><FaImages color="#44be62" className="me-2"/>Photo/video</button>
+                    <button className={styles.statusOptionButton}><FaImages color="#44be62" className="me-1"/>Photo/video</button>
                 </div>
                 <div className="col-4 d-flex align-items-center justify-content-center">
-                    <button className={styles.statusOptionButton}><FaSmile color="#f7ba28" className="me-2"/>Feeling/activity</button>
+                    <button className={styles.statusOptionButton}><FaSmile color="#f7ba28" className="me-1"/>Feeling/activity</button>
                 </div>
             </div>
             <NewStatusModal profile={profile} show={showNewStatusForm} handleClose={handleCloseNewStatusForm} />

@@ -52,7 +52,7 @@ const Left = ({profile}) => {
 // Middle column of the home page
 const Middle = ({profile}) => {
     return (
-        <div className={`${styles.middleContainer} vh-100 mx-5`} style={{width: '600px'}}>
+        <div className={`${styles.middleContainer} vh-100 mx-3`} style={{width: '600px'}}>
             <UpdateStatus profile={profile}/>
             <Statuses profile={profile}/>
         </div>
