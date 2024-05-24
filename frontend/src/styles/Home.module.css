@@ -47,4 +47,6 @@
     height: 3rem;
     border-radius: 50%;
     margin-right: 0.5rem;
+    object-fit: cover; 
+
 }
