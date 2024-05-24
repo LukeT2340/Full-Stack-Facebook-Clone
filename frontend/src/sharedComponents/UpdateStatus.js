@@ -28,14 +28,14 @@ const UpdateStatus = ({profile}) => {
             </div>
             <hr className='mb-2 mt-3 p-0'></hr>
             <div className="d-flex">
-                <div className="col-4 d-flex align-items-center justify-content-center">
-                    <button className={styles.statusOptionButton}><FaVideo color="#f02848" className="me-1"/>Live video</button>
+                <div className="col-4 d-flex">
+                    <button className={`${styles.statusOptionButton} d-flex justify-content-center align-items-center`}><FaVideo color="#f02848" className="me-1" size={24}/><p className='m-0 p-0 d-none d-md-block'>Live video</p></button>
                 </div>
-                <div className="col-4 d-flex align-items-center justify-content-center">
-                    <button className={styles.statusOptionButton}><FaImages color="#44be62" className="me-1"/>Photo/video</button>
+                <div className="col-4 d-flex">
+                    <button className={`${styles.statusOptionButton} d-flex justify-content-center align-items-center`}><FaImages color="#44be62" className="me-1" size={24}/><p className='m-0 p-0 d-none d-md-block'>Photo/video</p></button>
                 </div>
-                <div className="col-4 d-flex align-items-center justify-content-center">
-                    <button className={styles.statusOptionButton}><FaSmile color="#f7ba28" className="me-1"/>Feeling/activity</button>
+                <div className="col-4 d-flex">
+                    <button className={`${styles.statusOptionButton} d-flex justify-content-center align-items-center`}><FaSmile color="#f7ba28" className="me-1" size={24}/><p className='m-0 p-0 d-none d-md-block'>Feeling/activity</p></button>
                 </div>
             </div>
             <NewStatusModal profile={profile} show={showNewStatusForm} handleClose={handleCloseNewStatusForm} />
