@@ -24,7 +24,7 @@ const Home = ({profile}) => {
 // Left column of the home page
 const Left = ({profile}) => {
     return (
-        <div className="col-xl-3 col-lg-3 d-none d-lg-block me-3">
+        <div className="col-xl-3 col-lg-3 d-none d-lg-block mt-3 me-3">
             <Nav.Link as={Link} to={`/profile/${profile._id}`} className={`${styles.profileContainer} m-0 p-2`}>
                 <img src={profile.profilePictureUrl} className={styles.optionImage} alt="profile picture"></img>
                 <p>{profile.firstName} {profile.lastName}</p>
