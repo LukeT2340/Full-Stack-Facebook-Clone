@@ -1,0 +1,125 @@
+/* New Status Styles */
+
+.newStatusContainer {
+    background-color: white;
+    padding: 15px;
+    border-radius: 15px;
+    margin-top: 15px;
+}
+
+.newStatusContainer img {
+    width: 3rem;
+    height: auto;
+    border-radius: 50%;
+}
+
+.textFieldLookalike {
+    border: none;
+    outline: none;
+    background-color: #f1f2f5;
+    width: 100%;
+    color: #65676b;
+    border-radius: 30px;
+    margin-left: 0.5rem;
+    font-size: 1.3rem;
+    font-weight: 300;
+    text-align: left;
+    padding-left: 20px;
+}
+
+.textFieldLookalike:hover {
+    background-color: #eaeaea;
+}
+
+.statusOptionButton {
+    display: flex;
+    justify-content: center;
+    font-size: 19px;
+    align-items: center;
+    border: none;
+    outline: none;
+    background: white;
+    width: 100%;
+    height: 100%;
+    margin: 0.5rem;
+    border-radius: 15px;
+}
+
+.statusOptionButton:hover {
+    background-color: #f1f2f5;
+}
+
+/* New Status Modal */
+.modalInnerContainer {
+    width: 40rem;
+}
+
+.profilePicture {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    margin-right: 0.5rem;
+}
+
+.newStatusFormContainer p {
+    font-weight: 600;
+}
+
+.visibilityButton {
+    border: none;
+    outline: none;
+    background: #e4e6ea;
+    border-radius: 5px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    padding-block: 2px;
+}
+
+.newStatusFormContainer textarea {
+    border: none;
+    outline: none;
+    width: 100%;
+    font-size: 1.3rem;
+    resize: none;
+}
+
+.emojiIcon {
+    align-self: end;
+}
+
+.postButton {
+    border: none;
+    outline: none;
+    font-weight: 600;
+    padding-block: 7px;
+}
+
+.postButton:disabled {
+    background-color: #e4e6ea;
+    color: rgb(60, 60, 60);
+}
+
+.customFileInputButton {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: white;
+    color: black;
+    border: 0.5px solid gray;
+    border-radius: 10px;
+    box-shadow: 2px 2px 2px rgba(0,0,0,0.14);
+    cursor: pointer;
+    text-align: center;
+    margin-top: 20px;
+    font-weight: 600;
+}
+
+.customFileInputButton:hover {
+    cursor: pointer;
+}
+
+.selectedImage {
+    width: 8rem;
+}
+

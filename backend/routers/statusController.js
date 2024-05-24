@@ -87,32 +87,45 @@ router.post("/post", upload.single('image'), async (req, res) => {
   }
 });
 
-// Fetch Statuses
+// Fetch Statuses - If userId is provided in query, that means we are fetching statuses for a particular user. Else it is for the home page
 router.get("/getMany", async (req, res) => {
   try {
-      // Extract query parameters
-      let { page, limit } = req.query;
+    // Extract query parameters
+    let { page, limit, userId } = req.query;
 
-      // Set default values if parameters are not provided
-      page = page ? parseInt(page) : 1;
-      limit = limit ? parseInt(limit) : 20;
+    // Set default values if parameters are not provided
+    page = page ? parseInt(page) : 1;
+    limit = limit ? parseInt(limit) : 20;
 
-      // Calculate skip value for pagination
-      const skip = (page - 1) * limit;
+    // Validate page and limit values
+    if (isNaN(page) || page < 1) page = 1;
+    if (isNaN(limit) || limit < 1) limit = 20;
 
-      // Query the database for statuses
-      const statuses = await Status.find({})
+    // Calculate skip value for pagination
+    const skip = (page - 1) * limit;
+
+    let statuses;
+
+    // Query the database for user's statuses
+    if (userId) {
+      statuses = await Status.find({ userId }) // Use userId field
         .sort({ createdAt: -1 })
         .skip(skip)
         .limit(limit);
+    } else {
+      // Query the database for all statuses
+      statuses = await Status.find({})
+        .sort({ createdAt: -1 })
+        .skip(skip)
+        .limit(limit);
+    }
 
-      // Send the fetched statuses as a response
-      res.status(200).json({
-          statuses,
-      });
+    // Send the fetched statuses as a response
+    return res.status(200).json({ statuses });
   } catch (error) {
-      // Handle errors and send an error response
-      res.status(500).json({ message: 'Internal server error' });
+    // Handle errors and send an error response
+    console.error(error);
+    res.status(500).json({ message: 'Internal server error' });
   }
 });
 

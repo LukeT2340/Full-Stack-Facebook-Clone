@@ -1,15 +1,15 @@
 import { FaHeart, FaLaugh, FaThumbsUp, FaComment, FaShare, FaArrowAltCircleUp } from 'react-icons/fa';
-import styles from "../styles/Posts.module.css"
+import styles from "../styles/Statuses.module.css"
 import { useFetchStatuses } from "../hooks/useFetchStatuses"
 import { useProfile } from "../hooks/useProfile"
 import { useLikeStatus } from '../hooks/useLikeStatus'
 import { useState } from 'react'
 import { useComment } from '../hooks/useComment'
+import { Link } from 'react-router-dom';
 
-// This section holds all the new statuses by the user and other users
-const Posts = ({profile}) => {
-    const { statuses, areStatusesLoading } = useFetchStatuses(20, 1) // Fetch 20 statuses
-
+// This component displays recent statuses
+const Statuses = ({profile, onlyFetchOwnStatuses}) => {
+    const { statuses, areStatusesLoading } = useFetchStatuses(20, 1, onlyFetchOwnStatuses ? profile._id : null) // Fetch 20 statuses
     if (areStatusesLoading) {
         return (
             <>Loading...</>
@@ -17,20 +17,21 @@ const Posts = ({profile}) => {
     }
 
     return (
-        <div className="d-flex flex-column">
+        <div className="d-flex flex-column mb-3">
             {statuses && statuses.map((status) => (
-                <Post key={status._id} status={status} clientsProfile={profile} />
+                <Status key={status._id} status={status} clientsProfile={profile} />
             ))}
         </div>
     )
 }
 
 // Individual posts
-const Post = ({status, clientsProfile}) => {
+const Status = ({status, clientsProfile}) => {
     const { profile, isProfileLoading } = useProfile(status.userId) // Fetch profile of person who's post it is
     const { unlikeStatus, likeStatus, isLiked, isLoading } = useLikeStatus(status._id) 
     const [likeCount, setLikeCount] = useState(status.likes.length)
     const [commentSectionOpen, setCommentSectionOpen] = useState(status.comments.length > 0)
+    const [comments, setComments] = useState(status.comments)
 
     // Handle comment button clicked
     const handleCommentButtonClicked = () => {
@@ -74,9 +75,13 @@ const Post = ({status, clientsProfile}) => {
     return (
         <div className={`${styles.postContainer}`}>
             <div className={`d-flex`}>
-                <img className={styles.profilePicture} src={profile.profilePictureUrl}></img>
+                <Link to={`/profile/${profile._id}`}>
+                    <img className={styles.profilePicture} src={profile.profilePictureUrl}></img>
+                </Link>
                 <div className={`${styles.nameAndDateContainer}`}>
-                    <h6 className={styles.name}>{`${profile.firstName} ${profile.lastName}`}</h6>
+                    <Link to={`/profile/${profile._id}`} className={styles.nameLink}>
+                        <h6 className={styles.name}>{`${profile.firstName} ${profile.lastName}`}</h6>
+                    </Link>
                     <p className={styles.postDate}>{userFriendlyDate(status.createdAt)}</p>
                 </div>
             </div>
@@ -96,9 +101,7 @@ const Post = ({status, clientsProfile}) => {
                     </div>
                 )}
                 {status.comments.length > 0 && (
-                    <div className={styles.commentCount}>
-                        <p>{`${status.comments.length} comments`}</p>
-                    </div>
+                    <button className={styles.commentCount} onClick={handleCommentButtonClicked}>{`${status.comments.length} comments`}</button>
                 )}
             </div>
             <hr className='m-2'></hr>
@@ -116,13 +119,13 @@ const Post = ({status, clientsProfile}) => {
                     <p>Share</p>
                 </button>
             </div>
-            <Comments status={status} open={commentSectionOpen} profile={clientsProfile}/>
+            <Comments setComments={setComments} statusId={status._id} comments={comments} open={commentSectionOpen} profile={clientsProfile}/>
         </div>
     )
 }
 
 // Comment section
-const Comments = ({status, open, profile}) => {
+const Comments = ({setComments, statusId, comments, open, profile}) => {
     if (!open) {
         return <></>
     }
@@ -130,10 +133,10 @@ const Comments = ({status, open, profile}) => {
     return (
         <div className={styles.commentsContainer}>
             <hr className='m-2'></hr>
-            {status.comments.map((comment) => {
+            {comments.map((comment) => {
                 return <Comment key={comment._id} comment={comment} />;
             })}
-            <NewComment status={status} profile={profile}/>
+            <NewComment setComments={setComments} statusId={statusId} profile={profile}/>
         </div>
     )
 }
@@ -167,10 +170,14 @@ const Comment = ({comment}) => {
 
     return (
         <div className={styles.commentContainer}>
-            <img src={profile.profilePictureUrl} alt="Profile picture" className={styles.commentSectionProfilePicture}></img>
+            <Link to={`/profile/${profile._id}`}>
+                <img src={profile.profilePictureUrl} alt="Profile picture" className={styles.commentSectionProfilePicture}></img>
+            </Link>
             <div>
                 <div className={styles.nameAndCommentTextContainer}>
-                    <p className={styles.commenterName}>{profile.firstName} {profile.lastName}</p>
+                    <Link to={`/profile/${profile._id}`} className={styles.nameLink}>
+                        <p className={styles.commenterName} >{profile.firstName} {profile.lastName}</p>
+                    </Link>
                     <p>{comment.text}</p>
                 </div>
                 <p className={styles.commentDateTime}>{userFriendlyDate(comment.createdAt)}</p>
@@ -180,10 +187,10 @@ const Comment = ({comment}) => {
 }
 
 // Write new comment
-const NewComment = ({status, profile}) => {
+const NewComment = ({setComments, statusId, profile}) => {
     const [text, setText] = useState('');
     const [isFocused, setIsFocused] = useState(false);
-    const { publishComment, isLoading } = useComment(status._id);
+    const { publishComment, isLoading } = useComment(statusId);
 
     // Handle text box focused
     const handleFocused = () => {
@@ -198,7 +205,8 @@ const NewComment = ({status, profile}) => {
     // Publish comment
     const handleComment = async () => {
         try {
-            await publishComment(text);
+            const newComment = await publishComment(text);
+            setComments(prev => [...prev, newComment]); 
             setText('');
         } catch (error) {
             console.error('Error publishing comment:', error);
@@ -208,9 +216,11 @@ const NewComment = ({status, profile}) => {
 
     return (
         <div className={styles.newCommentContainer}>
-            <img src={profile.profilePictureUrl} alt="Profile picture" className={styles.commentSectionProfilePicture}></img>
+            <Link to={`/profile/${profile._id}`}>
+                <img src={profile.profilePictureUrl} alt="Profile picture" className={styles.commentSectionProfilePicture}></img>
+            </Link>
             <div className={styles.commentInputContainer}>
-                <input onSubmit={publishComment} onFocus={handleFocused} type="text" value={text} placeholder="Submit your comment..." onChange={handleTextChange}></input>
+                <input onKeyDown={handleComment} onFocus={handleFocused} type="text" value={text} placeholder="Submit your comment..." onChange={handleTextChange}></input>
                 {isFocused && (
                     <button className={styles.publishCommentButton} onClick={handleComment}>
                         <FaArrowAltCircleUp size={22} className='me-1' color={'var(--accent-color)'}/>
@@ -221,4 +231,4 @@ const NewComment = ({status, profile}) => {
     )
 }
 
-export default Posts
+export default Statuses

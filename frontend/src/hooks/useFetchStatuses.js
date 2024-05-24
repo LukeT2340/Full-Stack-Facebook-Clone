@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useAuthContext } from './useAuthContext';
 
-export const useFetchStatuses = (limit, page) => {
+export const useFetchStatuses = (limit, page, userId) => {
     const [statuses, setStatuses] = useState([]);
     const [areStatusesLoading, setAreStatusesLoading] = useState(true);
     const { user } = useAuthContext();
@@ -12,7 +12,8 @@ export const useFetchStatuses = (limit, page) => {
                 const token = user.token;
 
                 // Try to fetch posts from API
-                const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/status/getMany?limit=${limit}?page=${page}`, {
+                const response = await fetch(  `${process.env.REACT_APP_BACKEND_URL}/status/getMany?limit=${limit}&page=${page}${userId ? `&userId=${userId}` : ''}`, 
+                {
                     method: 'GET',
                     headers: {
                         'Authorization': `Bearer ${token}`,
@@ -37,7 +38,7 @@ export const useFetchStatuses = (limit, page) => {
         };
 
         fetchStatuses();
-    }, [user.token]); // Ensure useEffect runs when user token changes
+    }, [user.token]); 
 
     return { statuses, areStatusesLoading };
 };

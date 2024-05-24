@@ -4,7 +4,7 @@ import React from 'react';
 import { useAuthContext } from './hooks/useAuthContext.js';
 import Home from './pages/Home.js';
 import NavigationBar from './sharedComponents/NavigationBar.js';
-import Footer from './sharedComponents/Footer.js';
+import Profile from "./pages/Profile.js"
 import Login from './pages/Login.js';
 import { useProfile } from './hooks/useProfile';
 
@@ -32,6 +32,7 @@ function App() {
           {user && profile && (
             <>
               <Route path="/home" element={<Home profile={profile} />} />
+              <Route path="/profile/:userId" element={<Profile />} />
               <Route path="*" element={<Navigate to="/home" />} />
             </>
           )}

@@ -1,0 +1,74 @@
+/* New Status Modal */
+.modalInnerContainer {
+    width: 40rem;
+}
+
+.profilePicture {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    margin-right: 0.5rem;
+}
+
+.newStatusFormContainer p {
+    font-weight: 600;
+}
+
+.visibilityButton {
+    border: none;
+    outline: none;
+    background: #e4e6ea;
+    border-radius: 5px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    padding-block: 2px;
+}
+
+.newStatusFormContainer textarea {
+    border: none;
+    outline: none;
+    width: 100%;
+    font-size: 1.3rem;
+    resize: none;
+}
+
+.emojiIcon {
+    align-self: end;
+}
+
+.postButton {
+    border: none;
+    outline: none;
+    font-weight: 600;
+    padding-block: 7px;
+}
+
+.postButton:disabled {
+    background-color: #e4e6ea;
+    color: rgb(60, 60, 60);
+}
+
+.customFileInputButton {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: white;
+    color: black;
+    border: 0.5px solid gray;
+    border-radius: 10px;
+    box-shadow: 2px 2px 2px rgba(0,0,0,0.14);
+    cursor: pointer;
+    text-align: center;
+    margin-top: 20px;
+    font-weight: 600;
+}
+
+.customFileInputButton:hover {
+    cursor: pointer;
+}
+
+.selectedImage {
+    width: 8rem;
+}
+
