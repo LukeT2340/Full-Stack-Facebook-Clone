@@ -13,7 +13,7 @@ const Home = ({profile}) => {
     }
 
     return (
-        <div className={`${styles.homeContainer} d-flex justify-content-between`} style={{ backgroundColor: '#f1f2f5' }}> {/* I shouldn't have to define styles like this. Fix later*/ }
+        <div className={`${styles.homeContainer} d-flex justify-content-between justify-content-lg-center`} style={{ backgroundColor: '#f1f2f5' }}> {/* I shouldn't have to define styles like this. Fix later*/ }
             <Left profile={profile} />
             <Middle profile={profile} />
             <Right />
@@ -24,7 +24,7 @@ const Home = ({profile}) => {
 // Left column of the home page
 const Left = ({profile}) => {
     return (
-        <div className="col-xl-3 col-lg-3 d-none d-lg-block mt-3 me-3">
+        <div className="col-xl-2 col-lg-3 d-none d-lg-block mt-3 me-3">
             <Nav.Link as={Link} to={`/profile/${profile._id}`} className={`${styles.profileContainer} m-0 p-2`}>
                 <img src={profile.profilePictureUrl} className={styles.optionImage} alt="profile picture"></img>
                 <p>{profile.firstName} {profile.lastName}</p>
@@ -62,7 +62,7 @@ const Middle = ({profile}) => {
 // Right column of the home page
 const Right = () => {
     return (
-        <div className="d-md-block col-xl-3 col-lg-3 col-md-3 d-none d-sm-none ms-3">
+        <div className="d-md-block col-xl-2 col-lg-3 col-md-3 d-none d-sm-none ms-3">
             <Contacts />
         </div>
     )

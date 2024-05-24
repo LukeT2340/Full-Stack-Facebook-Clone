@@ -15,7 +15,7 @@ const NavigationBar = ({profile}) => {
             <Navbar.Toggle aria-controls="basic-navbar-nav" className='mx-3' />
 
             <div className={styles.navBar}>
-                <NavBarLeft />
+                <NavBarLeft profile={profile}/>
                 <NavBarMiddle />
                 <NavBarRight profile={profile}/>
             </div>
@@ -25,7 +25,7 @@ const NavigationBar = ({profile}) => {
 };
 
 {/* Navigation Bar Left Side */}
-const NavBarLeft = () => {
+const NavBarLeft = ({profile}) => {
     const [searchText, setSearchText] = useState("")
 
     // Handle search text change
@@ -46,6 +46,10 @@ const NavBarLeft = () => {
                         onChange={handleSearchTextChange}
                     />   
                 </div>
+                <Nav.Link href={`/profile/${profile._id}`} className={`${styles.profileContainer} d-md-none d-sm-block`}>
+                    <img src={profile.profilePictureUrl} className={styles.profilePicture} alt="profile picture"></img>
+                    <p>{profile.firstName} {profile.lastName}</p>
+                </Nav.Link>
             </Nav>
         </Navbar.Collapse>
     )
