@@ -55,6 +55,7 @@ async function hashPassword(password) {
 
 // Sign up route with profile picture upload
 router.post('/signup', upload.single('profilePicture'), async (req, res) => {
+  console.log("Someone tried to sign up")
   try {
     // Check if username or email already exists
     const existingUser = await User.findOne({ $or: [{ email: req.body.email }] });
