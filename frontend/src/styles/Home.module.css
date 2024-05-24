@@ -7,9 +7,12 @@
     height: 100vh; 
     overflow-y: auto; 
 }
+
+/* Removes scroll indicator
 .middleContainer::-webkit-scrollbar {
     display: none;
 }
+*/
 
 /* Left Column */
 
@@ -30,6 +33,13 @@
     margin: 0;
     font-weight: 500;
     font-size: 1.2rem;
+}
+
+.optionImage {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    margin-inline: 1rem;
 }
 
 .profilePicture {

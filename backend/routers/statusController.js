@@ -108,6 +108,7 @@ router.get("/getMany", async (req, res) => {
 
     // Query the database for user's statuses
     if (userId) {
+
       statuses = await Status.find({ userId }) // Use userId field
         .sort({ createdAt: -1 })
         .skip(skip)

@@ -220,7 +220,7 @@ const NewComment = ({setComments, statusId, profile}) => {
                 <img src={profile.profilePictureUrl} alt="Profile picture" className={styles.commentSectionProfilePicture}></img>
             </Link>
             <div className={styles.commentInputContainer}>
-                <input onKeyDown={handleComment} onFocus={handleFocused} type="text" value={text} placeholder="Submit your comment..." onChange={handleTextChange}></input>
+                <input onSubmit={handleComment} onFocus={handleFocused} type="text" value={text} placeholder="Submit your comment..." onChange={handleTextChange}></input>
                 {isFocused && (
                     <button className={styles.publishCommentButton} onClick={handleComment}>
                         <FaArrowAltCircleUp size={22} className='me-1' color={'var(--accent-color)'}/>

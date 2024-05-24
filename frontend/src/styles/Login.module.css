@@ -17,6 +17,10 @@
     box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.1);
 }
 
+.loginContainer p {
+    font-size: 0.7rem;
+}
+
 .thirdPartySignInButton {
     width: 15rem;
 }
@@ -58,6 +62,7 @@
 .signUpButton {
     background-color: var(--accent-color);
     border: none;
+    font-size: 0.7rem;
 }
 
 .signUpButton:hover {

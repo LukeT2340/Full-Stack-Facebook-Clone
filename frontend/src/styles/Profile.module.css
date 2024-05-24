@@ -16,7 +16,7 @@
     display: flex;
     justify-content: space-between;
     width: 100%;
-    height: 50vh;
+    height: 30vh;
 }
 
 .profilePictureAndName {
@@ -107,4 +107,31 @@
 .profileBottom {
     min-height: 50vh;
     display: flex;
+}
+
+.introContainer {
+    display: flex;
+    flex-direction: column;
+    padding: 15px;
+    border-radius: 15px;
+    background: white;
+    margin-top: 15px;
+}
+
+.introContainer h4 {
+    font-weight: 700;
+    margin: 0;
+}
+
+.introContainer button {
+    background: #e4e6ea;
+    border: none;
+    padding: 5px;
+    margin-block: 14px;
+    border-radius: 8px;
+    font-weight: 600;
+}
+
+.introContainer button:hover {
+    background: #dfe0e1;
 }

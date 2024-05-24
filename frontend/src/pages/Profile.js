@@ -47,10 +47,13 @@ const ProfileBottom = ({profile}) => {
         <div className={styles.profileBottomBackground}>
             <div className={`col-xl-8 col-lg-10 col-sm-12`}>
                 <div className={styles.profileBottom}>
-                    <div className="col-lg-5">
-
+                    {/* Left side */}
+                    <div className="col-lg-5 me-2">
+                        <Intro profile={profile}/>
                     </div>
-                    <div className="col-lg-7">
+
+                    {/* Right side */}
+                    <div className="col-lg-7 ms-2">
                         {user.user_id == profile._id && (
                             <UpdateStatus profile={profile} />
                         )}
@@ -109,4 +112,21 @@ const AddStoryAndEditProfileButtons = ({profile}) => {
         </div>
     )
 }
+
+const Intro = ({profile}) => {
+
+    return (
+        <div className={styles.introContainer}>
+            <h4>Intro</h4>
+            {profile.bio ? (
+                <button>Edit bio</button>
+             ) : (
+                <button>Add bio</button>
+            )}
+            <button>Edit details</button>
+            <button>Add featured</button>
+        </div>
+    )
+}
+
 export default Profile

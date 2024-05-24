@@ -29,7 +29,7 @@ const LeftSide = () => {
 // Right side of login page
 const RightSide = () => {
     return (
-        <div className={`${styles.loginContainer} col-lg-3 col-md-8 col-sm-11 mx-4`}>   
+        <div className={`${styles.loginContainer} col-lg-4 col-md-8 col-sm-11 mx-4`}>   
             {/* Email and password sign-in */}
             <EmailLogin />
 

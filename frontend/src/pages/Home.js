@@ -26,28 +26,24 @@ const Left = ({profile}) => {
     return (
         <div className="col-xl-3 col-lg-3 d-none d-lg-block me-3">
             <Nav.Link as={Link} to={`/profile/${profile._id}`} className={`${styles.profileContainer} m-0 p-2`}>
-                <img src={profile.profilePictureUrl} className={styles.profilePicture} alt="profile picture"></img>
+                <img src={profile.profilePictureUrl} className={styles.optionImage} alt="profile picture"></img>
                 <p>{profile.firstName} {profile.lastName}</p>
             </Nav.Link>
             <Nav.Link as={Link} className={`${styles.profileContainer} m-0 p-2`}>
-                <FaUserFriends className={styles.profilePicture} color={'var(--accent-color)'}/>
+                <FaUserFriends className={styles.optionImage} color={'var(--accent-color)'}/>
                 <p>Friends</p>
             </Nav.Link>
             <Nav.Link as={Link} className={`${styles.profileContainer} m-0 p-2`}>
-                <FaClock className={styles.profilePicture} color={'var(--accent-color)'}/>
+                <FaClock className={styles.optionImage} color={'var(--accent-color)'}/>
                 <p>Memories</p>
             </Nav.Link>
             <Nav.Link as={Link} className={`${styles.profileContainer} m-0 p-2`}>
-                <FaBookmark className={styles.profilePicture} color={'purple'}/>
+                <FaBookmark className={styles.optionImage} color={'purple'}/>
                 <p>Saved</p>
             </Nav.Link>            
             <Nav.Link as={Link} className={`${styles.profileContainer} m-0 p-2`}>
-                <FaCalendar className={styles.profilePicture} color={'red'}/>
+                <FaCalendar className={styles.optionImage} color={'red'}/>
                 <p>Events</p>
-            </Nav.Link>
-            <Nav.Link as={Link} className={`${styles.profileContainer} m-0 p-2`}>
-                <img src={profile.profilePictureUrl} className={styles.profilePicture} alt="profile picture"></img>
-                <p>{profile.firstName} {profile.lastName}</p>
             </Nav.Link>
         </div>
     )

@@ -1,10 +1,9 @@
 import React from 'react'
-import { Navbar, Nav, NavDropdown, Form, FormControl, Button } from 'react-bootstrap'
-import { useLocation } from 'react-router-dom'
-import { useState } from 'react'
+import { Navbar, Nav } from 'react-bootstrap'
+
+import { useState, useEffect, useRef } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import styles from '../styles/NavigationBar.module.css'
-import { useAuthContext } from "../hooks/useAuthContext"
 import { useLogout } from "../hooks/useLogout"
 import { FaComment, FaBell, FaSearch, FaCog, FaChevronRight, FaQuestionCircle, FaMoon, FaSignOutAlt, FaCommentSlash } from 'react-icons/fa';
 
@@ -63,11 +62,23 @@ const NavBarMiddle = () => {
 
 {/* Navigation Bar Right Side */}
 const NavBarRight = ({profile}) => {
-    const location = useLocation()
     const [showProfileOptions, setShowProfileOptions] = useState(false)
-    const isActive = (path) => {
-        return location.pathname === path ? 'd-none' : ''
-    }
+    const profileOptionsRef = useRef(null);
+
+    // Listen to mouse events. Close options menu on click
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+          if (profileOptionsRef.current && !profileOptionsRef.current.contains(event.target)) {
+            setShowProfileOptions(false);
+          }
+        };
+    
+        document.addEventListener('mousedown', handleClickOutside);
+    
+        return () => {
+          document.removeEventListener('mousedown', handleClickOutside);
+        };
+      }, []);
 
     // Handle Profile Button Clicked (show options)
     const handleProfileButtonClicked = () => {
@@ -75,7 +86,7 @@ const NavBarRight = ({profile}) => {
     }
 
     return (
-        <Nav className="d-none d-md-flex mx-3">
+        <Nav className="d-none d-md-flex">
             <div className={styles.buttonContainer}>
                 <FaComment className={styles.button}/>
             </div>
@@ -86,9 +97,11 @@ const NavBarRight = ({profile}) => {
                 <img className={styles.profilePicture} src={profile.profilePictureUrl} alt="Profile picture"></img>
             </button>
 
-            {showProfileOptions && (
-                <ProfileOptions profile={profile} visible/>
-            )}
+            <div ref={profileOptionsRef}>
+                {showProfileOptions && (
+                    <ProfileOptions profile={profile} />
+                )}
+            </div>
         </Nav>
     );
 }
@@ -97,15 +110,9 @@ const NavBarRight = ({profile}) => {
 const ProfileOptions = ({profile}) => {
     const { logout } = useLogout()
 
-    // Handle Logout
-    const handleLogout = () => {
-        logout();
-        window.location.reload();
-    }
-
     return (
         <div className={`${styles.profileOptionsContainer} d-flex flex-column`}>
-            <Nav.Link className={`${styles.profileContainer}`}>
+            <Nav.Link href={`/profile/${profile._id}`} className={`${styles.profileContainer}`}>
                 <img src={profile.profilePictureUrl} className={styles.profilePicture} alt="profile picture"></img>
                 <p>{profile.firstName} {profile.lastName}</p>
             </Nav.Link>
