@@ -1,11 +1,16 @@
 // Required libraries
-const express = require('express')
-const cors = require('cors')
-const userController = require('./routers/userController')
-const statusController = require('./routers/statusController')
-const cookieParser = require('cookie-parser')
-require('dotenv').config()
-const mongoose = require('mongoose')
+const express = require('express');
+const cors = require('cors');
+const socketIo = require('socket.io'); // Import socket.io
+const userController = require('./routers/userController');
+const statusController = require('./routers/statusController');
+const cookieParser = require('cookie-parser');
+require('dotenv').config();
+const mongoose = require('mongoose');
+const Message = require('./models/Message');
+
+// Define app
+const app = express();
 
 // Connection URI for your MongoDB database
 const mongoURI = `${process.env.MONGO_URL}`;
@@ -32,8 +37,29 @@ db.on('disconnected', () => {
   console.log('Disconnected from MongoDB');
 });
 
-// Define app
-const app = express();
+// Initialize socket.io
+const server = require('http').createServer(app); // Create HTTP server
+const io = socketIo(server); // Pass the server instance to socket.io
+
+io.on('connection', (socket) => {
+  console.log('A user connected');
+
+  // Handle incoming messages
+  socket.on('message', async (data) => {
+    const message = new Message({
+      userId: data.userId,
+      text: data.text,
+      createdAt: new Date(),
+    });
+    await message.save();
+    io.emit('message', message); // Broadcast to all connected clients
+  });
+
+  // Handle disconnection
+  socket.on('disconnect', () => {
+    console.log('A user disconnected');
+  });
+});
 
 // Use cors
 app.use(cors());
@@ -45,10 +71,10 @@ app.use(cookieParser());
 app.use('/user', userController);
 
 // Use status routes
-app.use('/status', statusController)
+app.use('/status', statusController);
 
 // Start listening
 const port = process.env.PORT || 3002;
-const server = app.listen(port, () => {
-    console.log(`Server is listening on port ${port}`);
+server.listen(port, () => {
+  console.log(`Server is listening on port ${port}`);
 });

@@ -11,6 +11,7 @@ const commentSchema = new Schema({
 // Define the Status schema
 const statusSchema = new Schema({
   userId: { type: Schema.Types.ObjectId, ref: 'User', required: true },
+  recipientUserId: { type: Schema.Types.ObjectId, ref: 'User'},
   text: { type: String, required: true },
   media: {
     type: { type: String, enum: ['image', 'video'] },

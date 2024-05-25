@@ -53,8 +53,8 @@ const Left = ({profile}) => {
 const Middle = ({profile}) => {
     return (
         <div className={`${styles.middleContainer} vh-100 mx-3`} style={{width: '600px'}}>
-            <UpdateStatus profile={profile}/>
-            <Statuses profile={profile}/>
+            <UpdateStatus clientProfile={profile} recipientProfile={profile}/>
+            <Statuses clientProfile={profile}/>
         </div>
     )
 }

@@ -1,12 +1,12 @@
 import styles from "../styles/NewStatusModal.module.css"
 import { Form, Button, Modal, Dropdown, Nav} from 'react-bootstrap'
-import { FaImages, FaSmile, FaGlobe, FaUserPlus, FaLocationArrow } from 'react-icons/fa';
+import { FaImages, FaSmile, FaGlobe, FaUserPlus, FaLocationArrow, FaCaretRight } from 'react-icons/fa';
 import { useEffect, useState } from 'react'
 import { useNewPost } from "../hooks/useNewPost"
 import { Link } from 'react-router-dom';
 
 // Modal where users can post new statuses
-const NewStatusModal = ({ profile, show, handleClose }) => {
+const NewStatusModal = ({ clientProfile, recipientProfile, show, handleClose }) => {
     const { post, isSubmitted, isLoading } = useNewPost()
     const [text, setText] = useState("")    
     const [selectedImage, setSelectedImage] = useState(null);
@@ -50,7 +50,7 @@ const NewStatusModal = ({ profile, show, handleClose }) => {
     // Handle post button clicked
     const handleSubmit = async (e) => {
         e.preventDefault()
-        await post(selectedImage, text, visibility);
+        await post(selectedImage, text, visibility, recipientProfile._id);
         window.location.reload(true); 
     }
 
@@ -68,11 +68,19 @@ const NewStatusModal = ({ profile, show, handleClose }) => {
                     <Form className={`d-flex flex-column ${styles.modalBody}`} onSubmit={handleSubmit}>
                         {/* Profile picture, name and visibility setting for status*/}
                         <div className="d-flex">
-                            <Link to={`/profile/${profile._id}`}>
-                                <img className={styles.profilePicture} src={profile.profilePictureUrl}></img>
+                            <Link to={`/profile/${clientProfile._id}`}>
+                                <img className={styles.profilePicture} src={clientProfile.profilePictureUrl}></img>
                             </Link>
                             <div className="d-flex flex-column">
-                                <p className="m-0 p-0">{profile.firstName} {profile.lastName}</p>
+                                <div className='d-flex align-items-center'>
+                                    <p className="m-0 p-0">{clientProfile.firstName} {clientProfile.lastName}</p>
+                                    {(clientProfile._id !== recipientProfile._id) && (
+                                        <>
+                                            <FaCaretRight />
+                                            <p className="m-0 p-0">{recipientProfile.firstName} {recipientProfile.lastName}</p>
+                                        </>
+                                    )}
+                                </div>
                                 <Dropdown className={`${styles.visibilityDropdown}`}>
                                     <Dropdown.Toggle variant="light" id="visibility-dropdown" className="d-flex align-items-center">
                                         <FaGlobe className="me-1" />
@@ -88,7 +96,7 @@ const NewStatusModal = ({ profile, show, handleClose }) => {
                             </div>
                         </div>
                         <textarea
-                            placeholder={`What's on your mind, ${profile.firstName}?`}
+                            placeholder={clientProfile._id === recipientProfile._id ? `What's on your mind, ${clientProfile.firstName}?` : `Say something to ${recipientProfile.firstName}`}
                             rows={4}
                             className="p-4"
                             value={text}

@@ -10,10 +10,13 @@ import NewStatusModal from "../sharedComponents/NewStatusModal";
 
 // Profile page
 const Profile = () => {
+    const clientUserJson = localStorage.getItem('user');
+    const clientUser = JSON.parse(clientUserJson);
     const { userId } = useParams()
-    const { profile, isProfileLoading } = useProfile(userId)
+    const { profile: pageProfile, isProfileLoading: isPageProfileLoading } = useProfile(userId) // Get profile of the person's profile page we are viewing
+    const { profile: clientProfile, isProfileLoading: isClientProfileLoading} = useProfile(clientUser.user_id) // Get the profile of the client user
 
-    if (isProfileLoading) {
+    if (isPageProfileLoading || isClientProfileLoading) {
         return (
             <>Loading...</>
         )
@@ -21,22 +24,22 @@ const Profile = () => {
 
     return (
         <div className={`${styles.profilePageContainer} d-flex flex-column justify-content-center align-items-center`}>
-            <ProfileTop profile={profile} />
-            <ProfileBottom profile={profile} />
+            <ProfileTop pageProfile={pageProfile} clientProfile={clientProfile} />
+            <ProfileBottom pageProfile={pageProfile} clientProfile={clientProfile} />
         </div>
     )
 }
 
 // Top part of the profile page
-const ProfileTop = ({profile}) => {
+const ProfileTop = ({clientProfile, pageProfile}) => {
     return (
         <div className={`col-xl-5 col-lg-8 col-md-10 col-sm-12`}>
             <div className={`${styles.profileTop} d-flex flex-column flex-md-row justify-content-center align-items-md-end`}>
                 <div className="col-xl-6 col-lg-6  order-1 order-md-1 mt-auto mt-md-0">
-                    <ProfilePictureAndName profile={profile} />
+                    <ProfilePictureAndName pageProfile={pageProfile} />
                 </div>
                 <div className="col-xl-6 col-lg-6  order-2 order-md-2 mt-auto mt-md-0">
-                    <AddStoryAndEditProfileButtons profile={profile} />
+                    <AddStoryAndEditProfileButtons clientProfile={clientProfile} pageProfile={pageProfile} />
                 </div>
             </div>
         </div>
@@ -44,24 +47,20 @@ const ProfileTop = ({profile}) => {
 }
 
 // Bottom part of the profile page
-const ProfileBottom = ({profile}) => {
-    const { user } = useAuthContext()
-
+const ProfileBottom = ({pageProfile, clientProfile}) => {
     return (
         <div className={styles.profileBottomBackground}>
             <div className={`col-xl-5 col-lg-8 col-md-10 col-sm-12`}>
                 <div className={`${styles.profileBottom} d-flex flex-column flex-md-row justify-content-center`}>
                     {/* Left side */}
                     <div className="col-xl-5 col-lg-4 col-md-10 col-12 mx-2">
-                        <Intro profile={profile}/>
+                        <Intro profile={pageProfile}/>
                     </div>
 
                     {/* Right side */}
                     <div className="col-xl-7 col-lg-8 col-md-10 col-12 mx-2">
-                        {user.user_id == profile._id && (
-                            <UpdateStatus profile={profile} />
-                        )}
-                        <Statuses profile={profile} onlyFetchOwnStatuses={true} />
+                        <UpdateStatus clientProfile={clientProfile} recipientProfile={pageProfile} />
+                        <Statuses pageProfile={pageProfile} clientProfile={clientProfile} onlyFetchOwnStatuses={true} />
                     </div>
                 </div>
             </div>
@@ -70,18 +69,18 @@ const ProfileBottom = ({profile}) => {
 }
 
 // Profile picture and name at the top of the screen
-const ProfilePictureAndName = ({profile}) => {
+const ProfilePictureAndName = ({pageProfile}) => {
     return (
         <div className={`${styles.profilePictureAndName} mt-auto`}>
-            <img className={styles.profilePicture} src={profile.profilePictureUrl} alt="Profile picture"></img>
+            <img className={styles.profilePicture} src={pageProfile.profilePictureUrl} alt="Profile picture"></img>
             <FaCamera className={styles.cameraIcon} />
-            <h1>{`${profile.firstName} ${profile.lastName}`}</h1>
+            <h1>{`${pageProfile.firstName} ${pageProfile.lastName}`}</h1>
         </div>
     )
 }
 
 // Add story and edit profile buttons
-const AddStoryAndEditProfileButtons = ({profile}) => {
+const AddStoryAndEditProfileButtons = ({pageProfile, clientProfile}) => {
     const { user } = useAuthContext()
     const [showNewStatusForm, setShowNewStatusForm] = useState(false); 
 
@@ -95,7 +94,7 @@ const AddStoryAndEditProfileButtons = ({profile}) => {
         setShowNewStatusForm(false)
     };
 
-    if (user.user_id != profile._id) {
+    if (user.user_id != pageProfile._id) {
         return
     }
 
@@ -110,7 +109,7 @@ const AddStoryAndEditProfileButtons = ({profile}) => {
                 <p>Edit profile</p>
             </button>
             <button className={styles.peopleYouMayKnowButton}><FaChevronDown /></button>
-            <NewStatusModal profile={profile} show={showNewStatusForm} handleClose={handleCloseNewStatusForm} />
+            <NewStatusModal recipientProfile={pageProfile} clientProfile={clientProfile} show={showNewStatusForm} handleClose={handleCloseNewStatusForm} />
         </div>
     )
 }

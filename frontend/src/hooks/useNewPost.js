@@ -17,15 +17,21 @@ export const useNewPost = () => {
         useWebWorker: true
     };
 
-    const post = async (file, text, visibility) => {
+    const post = async (file, text, visibility, recipientUserId) => {
         setIsLoading(true);
         setIsSubmitted(false);
         try {
             const formData = new FormData();
 
+            // If the status includes an image
             if (file) {
                 const compressedFile = await imageCompression(file, options);
                 formData.append('image', compressedFile); 
+            }
+
+            // If the status is directed at someone (i.e. posting on someones wall)
+            if (recipientUserId) {
+                formData.append('recipientUserId', recipientUserId)
             }
 
             formData.append('text', text.trim());

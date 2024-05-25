@@ -48,9 +48,10 @@ router.use(requireAuth)
 router.post("/post", upload.single('image'), async (req, res) => {
   try {
       // Extract status text, visibility, and media from request body
-      const { text, visibility } = req.body;
+      const { text, visibility, recipientUserId } = req.body;
       const userId = req.userId;
       let media = null;
+      
       // Check if an image file is uploaded
       if (req.file) {
           // Reference for Firebase Storage
@@ -69,6 +70,7 @@ router.post("/post", upload.single('image'), async (req, res) => {
       // Create a new status document
       const newStatus = new Status({
           userId,
+          recipientUserId,
           text,
           media,
           createdAt: new Date(),

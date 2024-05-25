@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import NewStatusModal from './NewStatusModal';
 
 // Upload status section
-const UpdateStatus = ({profile}) => {
+const UpdateStatus = ({clientProfile, recipientProfile}) => {
     const [showNewStatusForm, setShowNewStatusForm] = useState(false); 
 
     // Open new status form
@@ -21,10 +21,10 @@ const UpdateStatus = ({profile}) => {
     return (
         <div className={`d-flex flex-column ${styles.newStatusContainer}`}>
             <div className="d-flex">
-                <Link to={`/profile/${profile._id}`}>
-                    <img src={profile.profilePictureUrl} alt="Profile picture"></img>
+                <Link to={`/profile/${clientProfile._id}`}>
+                    <img src={clientProfile.profilePictureUrl} alt="Profile picture"></img>
                 </Link>
-                <button className={styles.textFieldLookalike} onClick={handleOpenNewStatusForm}>{`What's on your mind, ${profile.firstName}?`}</button>
+                <button className={styles.textFieldLookalike} onClick={handleOpenNewStatusForm}>{clientProfile._id === recipientProfile._id ? `What's on your mind, ${clientProfile.firstName}?` : `Write something to ${recipientProfile.firstName}`}</button>
             </div>
             <hr className='mb-2 mt-3 p-0'></hr>
             <div className="d-flex">
@@ -38,7 +38,7 @@ const UpdateStatus = ({profile}) => {
                     <button className={`${styles.statusOptionButton} d-flex justify-content-center align-items-center`}><FaSmile color="#f7ba28" className="me-1" size={24}/><p className='m-0 p-0 d-none d-md-block'>Feeling/activity</p></button>
                 </div>
             </div>
-            <NewStatusModal profile={profile} show={showNewStatusForm} handleClose={handleCloseNewStatusForm} />
+            <NewStatusModal clientProfile={clientProfile} recipientProfile={recipientProfile} show={showNewStatusForm} handleClose={handleCloseNewStatusForm} />
         </div>
     )
 }

@@ -8,8 +8,8 @@ import { useComment } from '../hooks/useComment'
 import { Link } from 'react-router-dom';
 
 // This component displays recent statuses
-const Statuses = ({profile, onlyFetchOwnStatuses}) => {
-    const { statuses, areStatusesLoading } = useFetchStatuses(20, 1, onlyFetchOwnStatuses ? profile._id : null) // Fetch 20 statuses
+const Statuses = ({clientProfile, pageProfile, onlyFetchOwnStatuses}) => {
+    const { statuses, areStatusesLoading } = useFetchStatuses(20, 1, onlyFetchOwnStatuses ? pageProfile._id : null) // Fetch 20 statuses
     if (areStatusesLoading) {
         return (
             <>Loading...</>
@@ -19,7 +19,7 @@ const Statuses = ({profile, onlyFetchOwnStatuses}) => {
     return (
         <div className="d-flex flex-column mb-3 w-100">
             {statuses && statuses.map((status) => (
-                <Status key={status._id} status={status} clientsProfile={profile} />
+                <Status key={status._id} status={status} clientsProfile={clientProfile} />
             ))}
         </div>
     )
