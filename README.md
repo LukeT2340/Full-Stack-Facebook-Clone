@@ -5,6 +5,11 @@ This project is not yet complete. You can check out my progress here:
 
 https://headbookk.netlify.app
 
+If you don't want to sign up you can use the following login details:
+
+email: 123@mail.com
+password: Password#1
+
 ## Features
 
 - User Authentication (Sign Up, Login, Logout)
