@@ -36,7 +36,7 @@ export const useLikeStatus = (statusId) => {
       };
   
       checkIfLiked();
-    }, [statusId])
+    }, [])
 
     // Like status
   const likeStatus = async () => {
