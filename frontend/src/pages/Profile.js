@@ -33,7 +33,7 @@ const Profile = () => {
 // Top part of the profile page
 const ProfileTop = ({clientProfile, pageProfile}) => {
     return (
-        <div className={`col-xl-5 col-lg-8 col-md-10 col-sm-12`}>
+        <div className={`col-xl-7 col-lg-8 col-md-10 col-sm-12`}>
             <div className={`${styles.profileTop} d-flex flex-column flex-md-row justify-content-center align-items-md-end`}>
                 <div className="col-xl-6 col-lg-6  order-1 order-md-1 mt-auto mt-md-0">
                     <ProfilePictureAndName pageProfile={pageProfile} />
@@ -50,7 +50,7 @@ const ProfileTop = ({clientProfile, pageProfile}) => {
 const ProfileBottom = ({pageProfile, clientProfile}) => {
     return (
         <div className={styles.profileBottomBackground}>
-            <div className={`col-xl-5 col-lg-8 col-md-10 col-sm-12`}>
+            <div className={`col-xl-7 col-lg-8 col-md-10 col-sm-12`}>
                 <div className={`${styles.profileBottom} d-flex flex-column flex-md-row justify-content-center`}>
                     {/* Left side */}
                     <div className="col-xl-5 col-lg-4 col-md-10 col-12 mx-2">
