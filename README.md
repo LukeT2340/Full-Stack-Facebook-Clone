@@ -7,8 +7,9 @@ https://headbookk.netlify.app
 
 If you don't want to sign up you can use the following login details:
 
-email: 123@mail.com
-password: Password#1
+Email: 123@mail.com
+
+Password: Password#1
 
 ## Features
 
