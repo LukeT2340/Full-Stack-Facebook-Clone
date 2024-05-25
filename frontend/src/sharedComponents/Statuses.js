@@ -80,7 +80,7 @@ const Status = ({status, clientsProfile}) => {
                     <img className={styles.profilePicture} src={posterProfile.profilePictureUrl}></img>
                 </Link>
                 <div className={`${styles.nameAndDateContainer}`}>
-                        <div className='d-flex align-items-center'>
+                        <div className='d-flex flex-wrap align-items-center '>
                             <Link to={`/profile/${posterProfile._id}`} className={styles.nameLink}>
                                 <h6 className={styles.name}>{`${posterProfile.firstName} ${posterProfile.lastName}`}</h6>
                             </Link>
