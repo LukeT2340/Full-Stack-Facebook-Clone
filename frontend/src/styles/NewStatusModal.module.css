@@ -1,6 +1,7 @@
 /* New Status Modal */
 .modalInnerContainer {
-    width: 30rem;
+    min-width: 29rem;
+    max-width: 100%;
 }
 
 .profilePicture {
