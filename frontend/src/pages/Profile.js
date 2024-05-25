@@ -30,10 +30,14 @@ const Profile = () => {
 // Top part of the profile page
 const ProfileTop = ({profile}) => {
     return (
-        <div className={`col-xl-8 col-lg-10 col-sm-12`}>
-            <div className={styles.profileTop}>
-                <ProfilePictureAndName profile={profile} className="mt-auto" />
-                <AddStoryAndEditProfileButtons profile={profile}/>
+        <div className={`col-xl-5 col-lg-8 col-md-10 col-sm-12`}>
+            <div className={`${styles.profileTop} d-flex flex-column flex-md-row justify-content-center align-items-md-end`}>
+                <div className="col-xl-6 col-lg-6  order-1 order-md-1 mt-auto mt-md-0">
+                    <ProfilePictureAndName profile={profile} />
+                </div>
+                <div className="col-xl-6 col-lg-6  order-2 order-md-2 mt-auto mt-md-0">
+                    <AddStoryAndEditProfileButtons profile={profile} />
+                </div>
             </div>
         </div>
     )
@@ -45,15 +49,15 @@ const ProfileBottom = ({profile}) => {
 
     return (
         <div className={styles.profileBottomBackground}>
-            <div className={`col-xl-8 col-lg-10 col-sm-12`}>
-                <div className={styles.profileBottom}>
+            <div className={`col-xl-5 col-lg-8 col-md-10 col-sm-12`}>
+                <div className={`${styles.profileBottom} d-flex flex-column flex-md-row justify-content-center`}>
                     {/* Left side */}
-                    <div className="col-lg-5 me-2">
+                    <div className="col-xl-5 col-lg-4 col-md-10 col-12 mx-2">
                         <Intro profile={profile}/>
                     </div>
 
                     {/* Right side */}
-                    <div className="col-lg-7 ms-2">
+                    <div className="col-xl-7 col-lg-8 col-md-10 col-12 mx-2">
                         {user.user_id == profile._id && (
                             <UpdateStatus profile={profile} />
                         )}
@@ -69,10 +73,8 @@ const ProfileBottom = ({profile}) => {
 const ProfilePictureAndName = ({profile}) => {
     return (
         <div className={`${styles.profilePictureAndName} mt-auto`}>
-            <div className={styles.ProfilePictureContainer}>
-                <img className={styles.profilePicture} src={profile.profilePictureUrl} alt="Profile picture"></img>
-                <FaCamera className={styles.cameraIcon} />
-            </div>
+            <img className={styles.profilePicture} src={profile.profilePictureUrl} alt="Profile picture"></img>
+            <FaCamera className={styles.cameraIcon} />
             <h1>{`${profile.firstName} ${profile.lastName}`}</h1>
         </div>
     )
@@ -98,7 +100,7 @@ const AddStoryAndEditProfileButtons = ({profile}) => {
     }
 
     return(
-        <div className="d-flex mt-auto mb-4">
+        <div className="d-flex flex-wrap justify-content-end mt-auto mb-4">
             <button className={styles.addStoryButton} onClick={handleOpenNewStatusForm}>
                 <FaPlus />
                 <p>Add to story</p>

@@ -17,7 +17,7 @@ const Statuses = ({profile, onlyFetchOwnStatuses}) => {
     }
 
     return (
-        <div className="d-flex flex-column mb-3">
+        <div className="d-flex flex-column mb-3 w-100">
             {statuses && statuses.map((status) => (
                 <Status key={status._id} status={status} clientsProfile={profile} />
             ))}

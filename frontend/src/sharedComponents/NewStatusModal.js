@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 
 // Modal where users can post new statuses
 const NewStatusModal = ({ profile, show, handleClose }) => {
-    const { post, isSubmitted, isLoading, error } = useNewPost()
+    const { post, isSubmitted, isLoading } = useNewPost()
     const [text, setText] = useState("")    
     const [selectedImage, setSelectedImage] = useState(null);
     const [imagePreview, setImagePreview] = useState(null);
