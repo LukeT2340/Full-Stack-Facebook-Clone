@@ -69,7 +69,7 @@ const Status = ({status, clientsProfile}) => {
 
     if (isPosterProfileLoading || isLoading|| isRecipientProfileLoading) {
         return (
-            <>Loading...</>
+            <></>
         )
     }
 
@@ -175,7 +175,7 @@ const Comment = ({comment}) => {
 
     if (isProfileLoading) {
         return (
-            <div className={styles.commentContainer}>Loading...</div>
+            <></>
         )
     }
 
