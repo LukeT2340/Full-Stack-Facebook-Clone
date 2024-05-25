@@ -65,6 +65,8 @@
 .profilePictureContainer {
     border: none;
     background: none;
+    padding: 0;
+    margin-inline-end: 10px;
 }
 
 .profilePicture {
