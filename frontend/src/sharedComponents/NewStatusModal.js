@@ -59,7 +59,7 @@ const NewStatusModal = ({ clientProfile, recipientProfile, show, handleClose }) 
     };
 
     return (
-        <Modal className={`modal-lg d-flex flex-column justify-content-center ${styles.newStatusFormContainer}`} show={show} onHide={handleClose}>
+        <Modal className={`modal-xl d-flex flex-column justify-content-center ${styles.newStatusFormContainer}`} show={show} onHide={handleClose}>
             <div className={`${styles.modalInnerContainer}`}>
                 <Modal.Header closeButton>
                     <Modal.Title className={styles.createPostText}>Create Post</Modal.Title>

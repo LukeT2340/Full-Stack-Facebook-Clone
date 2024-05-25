@@ -29,9 +29,8 @@
 .newStatusFormContainer textarea {
     border: none;
     outline: none;
-    width: 100%;
+    width: auto;
     font-size: 1.3rem;
-    resize: none;
 }
 
 .emojiIcon {
@@ -54,7 +53,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px 20px;
+    padding: 10px 10px;
     background-color: white;
     color: black;
     border: 0.5px solid gray;
