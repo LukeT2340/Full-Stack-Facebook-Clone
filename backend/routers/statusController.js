@@ -110,11 +110,16 @@ router.get("/getMany", async (req, res) => {
 
     // Query the database for user's statuses
     if (userId) {
-
-      statuses = await Status.find({ userId }) // Use userId field
+      const statuses = await Status.find({
+        $or: [
+          { userId: userId },
+          { recipientUserId: userId }
+        ]
+      })
         .sort({ createdAt: -1 })
         .skip(skip)
         .limit(limit);
+      return res.status(200).json({ statuses });
     } else {
       // Query the database for all statuses
       statuses = await Status.find({})

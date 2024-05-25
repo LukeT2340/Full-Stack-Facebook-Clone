@@ -38,7 +38,7 @@ export const useFetchStatuses = (limit, page, userId) => {
         };
 
         fetchStatuses();
-    }, [user.token]); 
+    }, [userId]); 
 
     return { statuses, areStatusesLoading };
 };

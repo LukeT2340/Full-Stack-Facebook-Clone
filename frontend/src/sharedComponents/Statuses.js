@@ -1,4 +1,4 @@
-import { FaHeart, FaLaugh, FaThumbsUp, FaComment, FaShare, FaArrowAltCircleUp } from 'react-icons/fa';
+import { FaHeart, FaLaugh, FaThumbsUp, FaComment, FaShare, FaArrowAltCircleUp, FaCaretRight } from 'react-icons/fa';
 import styles from "../styles/Statuses.module.css"
 import { useFetchStatuses } from "../hooks/useFetchStatuses"
 import { useProfile } from "../hooks/useProfile"
@@ -27,7 +27,8 @@ const Statuses = ({clientProfile, pageProfile, onlyFetchOwnStatuses}) => {
 
 // Individual posts
 const Status = ({status, clientsProfile}) => {
-    const { profile, isProfileLoading } = useProfile(status.userId) // Fetch profile of person who's post it is
+    const { profile: posterProfile, isProfileLoading: isPosterProfileLoading } = useProfile(status.userId) // Fetch profile of person who's post it is
+    const { profile: recipientProfile, isProfileLoading: isRecipientProfileLoading } = useProfile(status.recipientUserId) // Fetch profile of person who's post it is
     const { unlikeStatus, likeStatus, isLiked, isLoading } = useLikeStatus(status._id) 
     const [likeCount, setLikeCount] = useState(status.likes.length)
     const [commentSectionOpen, setCommentSectionOpen] = useState(status.comments.length > 0)
@@ -66,7 +67,7 @@ const Status = ({status, clientsProfile}) => {
         return `${day} ${month} at ${hours}:${minutes}`;
     }
 
-    if (!profile || isProfileLoading || isLoading) {
+    if (isPosterProfileLoading || isLoading|| isRecipientProfileLoading) {
         return (
             <>Loading...</>
         )
@@ -75,13 +76,23 @@ const Status = ({status, clientsProfile}) => {
     return (
         <div className={`${styles.postContainer}`}>
             <div className={`d-flex`}>
-                <Link to={`/profile/${profile._id}`}>
-                    <img className={styles.profilePicture} src={profile.profilePictureUrl}></img>
+                <Link to={`/profile/${posterProfile._id}`}>
+                    <img className={styles.profilePicture} src={posterProfile.profilePictureUrl}></img>
                 </Link>
                 <div className={`${styles.nameAndDateContainer}`}>
-                    <Link to={`/profile/${profile._id}`} className={styles.nameLink}>
-                        <h6 className={styles.name}>{`${profile.firstName} ${profile.lastName}`}</h6>
-                    </Link>
+                        <div className='d-flex align-items-center'>
+                            <Link to={`/profile/${posterProfile._id}`} className={styles.nameLink}>
+                                <h6 className={styles.name}>{`${posterProfile.firstName} ${posterProfile.lastName}`}</h6>
+                            </Link>
+                            {recipientProfile && recipientProfile._id != posterProfile._id && (
+                                <>
+                                    <FaCaretRight />
+                                    <Link to={`/profile/${recipientProfile._id}`} className={styles.nameLink}>
+                                        <h6 className={styles.name}>{`${recipientProfile.firstName} ${recipientProfile.lastName}`}</h6>
+                                    </Link>
+                                </>
+                            )}
+                        </div>
                     <p className={styles.postDate}>{userFriendlyDate(status.createdAt)}</p>
                 </div>
             </div>
