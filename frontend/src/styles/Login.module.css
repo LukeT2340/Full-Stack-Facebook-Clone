@@ -1,12 +1,12 @@
 /* Left side of Login screen */
 .appName {
-    font-size: 4rem;
+    font-size: 3rem;
     color: var(--accent-color);
     font-weight: 900;
 }
 
 .blurb {
-    font-size: 1.5rem;
+    font-size: 1.2rem;
 }
 
 /* Right side of Login screen */
