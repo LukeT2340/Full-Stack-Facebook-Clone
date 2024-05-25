@@ -1,7 +1,11 @@
 /* New Status Modal */
+.newStatusFormContainer {
+    position: absolute;
+}
+
 .modalInnerContainer {
-    min-width: 29rem;
-    max-width: 100%;
+    min-width: 22rem;
+    width: 32rem;
 }
 
 .profilePicture {
@@ -29,7 +33,6 @@
 .newStatusFormContainer textarea {
     border: none;
     outline: none;
-    width: auto;
     font-size: 1.3rem;
 }
 
