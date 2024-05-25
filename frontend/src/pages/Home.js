@@ -9,7 +9,7 @@ import { FaUserFriends, FaClock, FaBookmark, FaCalendar } from 'react-icons/fa';
 const Home = ({profile, setChatRecipientId}) => {    
 
     if (!profile) {
-        <>loading...</>
+        <></>
     }
 
     return (
