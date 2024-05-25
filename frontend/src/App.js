@@ -1,26 +1,35 @@
 import './App.css';
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
-import React from 'react';
+import React, { useState } from 'react';
 import { useAuthContext } from './hooks/useAuthContext.js';
 import Home from './pages/Home.js';
 import NavigationBar from './sharedComponents/NavigationBar.js';
+import Chat from './sharedComponents/Chat.js';
 import Profile from "./pages/Profile.js"
 import Login from './pages/Login.js';
 import { useProfile } from './hooks/useProfile';
 
+
 function App() {
   const { user } = useAuthContext();
   const { profile, isProfileLoading } = useProfile(user ? user.user_id : null);
+  const [chatRecipientId, setChatRecipientId] = useState(null)
 
-  if (isProfileLoading) {
+  if (!profile || isProfileLoading) {
     return <>Loading...</>; 
   }
 
   return (
     <Router className="App">
       <div className="d-flex flex-column min-vh-100 justify-content-between">
-        {user && profile && <NavigationBar profile={profile}/>}
+        {user && profile && (
+          <>
+            <NavigationBar profile={profile}/>
+            <Chat clientProfile={profile} recipientId={chatRecipientId} />
+          </>
+          )}
         <Routes>
+
           {/* Pages only available to unauthenticated users */}
           {!user && (
             <>
@@ -28,11 +37,12 @@ function App() {
               <Route path="*" element={<Navigate to="/login" />} />
             </>
           )}
+
           {/* Pages only available to authenticated users */}
           {user && profile && (
             <>
-              <Route path="/home" element={<Home profile={profile} />} />
-              <Route path="/profile/:userId" element={<Profile />} />
+              <Route path="/home" element={<Home profile={profile} setChatRecipientId={setChatRecipientId} />} />
+              <Route path="/profile/:userId" element={<Profile setChatRecipientId={setChatRecipientId}/>} />
               <Route path="*" element={<Navigate to="/home" />} />
             </>
           )}
@@ -43,6 +53,3 @@ function App() {
 }
 
 export default App;
-
-/*         <Footer />
-*/

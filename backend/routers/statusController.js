@@ -42,6 +42,7 @@ router.use(bodyParser.json());
 router.use(bodyParser.json({ limit: '30mb' }));
 router.use(bodyParser.urlencoded({ limit: '30mb', extended: true }));
 
+// Statuses can only be read and manipulated by authenticated users
 router.use(requireAuth)
 
 // Post new status

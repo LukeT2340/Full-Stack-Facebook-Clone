@@ -1,19 +1,20 @@
 // Required libraries
-const express = require('express');
-const cors = require('cors');
-const socketIo = require('socket.io'); // Import socket.io
-const userController = require('./routers/userController');
-const statusController = require('./routers/statusController');
-const cookieParser = require('cookie-parser');
-require('dotenv').config();
-const mongoose = require('mongoose');
-const Message = require('./models/Message');
+const express = require('express')
+const cors = require('cors')
+const socketIo = require('socket.io')
+const userController = require('./routers/userController')
+const statusController = require('./routers/statusController')
+const messageController = require('./routers/messageController')
+const cookieParser = require('cookie-parser')
+require('dotenv').config()
+const mongoose = require('mongoose')
+const Message = require('./models/Message')
 
 // Define app
-const app = express();
+const app = express()
 
 // Connection URI for your MongoDB database
-const mongoURI = `${process.env.MONGO_URL}`;
+const mongoURI = `${process.env.MONGO_URL}`
 
 // Connect to MongoDB
 mongoose.connect(mongoURI, {
@@ -22,27 +23,27 @@ mongoose.connect(mongoURI, {
 });
 
 // Get the default connection
-const db = mongoose.connection;
+const db = mongoose.connection
 
 // Event handlers for database connection
 db.on('connected', () => {
-  console.log('Connected to MongoDB');
+  console.log('Connected to MongoDB')
 });
 
 db.on('error', (err) => {
-  console.error('MongoDB connection error:', err);
+  console.error('MongoDB connection error:', err)
 });
 
 db.on('disconnected', () => {
-  console.log('Disconnected from MongoDB');
+  console.log('Disconnected from MongoDB')
 });
 
 // Initialize socket.io
 const server = require('http').createServer(app); // Create HTTP server
-const io = socketIo(server); // Pass the server instance to socket.io
+const io = socketIo(server) 
 
 io.on('connection', (socket) => {
-  console.log('A user connected');
+  console.log('A user connected')
 
   // Handle incoming messages
   socket.on('message', async (data) => {
@@ -51,27 +52,30 @@ io.on('connection', (socket) => {
       text: data.text,
       createdAt: new Date(),
     });
-    await message.save();
-    io.emit('message', message); // Broadcast to all connected clients
+    await message.save()
+    io.emit('message', message) // Broadcast to all connected clients
   });
 
   // Handle disconnection
   socket.on('disconnect', () => {
-    console.log('A user disconnected');
+    console.log('A user disconnected')
   });
 });
 
 // Use cors
-app.use(cors());
+app.use(cors())
 
 // Use cookie parser
 app.use(cookieParser());
 
 // Use signup routes
-app.use('/user', userController);
+app.use('/user', userController)
 
 // Use status routes
-app.use('/status', statusController);
+app.use('/status', statusController)
+
+// Use message routes
+app.use('/message', messageController)
 
 // Start listening
 const port = process.env.PORT || 3002;

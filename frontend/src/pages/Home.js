@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import UpdateStatus from "../sharedComponents/UpdateStatus";
 import { FaUserFriends, FaClock, FaBookmark, FaCalendar } from 'react-icons/fa';
 
-const Home = ({profile}) => {    
+const Home = ({profile, setChatRecipientId}) => {    
 
     if (!profile) {
         <>loading...</>
@@ -16,7 +16,7 @@ const Home = ({profile}) => {
         <div className={`${styles.homeContainer} d-flex justify-content-between justify-content-lg-center`} style={{ backgroundColor: '#f1f2f5' }}> {/* I shouldn't have to define styles like this. Fix later*/ }
             <Left profile={profile} />
             <Middle profile={profile} />
-            <Right />
+            <Right setChatRecipientId={setChatRecipientId}/>
         </div>
     )
 }
@@ -60,10 +60,10 @@ const Middle = ({profile}) => {
 }
 
 // Right column of the home page
-const Right = () => {
+const Right = ({setChatRecipientId}) => {
     return (
         <div className="d-md-block col-xl-2 col-lg-3 col-md-3 d-none d-sm-none ms-3">
-            <Contacts />
+            <Contacts setChatRecipientId={setChatRecipientId}/>
         </div>
     )
 }

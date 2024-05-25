@@ -3,10 +3,11 @@ const Schema = mongoose.Schema;
 
 // Define the Message schema
 const messageSchema = new Schema({
-  userId: { type: Schema.Types.ObjectId, ref: 'User', required: true },
+  senderId: { type: Schema.Types.ObjectId, ref: 'User', required: true },
+  recipientId: { type: Schema.Types.ObjectId, ref: 'User', required: true },
   text: { type: String, required: true },
   createdAt: { type: Date, default: Date.now },
-  updatedAt: { type: Date, default: Date.now } // Add updatedAt field
+  updatedAt: { type: Date, default: Date.now }
 });
 
 // Middleware for updating the updatedAt field before saving

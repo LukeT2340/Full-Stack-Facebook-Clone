@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 import { FaSearch, FaEllipsisH, FaCircle } from 'react-icons/fa'
 
 // Shows Contacts
-const Contacts = () => {
+const Contacts = ({setChatRecipientId}) => {
     const { contacts, isLoading } = useContacts(20);
     if (isLoading) {
         return <>Loading...</>;
@@ -27,16 +27,22 @@ const Contacts = () => {
                 </div>
             </div>
             {contacts.map((contact) => (
-                <Contact key={contact._id} contact={contact} />
+                <Contact setChatRecipientId={setChatRecipientId} key={contact._id} contact={contact} />
             ))}
         </div>
     );
 };
 
 // Individual Contact
-const Contact = ({ contact }) => {
+const Contact = ({ contact, setChatRecipientId }) => {
+
+    // Handle contact button clicked (open up chat with the contact)
+    const handleContactButtonClicked = () => {
+        setChatRecipientId(contact._id)
+    }
+
     return (
-        <button className={styles.contactContainer}>
+        <button className={styles.contactContainer} onClick={handleContactButtonClicked}>
             <div className={styles.profilePicture}>
                 <img src={contact.profilePictureUrl} alt="profile picture" className={styles.profilePicture}></img>
                 <FaCircle className={styles.onlineIcon} />

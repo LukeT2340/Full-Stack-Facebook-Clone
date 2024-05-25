@@ -1,0 +1,129 @@
+.chatBox {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 300px;
+    max-height: 400px;
+    border: 1px solid #ccc;
+    background: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    z-index: 1000;
+}
+
+.chatHeader {
+    padding: 10px;
+    color: var(--accent-color);
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.chatBody {
+    height: 400px;  
+    width: 100%;
+    overflow-y: auto;
+}
+
+.chatFooter {
+    padding: 10px;
+    border-top: 1px solid #ccc;
+    display: flex;
+}
+
+.chatFooter input {
+    flex: 1;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-right: 10px;
+}
+
+.chatFooter button {
+    padding: 8px 12px;
+    background: var(--accent-color);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.recipientInfo {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+}
+
+.recipientInfo h5 {
+    margin: 0;
+    color: black;
+}
+
+.profilePicture {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    margin-right: 0.5rem;
+    object-fit: cover; 
+}
+
+.closeButton {
+    font-size: 1.4rem;
+}
+
+.closeButton:hover {
+    cursor: pointer;
+}
+
+.messageContainer {
+    display: flex;
+    margin: 10px;
+}
+
+.messageContainer p {
+    margin: 0;
+}
+
+.clientMessage {
+    display: flex;
+    align-items: center;
+}
+
+.clientMessage p {
+    color: white;
+    background: var(--accent-color);
+    padding: 8px;
+    border-radius: 15px;
+}
+
+.theirMessage {
+    display: flex;
+    align-items: center;
+}
+
+.theirMessage p {
+    background: #f0f0f0;
+    padding: 8px;
+    border-radius: 15px;
+}
+
+.smallProfilePicture {
+    width: 2.3rem;
+    height: 2.3rem;
+    border-radius: 50%;
+    margin-right: 0.5rem;
+    object-fit: cover; 
+}
+
+.timestamp {
+    display: flex;
+    justify-content: center;
+}
+
+.timestamp p {
+    margin: 0;
+}
