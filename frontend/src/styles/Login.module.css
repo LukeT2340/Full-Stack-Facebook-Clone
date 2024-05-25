@@ -18,7 +18,7 @@
 }
 
 .loginContainer p {
-    font-size: 0.7rem;
+    font-size: 0.9rem;
 }
 
 .thirdPartySignInButton {
@@ -62,7 +62,7 @@
 .signUpButton {
     background-color: var(--accent-color);
     border: none;
-    font-size: 0.7rem;
+    font-size: 0.9rem;
 }
 
 .signUpButton:hover {
