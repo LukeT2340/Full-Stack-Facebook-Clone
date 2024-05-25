@@ -11,12 +11,12 @@
     justify-content: space-between;
     color: rgb(100, 100, 100);
     font-weight: 800;
-    font-size: 1.4rem;
     margin-bottom: 20px;
 }
 
 .topBar h4 {
     margin: 0;
+    font-size: 1.2rem;
 }
 
 .contactContainer {
@@ -35,6 +35,8 @@
 
 .contactContainer h5 {
     margin: 0;
+    font-size: 1.2rem;
+    font-weight: 400;
 }
 
 .profilePicture {
