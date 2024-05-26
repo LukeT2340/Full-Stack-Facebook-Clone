@@ -39,7 +39,7 @@ db.on('disconnected', () => {
 
 // Use cors
 app.use(cors({
-  origin: process.env.REACT_APP_URL, // React app URL
+  origin: process.env.REACT_APP_URL, 
   credentials: true,
 }));
 
@@ -64,14 +64,6 @@ const io = socketIo(server, {
     credentials: true,
   },
 });
-
-const generateRoomId = (userId1, userId2) => {
-  // Concatenate user IDs and sort them alphabetically
-  const sortedIds = [userId1, userId2].sort();
-  // Join the sorted IDs to create the room ID
-  const roomId = sortedIds.join('_');
-  return roomId;
-};
 
 io.on('connection', (socket) => {
   const { roomId } = socket.handshake.query; // Access room ID from handshake query
