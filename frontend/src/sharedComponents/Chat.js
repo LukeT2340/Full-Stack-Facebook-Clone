@@ -58,7 +58,7 @@ const Chat = ({clientProfile, recipientId}) => {
                 type="text"
                 value={text}
                 onChange={(e) => setText(e.target.value)}
-                placeholder="Type a message..."
+                placeholder="Aa"
               />
               <button onClick={handleSendMessage}>Send</button>
             </div>
