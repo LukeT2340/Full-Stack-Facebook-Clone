@@ -1,6 +1,6 @@
 import React from 'react'
 import { Navbar, Nav } from 'react-bootstrap'
-
+import { Link } from 'react-router-dom'
 import { useState, useEffect, useRef } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import styles from '../styles/NavigationBar.module.css'
@@ -11,7 +11,9 @@ import { FaComment, FaBell, FaSearch, FaCog, FaChevronRight, FaQuestionCircle, F
 const NavigationBar = ({profile}) => {
     return (
         <Navbar data-bs-theme="light" className={`border-bottom`} expand='md'>
-            <Navbar.Brand href="/home" className={`mx-3 ${styles.brand}`}>headbook</Navbar.Brand>
+            <Link to="/home" className='text-decoration-none'>
+                <Navbar.Brand className={`mx-3 ${styles.brand}`}>headbook</Navbar.Brand>
+            </Link>
             <Navbar.Toggle aria-controls="basic-navbar-nav" className='mx-3' />
 
             <div className={styles.navBar}>
