@@ -1,16 +1,24 @@
 import { useProfile } from "../hooks/useProfile"
-import { useState } from "react"
 import { FaTimes } from 'react-icons/fa'
 import styles from '../styles/Chat.module.css'
 import { Link } from 'react-router-dom'
 import { useMessage } from "../hooks/useMessage"
+import { useState, useEffect, useRef } from 'react';
 
 // Chat box (messenging)
 const Chat = ({clientProfile, recipientId}) => {
     const { profile: recipientProfile, isLoading: isRecipientProfileLoading } = useProfile(recipientId)
     const [text, setText] = useState('')
     const [isOpen, setIsOpen] = useState(true)
-    const { messages, setMessages, isSending, errorSending, sendMessage, isFetching, errorFetching } = useMessage(recipientId)
+    const { messages, sendMessage, isFetching} = useMessage(recipientId)
+    const messagesEndRef = useRef(null)
+
+    // Scroll to bottom whenever messages change
+    useEffect(() => {
+      if (messagesEndRef.current) {
+        messagesEndRef.current.scrollIntoView({ behavior: 'smooth' });
+      }
+    }, [messages]);
 
     // Handle profile is loading or fetching messages
     if (isRecipientProfileLoading || !recipientProfile || isFetching) {
@@ -38,6 +46,7 @@ const Chat = ({clientProfile, recipientId}) => {
               {messages.map((msg, index) => (
                 <Message key={index} message={msg} clientProfile={clientProfile} recipientProfile={recipientProfile} />
               ))}
+              <div ref={messagesEndRef} />
             </div>
             <div className={styles.chatFooter}>
               <input

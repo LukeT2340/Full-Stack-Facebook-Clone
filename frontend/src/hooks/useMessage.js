@@ -10,23 +10,34 @@ export const useMessage = (recipientId) => {
     const [errorFetching, setErrorFetching] = useState(null);
     const { user } = useAuthContext();
     const socket = useRef(null);
-    const messagesEndRef = useRef(null);
+
+    const generateRoomId = (userId1, userId2) => {
+        // Concatenate user IDs and sort them alphabetically
+        const sortedIds = [userId1, userId2].sort();
+        // Join the sorted IDs to create the room ID
+        const roomId = sortedIds.join('_');
+        return roomId;
+      };      
 
     useEffect(() => {
         // Initialize Socket.io connection
-        socket.current = io(process.env.REACT_APP_BACKEND_URL);
-
+        socket.current = io(process.env.REACT_APP_BACKEND_URL, {
+            withCredentials: true,
+            transports: ['websocket'], // Use WebSocket transport
+            query: { roomId: generateRoomId(user.user_id, recipientId) } // Pass room ID as query parameter
+        });
+    
         // Listen for incoming messages
         socket.current.on('message', (message) => {
             setMessages((prevMessages) => [...prevMessages, message]);
-            scrollToBottom();
         });
-
+    
         return () => {
             // Clean up the connection on unmount
             socket.current.disconnect();
         };
-    }, []);
+    }, [recipientId, user.user_id]);
+    
 
     useEffect(() => {
         const fetchMessages = async () => {
@@ -38,15 +49,14 @@ export const useMessage = (recipientId) => {
                     method: 'GET',
                     headers: {
                         'Authorization': `Bearer ${token}`,
-                        'Content-Type': 'application/json'
-                    }
+                        'Content-Type': 'application/json',
+                    },
                 });
                 if (!response.ok) {
                     throw new Error('Failed to fetch messages');
                 }
                 const data = await response.json();
                 setMessages(data.messages);
-                scrollToBottom();
             } catch (error) {
                 setErrorFetching(error.message);
             } finally {
@@ -57,23 +67,16 @@ export const useMessage = (recipientId) => {
         fetchMessages();
     }, [recipientId, user.token]);
 
-    const sendMessage = async (text) => {
+    const sendMessage = (text) => {
         setIsSending(true);
         try {
-            const token = user.token;
-            const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/message/send`, {
-                method: 'POST',
-                headers: {
-                    'Authorization': `Bearer ${token}`,
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ recipientId, text })
-            });
-            if (!response.ok) {
-                throw new Error('Failed to send message');
-            }
-            const data = await response.json();
-            return data.message;
+            const messageData = {
+                senderId: user.user_id,
+                recipientId,
+                text,
+            };
+            console.log('Sending message:', messageData); // Debug log
+            socket.current.emit('message', messageData);
         } catch (error) {
             setErrorSending(error.message);
         } finally {
@@ -81,11 +84,6 @@ export const useMessage = (recipientId) => {
         }
     };
 
-    const scrollToBottom = () => {
-        if (messagesEndRef.current) {
-            messagesEndRef.current.scrollIntoView({ behavior: 'smooth' });
-        }
-    };
 
     return { 
         messages, 
@@ -95,7 +93,5 @@ export const useMessage = (recipientId) => {
         setMessages, 
         isFetching, 
         errorFetching, 
-        messagesEndRef 
     };
 };
-
