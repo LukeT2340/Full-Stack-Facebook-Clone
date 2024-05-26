@@ -11,6 +11,7 @@ export const useMessage = (recipientId) => {
     const { user } = useAuthContext();
     const socket = useRef(null);
 
+    // The room id is the concatenation of two users' sorted ids
     const generateRoomId = (userId1, userId2) => {
         // Concatenate user IDs and sort them alphabetically
         const sortedIds = [userId1, userId2].sort();
@@ -19,30 +20,30 @@ export const useMessage = (recipientId) => {
         return roomId;
       };      
 
+    // Sets up connection between client and room
     useEffect(() => {
-        // Initialize Socket.io connection
         socket.current = io(process.env.REACT_APP_BACKEND_URL, {
             withCredentials: true,
-            transports: ['websocket'], // Use WebSocket transport
-            query: { roomId: generateRoomId(user.user_id, recipientId) } // Pass room ID as query parameter
+            transports: ['websocket'], 
+            query: { roomId: generateRoomId(user.user_id, recipientId) } 
         });
     
-        // Listen for incoming messages
         socket.current.on('message', (message) => {
             setMessages((prevMessages) => [...prevMessages, message]);
         });
     
         return () => {
-            // Clean up the connection on unmount
             socket.current.disconnect();
         };
+
     }, [recipientId, user.user_id]);
     
-
+    // Fetches messages
     useEffect(() => {
         const fetchMessages = async () => {
-            if (!recipientId) return; // Prevent fetching if recipientId is not set
+            if (!recipientId) return;
             setIsFetching(true);
+
             try {
                 const token = user.token;
                 const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/message/get?recipientId=${recipientId}`, {
@@ -67,6 +68,7 @@ export const useMessage = (recipientId) => {
         fetchMessages();
     }, [recipientId, user.token]);
 
+    // Send message to IO socket end-point
     const sendMessage = (text) => {
         setIsSending(true);
         try {
@@ -75,7 +77,6 @@ export const useMessage = (recipientId) => {
                 recipientId,
                 text,
             };
-            console.log('Sending message:', messageData); // Debug log
             socket.current.emit('message', messageData);
         } catch (error) {
             setErrorSending(error.message);

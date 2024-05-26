@@ -20,6 +20,11 @@ const Chat = ({clientProfile, recipientId}) => {
       }
     }, [messages]);
 
+    // If the user we are chatting with changes, open the chat
+    useEffect(() => {
+      setIsOpen(true)
+    }, [recipientId])
+
     // Handle profile is loading or fetching messages
     if (isRecipientProfileLoading || !recipientProfile || isFetching) {
         return 
@@ -32,7 +37,7 @@ const Chat = ({clientProfile, recipientId}) => {
     
 
     return (
-        isOpen && (
+        isOpen ? (
           <div className={styles.chatBox}>
             <div className={styles.chatHeader}>
               <Link to={`/profile/${recipientProfile._id}`} className={styles.recipientInfo}>
@@ -59,7 +64,14 @@ const Chat = ({clientProfile, recipientId}) => {
             </div>
           </div>
         )
+       : (
+        <div className={styles.closedChatContainer}>
+          <button onClick={() => setIsOpen(true)} className={styles.openChatButton}>
+            <img src={recipientProfile.profilePictureUrl} alt="Profile picture" className={styles.profilePicture}></img>
+          </button>
+        </div>
       )
+    )
 }
 
 // Individual message

@@ -127,3 +127,19 @@
 .timestamp p {
     margin: 0;
 }
+
+.closedChatContainer {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    max-height: 400px;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    z-index: 1000;
+}
+
+.openChatButton {
+    border: none;
+    outline: none;
+}
