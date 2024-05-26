@@ -1,5 +1,6 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useAuthContext } from './useAuthContext';
+import io from 'socket.io-client';
 
 export const useMessage = (recipientId) => {
     const [messages, setMessages] = useState([]);
@@ -8,9 +9,25 @@ export const useMessage = (recipientId) => {
     const [isFetching, setIsFetching] = useState(false);
     const [errorFetching, setErrorFetching] = useState(null);
     const { user } = useAuthContext();
+    const socket = useRef(null);
+    const messagesEndRef = useRef(null);
 
+    useEffect(() => {
+        // Initialize Socket.io connection
+        socket.current = io(process.env.REACT_APP_BACKEND_URL);
 
-    // Fetch messages when useMessage is initialized
+        // Listen for incoming messages
+        socket.current.on('message', (message) => {
+            setMessages((prevMessages) => [...prevMessages, message]);
+            scrollToBottom();
+        });
+
+        return () => {
+            // Clean up the connection on unmount
+            socket.current.disconnect();
+        };
+    }, []);
+
     useEffect(() => {
         const fetchMessages = async () => {
             if (!recipientId) return; // Prevent fetching if recipientId is not set
@@ -28,7 +45,8 @@ export const useMessage = (recipientId) => {
                     throw new Error('Failed to fetch messages');
                 }
                 const data = await response.json();
-                setMessages(data.messages); 
+                setMessages(data.messages);
+                scrollToBottom();
             } catch (error) {
                 setErrorFetching(error.message);
             } finally {
@@ -63,5 +81,21 @@ export const useMessage = (recipientId) => {
         }
     };
 
-    return { messages, isSending, errorSending, sendMessage, setMessages, isFetching, errorFetching };
+    const scrollToBottom = () => {
+        if (messagesEndRef.current) {
+            messagesEndRef.current.scrollIntoView({ behavior: 'smooth' });
+        }
+    };
+
+    return { 
+        messages, 
+        isSending, 
+        errorSending, 
+        sendMessage, 
+        setMessages, 
+        isFetching, 
+        errorFetching, 
+        messagesEndRef 
+    };
 };
+
