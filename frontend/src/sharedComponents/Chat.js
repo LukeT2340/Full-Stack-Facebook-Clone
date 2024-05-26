@@ -67,7 +67,7 @@ const Chat = ({clientProfile, recipientId}) => {
        : (
         <div className={styles.closedChatContainer}>
           <button onClick={() => setIsOpen(true)} className={styles.openChatButton}>
-            <img src={recipientProfile.profilePictureUrl} alt="Profile picture" className={styles.profilePicture}></img>
+            <img src={recipientProfile.profilePictureUrl} alt="Profile picture" className={styles.closedChatProfilePicture}></img>
           </button>
         </div>
       )
