@@ -1,4 +1,13 @@
 .navBar {
+    position: fixed;
+    width: 100vw;
+    background: white;
+    z-index: 10;
+    height: 55px;
+    border-bottom: 1px solid rgb(208, 208, 208);
+}
+
+.navBarContents {
     width: 100%;
     display: flex;
     justify-content: space-between;

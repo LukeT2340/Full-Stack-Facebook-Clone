@@ -13,7 +13,7 @@ const Home = ({profile, setChatRecipientId}) => {
     }
 
     return (
-        <div className={`${styles.homeContainer} d-flex justify-content-between justify-content-lg-center`} style={{ backgroundColor: '#f1f2f5' }}> {/* I shouldn't have to define styles like this. Fix later*/ }
+        <div className={`${styles.homeContainer} d-flex justify-content-between justify-content-lg-center`}>
             <Left profile={profile} />
             <Middle profile={profile} />
             <Right setChatRecipientId={setChatRecipientId}/>
@@ -24,7 +24,7 @@ const Home = ({profile, setChatRecipientId}) => {
 // Left column of the home page
 const Left = ({profile}) => {
     return (
-        <div className="col-xl-2 col-lg-3 d-none d-lg-block mt-3 me-3">
+        <div className={`${styles.leftContainer} col-xl-2 col-lg-3 d-none d-lg-block mt-3 me-3`}>
             <Nav.Link as={Link} to={`/profile/${profile._id}`} className={`${styles.profileContainer} m-0 p-2`}>
                 <img src={profile.profilePictureUrl} className={styles.optionImage} alt="profile picture"></img>
                 <p>{profile.firstName} {profile.lastName}</p>
@@ -52,7 +52,7 @@ const Left = ({profile}) => {
 // Middle column of the home page
 const Middle = ({profile}) => {
     return (
-        <div className={`${styles.middleContainer} vh-100 mx-3`} style={{width: '600px'}}>
+        <div className={`${styles.middleContainer} mx-3`} style={{width: '600px'}}>
             <UpdateStatus clientProfile={profile} recipientProfile={profile}/>
             <Statuses clientProfile={profile}/>
         </div>

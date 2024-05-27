@@ -25,7 +25,7 @@ const Profile = () => {
     }
 
     return (
-        <div className={`d-flex flex-column justify-content-center align-items-center`}>
+        <div className={`${styles.profileContainer} d-flex flex-column justify-content-center align-items-center`}>
             <ProfileTop pageProfile={pageProfile} clientProfile={clientProfile} />
             <ProfileBottom pageProfile={pageProfile} clientProfile={clientProfile} />
         </div>

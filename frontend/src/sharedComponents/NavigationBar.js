@@ -10,13 +10,13 @@ import { FaComment, FaBell, FaSearch, FaCog, FaChevronRight, FaQuestionCircle, F
 // Navigation Bar
 const NavigationBar = ({profile}) => {
     return (
-        <Navbar data-bs-theme="light" className={`border-bottom`} expand='md'>
+        <Navbar data-bs-theme="light" className={`${styles.navBar}`} expand='md'>
             <Link to="/home" className='text-decoration-none'>
                 <Navbar.Brand className={`mx-3 ${styles.brand}`}>headbook</Navbar.Brand>
             </Link>
             <Navbar.Toggle aria-controls="basic-navbar-nav" className='mx-3' />
 
-            <div className={styles.navBar}>
+            <div className={styles.navBarContents}>
                 <NavBarLeft profile={profile}/>
                 <NavBarMiddle />
                 <NavBarRight profile={profile}/>

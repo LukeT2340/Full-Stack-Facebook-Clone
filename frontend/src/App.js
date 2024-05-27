@@ -29,7 +29,6 @@ function App() {
           </>
           )}
         <Routes>
-
           {/* Pages only available to unauthenticated users */}
           {!user && (
             <>
