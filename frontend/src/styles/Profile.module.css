@@ -60,17 +60,6 @@
     object-fit: cover; 
 }
 
-.cameraIcon {
-    position: relative; 
-    top: 50px; 
-    right: 33px; 
-    z-index: 5;
-    font-size: 35px;
-    background: #f1f2f5;
-    padding: 07px;
-    border-radius: 50%;
-}
-
 .addStoryButton {
     display: flex;
     align-items: center;

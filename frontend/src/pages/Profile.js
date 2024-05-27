@@ -121,10 +121,7 @@ const ProfileBottom = ({pageProfile, clientProfile}) => {
 const ProfilePictureAndName = ({ pageProfile }) => {
     return (
         <div className="d-flex flex-column flex-md-row align-items-center">
-            <div className="">
-                <img className={`${styles.profilePicture}`} src={pageProfile.profilePictureUrl} alt="Profile picture" />
-                <FaCamera className={styles.cameraIcon} />
-            </div>
+            <img className={`${styles.profilePicture}`} src={pageProfile.profilePictureUrl} alt="Profile picture" />
             <h1>{`${pageProfile.firstName} ${pageProfile.lastName}`}</h1>
         </div>
     );
