@@ -63,7 +63,7 @@ const CoverPhoto = ({pageProfile, clientProfile}) => {
     };
     
     return (
-        <div className={styles.coverPhotoContainer}>
+        <div className={`${styles.coverPhotoContainer} mx-auto`}>
             <img 
                 src={pageProfile.coverPhotoUrl ? pageProfile.coverPhotoUrl : pageProfile.profilePictureUrl} 
                 alt="Cover photo" 
@@ -86,9 +86,7 @@ const CoverPhoto = ({pageProfile, clientProfile}) => {
 const ProfileTop = ({clientProfile, pageProfile}) => {
     return (
         <div className={`col-xl-7 col-lg-8 col-md-10 col-sm-12`}>
-            <div className="d-flex align-items-center justify-content-center">
-                <CoverPhoto pageProfile={pageProfile} clientProfile={clientProfile}/>
-            </div>
+            <CoverPhoto pageProfile={pageProfile} clientProfile={clientProfile}/>
             <div className={` ${styles.profileInfoContainer} d-flex flex-column flex-md-row`}>
                 <ProfilePictureAndName pageProfile={pageProfile} />
                 <AddStoryAndEditProfileButtons clientProfile={clientProfile} pageProfile={pageProfile} />
