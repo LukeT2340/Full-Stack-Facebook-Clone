@@ -103,7 +103,7 @@ const NewStatusModal = ({ clientProfile, recipientProfile, show, handleClose }) 
                             onChange={handleTextChange}
                         />
                         {/* Emoji 'button'*/}
-                        <FaSmile size={25} color={'#00ccff'} className={styles.emojiIcon}/>
+                        <FaSmile size={22} color={'#00ccff'} className={styles.emojiIcon}/>
 
                         {/* Show selected media */}
                         {selectedImage && (
@@ -125,10 +125,10 @@ const NewStatusModal = ({ clientProfile, recipientProfile, show, handleClose }) 
                             <label htmlFor="additionalMedia" className={`${styles.customFileInputButton}`}>
                                 <span>Add to your post</span>
                                 <div>
-                                    <FaImages color="#44be62" size={26} className="me-3"/>
-                                    <FaUserPlus color="blue" size={26} className="me-3"/>
-                                    <FaSmile color='#00ccff' size={26} className="me-3"/>
-                                    <FaLocationArrow color='orange' size={26} className="me-3"/>
+                                    <FaImages color="#44be62" size={22} className="me-3"/>
+                                    <FaUserPlus color="blue" size={22} className="me-3"/>
+                                    <FaSmile color='#00ccff' size={22} className="me-3"/>
+                                    <FaLocationArrow color='orange' size={22} className="me-3"/>
                                 </div>
                             </label>
                         </Form.Group>

@@ -5,7 +5,7 @@
 
 .modalInnerContainer {
     min-width: 22rem;
-    width: 32rem;
+    width: 28rem;
 }
 
 .profilePicture {
@@ -20,20 +20,12 @@
     font-weight: 600;
 }
 
-.visibilityButton {
-    border: none;
-    outline: none;
-    background: #e4e6ea;
-    border-radius: 5px;
-    font-size: 0.9rem;
-    font-weight: 500;
-    padding-block: 2px;
-}
-
 .newStatusFormContainer textarea {
     border: none;
     outline: none;
-    font-size: 1.3rem;
+    font-size: 1.1rem;
+    resize: none;
+    
 }
 
 .emojiIcon {

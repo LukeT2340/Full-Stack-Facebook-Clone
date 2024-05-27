@@ -38,6 +38,9 @@ const CoverPhoto = ({pageProfile, clientProfile}) => {
 
     // Handle Image Change
     const handleCoverPhotoChange = async (e) => {
+        if (loading) {
+            return
+        }
         const file = e.target.files[0];
         // Check if a file is selected
         if (!file) {
@@ -74,7 +77,7 @@ const CoverPhoto = ({pageProfile, clientProfile}) => {
                     <Form.Control type="file" accept="image/*" onChange={handleCoverPhotoChange} className="d-none" id="additionalMedia"></Form.Control>
                     <label htmlFor="additionalMedia" className={`${styles.customFileInputButton}`}>
                         <FaCamera className="me-1"/>
-                        Edit cover photo
+                        {loading ? `Loading...` : `Edit cover photo`}
                     </label>
                 </Form.Group>
             )}
