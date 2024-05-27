@@ -8,7 +8,7 @@ export const useProfile = (id) => {
         const fetchProfile = async () => {
             try {         
                 // Try to get user information from API
-                const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/user/getOne?userId=${id}`, {
+                const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/profile/getOne?userId=${id}`, {
                     method: 'GET'
                 })
 
@@ -23,7 +23,7 @@ export const useProfile = (id) => {
                 setProfile(json)
             }
             catch (error) {
-                console.log(error)
+            
             }
             finally {
                 setIsProfileLoading(false)

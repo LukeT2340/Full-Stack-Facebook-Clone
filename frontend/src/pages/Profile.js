@@ -1,12 +1,14 @@
 import styles from "../styles/Profile.module.css"
-import {useState} from 'react'
+import React, { useState } from 'react'
 import { useProfile } from "../hooks/useProfile"
 import { useParams } from "react-router-dom"
-import { FaCamera, FaPlus, FaPen, FaChevronDown } from 'react-icons/fa';
+import { FaCamera, FaPlus, FaPen, FaChevronDown } from 'react-icons/fa'
 import Statuses from "../sharedComponents/Statuses"
-import UpdateStatus from "../sharedComponents/UpdateStatus";
-import { useAuthContext } from "../hooks/useAuthContext";
-import NewStatusModal from "../sharedComponents/NewStatusModal";
+import UpdateStatus from "../sharedComponents/UpdateStatus"
+import { useAuthContext } from "../hooks/useAuthContext"
+import NewStatusModal from "../sharedComponents/NewStatusModal"
+import { useUserDetails } from '../hooks/useUserDetails.js' 
+import { Form } from 'react-bootstrap'
 
 // Profile page
 const Profile = () => {
@@ -34,6 +36,7 @@ const Profile = () => {
 const ProfileTop = ({clientProfile, pageProfile}) => {
     return (
         <div className={`col-xl-7 col-lg-8 col-md-10 col-sm-12`}>
+            <CoverPhoto pageProfile={pageProfile} clientProfile={clientProfile}/>
             <div className={`${styles.profileTop} d-flex flex-column flex-md-row justify-content-center align-items-md-end`}>
                 <div className="col-xl-6 col-lg-6  order-1 order-md-1 mt-auto mt-md-0">
                     <ProfilePictureAndName pageProfile={pageProfile} />
@@ -42,6 +45,51 @@ const ProfileTop = ({clientProfile, pageProfile}) => {
                     <AddStoryAndEditProfileButtons clientProfile={clientProfile} pageProfile={pageProfile} />
                 </div>
             </div>
+        </div>
+    )
+}
+
+// Cover photo
+const CoverPhoto = ({pageProfile, clientProfile}) => {
+    const { updateCoverPhoto, loading, error } = useUserDetails()
+
+    // Handle Image Change
+    const handleCoverPhotoChange = (e) => {
+        const file = e.target.files[0];
+        // Check if a file is selected
+        if (!file) {
+            return;
+        }
+    
+        // Check if the selected file is a valid instance of Blob or File
+        if (!(file instanceof Blob) && !(file instanceof File)) {
+            return;
+        }
+    
+        // Proceed with handling the valid file
+        const reader = new FileReader();
+            reader.onloadend = () => {
+            updateCoverPhoto(file)
+        };
+        reader.readAsDataURL(file);
+    };
+    
+    return (
+        <div className={styles.coverPhotoContainer}>
+            <img 
+                src={pageProfile.coverPhotoUrl ? pageProfile.coverPhotoUrl : pageProfile.profilePictureUrl} 
+                alt="Cover photo" 
+                className={pageProfile.coverPhotoUrl ? styles.coverPhoto : styles.coverPhotoPlaceholder}>
+            </img>
+            {pageProfile._id === clientProfile._id && (
+                <Form.Group className={`${styles.changeCoverContainer}`}>
+                    <Form.Control type="file" accept="image/*" onChange={handleCoverPhotoChange} className="d-none" id="additionalMedia"></Form.Control>
+                    <label htmlFor="additionalMedia" className={`${styles.customFileInputButton}`}>
+                        <FaCamera className="me-1"/>
+                        Edit cover photo
+                    </label>
+                </Form.Group>
+            )}
         </div>
     )
 }

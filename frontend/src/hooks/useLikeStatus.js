@@ -26,10 +26,9 @@ export const useLikeStatus = (statusId) => {
           }
   
           const { liked } = await response.json()
-          console.log(liked)
           setIsLiked(liked)
         } catch (error) {
-          console.error(error)
+
         } finally {
           setIsLoading(false)
         }

@@ -1,20 +1,54 @@
 .profilePageContainer {
-    
+
 }
 
-/* Top */
+/* Cover photo */
 
-.profileBottomBackground {
+.coverPhotoContainer {
     display: flex;
-    justify-content: center;
-    width: 100%;
-    height: 100%;
-    background: #f1f2f5;
+    width: inherit;
+}  
+
+.coverPhoto {
+    position: absolute;
+    width: inherit;
+    height: 35vh;
+    z-index: -5;
+    object-fit: cover; 
+    border-radius: 10px;
 }
+
+.coverPhotoPlaceholder {
+    position: absolute;
+    width: inherit;
+    height: 35vh;
+    z-index: -5;
+    padding-top: 30px;
+    filter: blur(30px);
+}
+
+.customFileInputButton {
+    display: flex;
+    align-items: center;
+    margin: 20px 0 0 40px;
+    padding-block: 5px;
+    padding-inline: 15px;
+    background: rgb(232, 232, 232);
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    z-index: 4;
+}
+
+.customFileInputButton:hover {
+    cursor: pointer;
+}
+
+/* Name and profile picture */
 
 .profileTop {
     width: 100%;
-    height: 30vh;
+    height: 50vh;
 }
 
 .profilePictureAndName {
@@ -22,6 +56,7 @@
     display: flex;
     flex-direction: row;
     align-items: center;
+    z-index: 10;
 }
 
 .profilePictureAndName h1 {
@@ -41,7 +76,7 @@
     position: relative; 
     top: 50px; 
     right: 33px; 
-    z-index: 2; 
+    z-index: 5;
     font-size: 35px;
     background: #f1f2f5;
     padding: 07px;
@@ -125,4 +160,12 @@
 
 .introContainer button:hover {
     background: #dfe0e1;
+}
+
+.profileBottomBackground {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    background: #f1f2f5;
 }

@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useAuthContext } from './useAuthContext';
 
-// Fetch contacts. To start with I won't put the ability to add friends in. So I'll just load other people on the app
+// Fetch contacts. To start with, I won't put the ability to add friends in. So I'll just load other people on the app
 export const useContacts = (limit) => {
     const [contacts, setContacts] = useState(null)
     const [isLoading, setIsLoading] = useState(false)
@@ -12,7 +12,7 @@ export const useContacts = (limit) => {
             setIsLoading(true)
             try {
                 
-                const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/user/getMany?limit=${limit}&user_id=${user.user_id}`, {
+                const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/profile/getMany?limit=${limit}&user_id=${user.user_id}`, {
                     method: 'GET'
                 }
                 )

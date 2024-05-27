@@ -12,7 +12,6 @@ export const useRegister = () => {
         setIsLoading(true);
         setError(null);
         
-        // Compress the image
         const options = {
             maxSizeMB: 10, 
             maxWidthOrHeight: 1920,
@@ -20,7 +19,7 @@ export const useRegister = () => {
         };
 
         try {
-            const compressedFile = await imageCompression(file, options);
+            const compressedFile = await imageCompression(file, options);   // Compress the image
 
             const formData = new FormData();
             formData.append('profilePicture', compressedFile); 
