@@ -9,7 +9,7 @@
 .coverPhoto {
     position: absolute;
     width: inherit;
-    height: 35vh;
+    height: 30vh;
     z-index: -5;
     object-fit: cover; 
     border-radius: 10px;
@@ -18,7 +18,7 @@
 .coverPhotoPlaceholder {
     position: absolute;
     width: inherit;
-    height: 35vh;
+    height: 30vh;
     z-index: -5;
     padding-top: 30px;
     filter: blur(30px);
