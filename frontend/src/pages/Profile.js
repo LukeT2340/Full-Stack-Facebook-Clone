@@ -54,7 +54,7 @@ const CoverPhoto = ({pageProfile, clientProfile}) => {
     const { updateCoverPhoto, loading, error } = useUserDetails()
 
     // Handle Image Change
-    const handleCoverPhotoChange = (e) => {
+    const handleCoverPhotoChange = async (e) => {
         const file = e.target.files[0];
         // Check if a file is selected
         if (!file) {
@@ -69,8 +69,13 @@ const CoverPhoto = ({pageProfile, clientProfile}) => {
         // Proceed with handling the valid file
         const reader = new FileReader();
             reader.onloadend = () => {
-            updateCoverPhoto(file)
         };
+        await updateCoverPhoto(file)
+
+        // If cover photo updated successfully, refresh the page
+        if (!error) {
+            window.location.reload();
+        }
         reader.readAsDataURL(file);
     };
     
