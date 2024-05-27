@@ -99,7 +99,7 @@ const ProfileTop = ({clientProfile, pageProfile}) => {
 const ProfileBottom = ({pageProfile, clientProfile}) => {
     return (
         <div className={styles.profileBottomBackground}>
-            <div className={`col-xl-7 col-lg-8 col-md-10 col-sm-12`}>
+            <div className={`col-xl-7 col-lg-8 col-10`}>
                 <div className={`${styles.profileBottom} d-flex flex-column flex-md-row justify-content-center`}>
                     {/* Left side */}
                     <div className="col-xl-5 col-lg-4 col-md-10 col-12 mx-2">
