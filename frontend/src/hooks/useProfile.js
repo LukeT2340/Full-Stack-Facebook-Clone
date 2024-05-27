@@ -6,6 +6,9 @@ export const useProfile = (id) => {
 
     useEffect(() => {
         const fetchProfile = async () => {
+            if (!id) {
+                return
+            }
             try {         
                 // Try to get user information from API
                 const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/profile/getOne?userId=${id}`, {

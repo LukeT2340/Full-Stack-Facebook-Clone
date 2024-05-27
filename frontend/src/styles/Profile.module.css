@@ -122,6 +122,7 @@
 .introContainer h4 {
     font-weight: 700;
     margin: 0;
+    color: black;
 }
 
 .introContainer button {
