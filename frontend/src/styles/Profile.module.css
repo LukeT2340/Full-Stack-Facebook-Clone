@@ -1,7 +1,3 @@
-.profilePageContainer {
-
-}
-
 /* Cover photo */
 
 .coverPhotoContainer {
@@ -46,18 +42,9 @@
 
 /* Name and profile picture */
 
-.profileTop {
-    width: 100%;
-    height: 50vh;
-}
-
-.profilePictureAndName {
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    z-index: 10;
-}
+.profileInfoContainer {
+    margin-top: 10rem;
+}    
 
 .profilePictureAndName h1 {
     font-size: 1.8rem;

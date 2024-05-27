@@ -25,26 +25,9 @@ const Profile = () => {
     }
 
     return (
-        <div className={`${styles.profilePageContainer} d-flex flex-column justify-content-center align-items-center`}>
+        <div className={`d-flex flex-column justify-content-center align-items-center`}>
             <ProfileTop pageProfile={pageProfile} clientProfile={clientProfile} />
             <ProfileBottom pageProfile={pageProfile} clientProfile={clientProfile} />
-        </div>
-    )
-}
-
-// Top part of the profile page
-const ProfileTop = ({clientProfile, pageProfile}) => {
-    return (
-        <div className={`col-xl-7 col-lg-8 col-md-10 col-sm-12`}>
-            <CoverPhoto pageProfile={pageProfile} clientProfile={clientProfile}/>
-            <div className={`${styles.profileTop} d-flex flex-column flex-md-row justify-content-center align-items-md-end`}>
-                <div className="col-xl-6 col-lg-6  order-1 order-md-1 mt-auto mt-md-0">
-                    <ProfilePictureAndName pageProfile={pageProfile} />
-                </div>
-                <div className="col-xl-6 col-lg-6  order-2 order-md-2 mt-auto mt-md-0">
-                    <AddStoryAndEditProfileButtons clientProfile={clientProfile} pageProfile={pageProfile} />
-                </div>
-            </div>
         </div>
     )
 }
@@ -99,6 +82,19 @@ const CoverPhoto = ({pageProfile, clientProfile}) => {
     )
 }
 
+// Top part of the profile page
+const ProfileTop = ({clientProfile, pageProfile}) => {
+    return (
+        <div className={`col-xl-7 col-lg-8 col-md-10 col-sm-12`}>
+            <CoverPhoto pageProfile={pageProfile} clientProfile={clientProfile}/>
+            <div className={` ${styles.profileInfoContainer} d-flex flex-column flex-md-row`}>
+                <ProfilePictureAndName pageProfile={pageProfile} />
+                <AddStoryAndEditProfileButtons clientProfile={clientProfile} pageProfile={pageProfile} />
+            </div>
+        </div>
+    )
+}
+
 // Bottom part of the profile page
 const ProfileBottom = ({pageProfile, clientProfile}) => {
     return (
@@ -122,15 +118,18 @@ const ProfileBottom = ({pageProfile, clientProfile}) => {
 }
 
 // Profile picture and name at the top of the screen
-const ProfilePictureAndName = ({pageProfile}) => {
+const ProfilePictureAndName = ({ pageProfile }) => {
     return (
-        <div className={`${styles.profilePictureAndName} mt-auto`}>
-            <img className={styles.profilePicture} src={pageProfile.profilePictureUrl} alt="Profile picture"></img>
-            <FaCamera className={styles.cameraIcon} />
+        <div className="d-flex flex-column flex-md-row align-items-center">
+            <div className="">
+                <img className={`${styles.profilePicture}`} src={pageProfile.profilePictureUrl} alt="Profile picture" />
+                <FaCamera className={styles.cameraIcon} />
+            </div>
             <h1>{`${pageProfile.firstName} ${pageProfile.lastName}`}</h1>
         </div>
-    )
-}
+    );
+};
+
 
 // Add story and edit profile buttons
 const AddStoryAndEditProfileButtons = ({pageProfile, clientProfile}) => {
