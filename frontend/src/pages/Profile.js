@@ -86,7 +86,9 @@ const CoverPhoto = ({pageProfile, clientProfile}) => {
 const ProfileTop = ({clientProfile, pageProfile}) => {
     return (
         <div className={`col-xl-7 col-lg-8 col-md-10 col-sm-12`}>
-            <CoverPhoto pageProfile={pageProfile} clientProfile={clientProfile}/>
+            <div className="d-flex align-items-center justify-content-center">
+                <CoverPhoto pageProfile={pageProfile} clientProfile={clientProfile}/>
+            </div>
             <div className={` ${styles.profileInfoContainer} d-flex flex-column flex-md-row`}>
                 <ProfilePictureAndName pageProfile={pageProfile} />
                 <AddStoryAndEditProfileButtons clientProfile={clientProfile} pageProfile={pageProfile} />
