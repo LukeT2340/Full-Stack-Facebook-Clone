@@ -31,10 +31,9 @@
 .customFileInputButton {
     display: flex;
     align-items: center;
-    margin: 20px 0 0 40px;
     padding-block: 5px;
     padding-inline: 15px;
-    background: rgb(232, 232, 232);
+    background: rgb(248, 248, 248);
     border: none;
     border-radius: 8px;
     font-weight: 600;

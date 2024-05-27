@@ -2,7 +2,7 @@
     position: fixed;
     width: 100vw;
     background: white;
-    z-index: 10;
+    z-index: 1000;
     height: 62px;
     border-bottom: 1px solid rgb(208, 208, 208);
 }
@@ -92,7 +92,7 @@
     right: 48px;
     background: white;
     box-shadow: 5px 5px 4px rgb(0,0,0,0.1);
-    z-index: 1; 
+    z-index: 1000; 
     padding: 10px;
     border-radius: 10px;
 }
