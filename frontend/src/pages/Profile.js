@@ -70,7 +70,7 @@ const CoverPhoto = ({pageProfile, clientProfile}) => {
                 className={pageProfile.coverPhotoUrl ? styles.coverPhoto : styles.coverPhotoPlaceholder}>
             </img>
             {pageProfile._id === clientProfile._id && (
-                <Form.Group className={`${styles.changeCoverContainer}`}>
+                <Form.Group className={`mt-auto`}>
                     <Form.Control type="file" accept="image/*" onChange={handleCoverPhotoChange} className="d-none" id="additionalMedia"></Form.Control>
                     <label htmlFor="additionalMedia" className={`${styles.customFileInputButton}`}>
                         <FaCamera className="me-1"/>
@@ -85,7 +85,7 @@ const CoverPhoto = ({pageProfile, clientProfile}) => {
 // Top part of the profile page
 const ProfileTop = ({clientProfile, pageProfile}) => {
     return (
-        <div className={`col-xl-7 col-lg-8 col-md-10 col-sm-12`}>
+        <div className={`col-xl-7 col-lg-8 col-md-12`}>
             <CoverPhoto pageProfile={pageProfile} clientProfile={clientProfile}/>
             <div className={` ${styles.profileInfoContainer} d-flex flex-column flex-md-row`}>
                 <ProfilePictureAndName pageProfile={pageProfile} />
@@ -122,7 +122,7 @@ const ProfilePictureAndName = ({ pageProfile }) => {
     return (
         <div className="d-flex flex-column flex-md-row align-items-center">
             <img className={`${styles.profilePicture}`} src={pageProfile.profilePictureUrl} alt="Profile picture" />
-            <h1>{`${pageProfile.firstName} ${pageProfile.lastName}`}</h1>
+            <h1 className="mx-2">{`${pageProfile.firstName} ${pageProfile.lastName}`}</h1>
         </div>
     );
 };
@@ -148,7 +148,7 @@ const AddStoryAndEditProfileButtons = ({pageProfile, clientProfile}) => {
     }
 
     return(
-        <div className="d-flex flex-wrap justify-content-end mt-auto mb-4">
+        <div className="d-flex flex-wrap ms-auto mt-auto mb-2">
             <button className={styles.addStoryButton} onClick={handleOpenNewStatusForm}>
                 <FaPlus />
                 <p>Add to story</p>
