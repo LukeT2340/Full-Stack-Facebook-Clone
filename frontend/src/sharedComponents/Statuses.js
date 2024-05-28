@@ -112,7 +112,11 @@ const Status = ({status, clientsProfile}) => {
                     </div>
                 )}
                 {status.comments.length > 0 && (
-                    <button className={styles.commentCount} onClick={handleCommentButtonClicked}>{`${status.comments.length} comments`}</button>
+                    <button className={styles.commentCount} onClick={handleCommentButtonClicked}>
+                    {status.comments.length === 1 ? 
+                        `${status.comments.length} comment` : 
+                        `${status.comments.length} comments` 
+                    }</button>
                 )}
             </div>
             <hr className='m-2'></hr>
