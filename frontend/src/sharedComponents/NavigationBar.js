@@ -89,14 +89,14 @@ const NavBarLeft = ({profile}) => {
                             <p>Give feedback</p>
                         </div>
                     </Nav.Link>
-                    <button className={`${styles.optionContainer}`} onClick={logout}>
+                    <Nav.Link className={`${styles.optionContainer}`} onClick={logout}>
                         <div className={styles.optionLeftPart}>
                             <div className={styles.icon}>
                                 <FaSignOutAlt />
                             </div>
                             <p>Logout</p>
                         </div>
-                    </button>
+                    </Nav.Link>
                 </div>
             </Nav>
         </Navbar.Collapse>
@@ -138,15 +138,15 @@ const NavBarRight = ({profile}) => {
       }
 
     return (
-        <Nav className="d-none d-md-flex">
+        <Nav className="d-none d-md-flex mx-3">
             <div className={styles.buttonContainer}>
                 <FaComment className={styles.button}/>
             </div>
             <div className={styles.buttonContainer}>
                 <FaBell className={styles.button}/>
             </div>
-            <div ref={profileOptionsRef}>
 
+            <div ref={profileOptionsRef}> 
                 <button className={styles.profilePictureContainer} onClick={handleProfileButtonClicked}>
                     <img className={styles.profilePicture} src={profile.profilePictureUrl} alt="Profile picture"></img>
                 </button>
