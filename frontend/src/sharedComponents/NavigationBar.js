@@ -38,7 +38,7 @@ const NavBarLeft = ({profile}) => {
 
     return (
         <Navbar.Collapse id="basic-navbar-nav" className="mx-3">
-            <Nav className={styles.profileOptionsContainer}>
+            <Nav>
                 <div className={`d-none d-md-flex ${styles.searchBarContainer}`}>
                     <FaSearch className={`${styles.searchIcon}`} />
                     <input 
@@ -49,53 +49,55 @@ const NavBarLeft = ({profile}) => {
                         onChange={handleSearchTextChange}
                     />   
                 </div>
-                <Nav.Link href={`/profile/${profile._id}`} className={`${styles.profileContainer}`}>
-                    <img src={profile.profilePictureUrl} className={styles.profilePicture} alt="profile picture"></img>
-                    <p>{profile.firstName} {profile.lastName}</p>
-                </Nav.Link>
-                <Nav.Link className={`${styles.optionContainer} d-md-none d-md-flex`}>
-                    <div className={styles.optionLeftPart}>
-                        <div className={styles.icon}>
-                            <FaCog />
+                <div className={`${styles.profileOptionsContainer} d-md-none d-md-flex`}>
+                    <Nav.Link href={`/profile/${profile._id}`} className={`${styles.profileContainer} d-md-none d-sm-block`}>
+                        <img src={profile.profilePictureUrl} className={styles.profilePicture} alt="profile picture"></img>
+                        <p>{profile.firstName} {profile.lastName}</p>
+                    </Nav.Link>
+                    <Nav.Link className={`${styles.optionContainer}`}>
+                        <div className={styles.optionLeftPart}>
+                            <div className={styles.icon}>
+                                <FaCog />
+                            </div>
+                            <p>Settings & privacy</p>
                         </div>
-                        <p>Settings & privacy</p>
-                    </div>
-                    <FaChevronRight />
-                </Nav.Link>
-                <Nav.Link className={`${styles.optionContainer} d-md-none d-md-flex`}>
-                    <div className={styles.optionLeftPart}>
-                        <div className={styles.icon}>
-                            <FaQuestionCircle />
+                        <FaChevronRight />
+                    </Nav.Link>
+                    <Nav.Link className={`${styles.optionContainer}`}>
+                        <div className={styles.optionLeftPart}>
+                            <div className={styles.icon}>
+                                <FaQuestionCircle />
+                            </div>
+                            <p>Help & support</p>
                         </div>
-                        <p>Help & support</p>
-                    </div>
-                    <FaChevronRight />
-                </Nav.Link>
-                <Nav.Link className={`${styles.optionContainer} d-md-none d-md-flex`}>
-                    <div className={styles.optionLeftPart}>
-                        <div className={styles.icon}>
-                            <FaMoon />
+                        <FaChevronRight />
+                    </Nav.Link>
+                    <Nav.Link className={`${styles.optionContainer}`}>
+                        <div className={styles.optionLeftPart}>
+                            <div className={styles.icon}>
+                                <FaMoon />
+                            </div>
+                            <p>Display & accessibility</p>
                         </div>
-                        <p>Display & accessibility</p>
-                    </div>
-                    <FaChevronRight />
-                </Nav.Link>
-                <Nav.Link className={`${styles.optionContainer} d-md-none d-md-flex`}>
-                    <div className={styles.optionLeftPart}>
-                        <div className={styles.icon}>
-                            <FaCommentSlash />
+                        <FaChevronRight />
+                    </Nav.Link>
+                    <Nav.Link className={`${styles.optionContainer}`}>
+                        <div className={styles.optionLeftPart}>
+                            <div className={styles.icon}>
+                                <FaCommentSlash />
+                            </div>
+                            <p>Give feedback</p>
                         </div>
-                        <p>Give feedback</p>
-                    </div>
-                </Nav.Link>
-                <button className={`${styles.optionContainer} d-md-none d-md-flex`} onClick={logout}>
-                    <div className={styles.optionLeftPart}>
-                        <div className={styles.icon}>
-                            <FaSignOutAlt />
+                    </Nav.Link>
+                    <button className={`${styles.optionContainer}`} onClick={logout}>
+                        <div className={styles.optionLeftPart}>
+                            <div className={styles.icon}>
+                                <FaSignOutAlt />
+                            </div>
+                            <p>Logout</p>
                         </div>
-                        <p>Logout</p>
-                    </div>
-                </button>
+                    </button>
+                </div>
             </Nav>
         </Navbar.Collapse>
     )
@@ -132,8 +134,8 @@ const NavBarRight = ({profile}) => {
 
     // Handle Profile Button Clicked (show options)
     const handleProfileButtonClicked = () => {
-        setShowProfileOptions(!showProfileOptions)
-    }
+        setShowProfileOptions(prev => !prev); 
+      }
 
     return (
         <Nav className="d-none d-md-flex">
@@ -143,11 +145,12 @@ const NavBarRight = ({profile}) => {
             <div className={styles.buttonContainer}>
                 <FaBell className={styles.button}/>
             </div>
-            <button className={styles.profilePictureContainer} onClick={handleProfileButtonClicked}>
-                <img className={styles.profilePicture} src={profile.profilePictureUrl} alt="Profile picture"></img>
-            </button>
-
             <div ref={profileOptionsRef}>
+
+                <button className={styles.profilePictureContainer} onClick={handleProfileButtonClicked}>
+                    <img className={styles.profilePicture} src={profile.profilePictureUrl} alt="Profile picture"></img>
+                </button>
+
                 {showProfileOptions && (
                     <ProfileOptions profile={profile} />
                 )}
