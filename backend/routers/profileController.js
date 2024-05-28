@@ -113,16 +113,26 @@ router.get("/getMany", async (req, res) => {
 
 // Search for users
 router.get("/search", async (req, res) => {
-  const text = req.query.text
+  const text = req.query.text;
+  const searchTextParts = text.split(" ");
+  const firstName = searchTextParts[0];
+  const lastName = searchTextParts.length > 1 ? searchTextParts.slice(1).join(" ") : '';
+  
   try {
-    // Find users whose names contain the search text, case-insentive
-    const users = await User.find({
-      $or: [
-        { firstName: { $regex: new RegExp(text, "i") } },
-        { lastName: { $regex: new RegExp(text, "i") } }
-      ]
-    }, { _id: 1, firstName: 1, lastName: 1, profilePictureUrl: 1 })
-    
+      // Find users whose names contain the search text, case-insensitive
+      const users = await User.find({
+          $or: [
+              { $and: [
+                  { firstName: { $regex: new RegExp(firstName, "i") } },
+                  { lastName: { $regex: new RegExp(lastName, "i") } }
+              ]},
+              { $and: [
+                  { lastName: { $regex: new RegExp(firstName, "i") } },
+                  { firstName: { $regex: new RegExp(lastName, "i") } }
+              ]}
+          ]
+      }, { _id: 1, firstName: 1, lastName: 1, profilePictureUrl: 1 });
+      
     // Handle successful database query
     res.status(200).json(users);
   } catch (error) {
