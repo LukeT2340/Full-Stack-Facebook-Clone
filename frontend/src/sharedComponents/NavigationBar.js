@@ -6,6 +6,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import styles from '../styles/NavigationBar.module.css'
 import { useLogout } from "../hooks/useLogout"
 import { FaComment, FaBell, FaSearch, FaCog, FaChevronRight, FaQuestionCircle, FaMoon, FaSignOutAlt, FaCommentSlash } from 'react-icons/fa';
+import Search from "./Search.js"
 
 // Navigation Bar
 const NavigationBar = ({profile}) => {
@@ -47,7 +48,7 @@ const NavBarLeft = ({profile}) => {
                         className={`${styles.searchBar}`} 
                         value={searchText} 
                         onChange={handleSearchTextChange}
-                    />   
+                    /> 
                 </div>
                 <div className={`${styles.profileOptionsContainer} d-md-none d-md-flex`}>
                     <Nav.Link href={`/profile/${profile._id}`} className={`${styles.profileContainer} d-md-none d-sm-block`}>
@@ -99,6 +100,7 @@ const NavBarLeft = ({profile}) => {
                     </Nav.Link>
                 </div>
             </Nav>
+            <Search text={searchText} />
         </Navbar.Collapse>
     )
 }

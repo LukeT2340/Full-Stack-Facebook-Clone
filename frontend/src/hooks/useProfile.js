@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 
+// Takes a user id and fetches that user's (public non-sensitive) information
 export const useProfile = (id) => {
     const [ profile, setProfile ] = useState(null)
     const [ isProfileLoading, setIsProfileLoading ] = useState(true)

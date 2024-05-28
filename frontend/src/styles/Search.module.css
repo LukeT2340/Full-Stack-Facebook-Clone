@@ -1,0 +1,39 @@
+.searchContainer {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    left: 0;
+    top: 0;
+    margin-top: 62px;
+    background: white;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 2px 4px 4px rgba(0, 0, 0, 0.1);
+}
+
+.searchContainer a {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: black;
+    width: 14rem;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.searchContainer a:hover {
+    background: #eeeef0;
+}
+
+.searchContainer h5 {
+    font-size: 1rem;
+    margin: 0;
+}
+
+.searchContainer img {
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+    object-fit: cover; 
+    margin-right: 10px;
+}

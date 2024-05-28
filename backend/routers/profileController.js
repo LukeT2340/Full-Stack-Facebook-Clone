@@ -111,8 +111,30 @@ router.get("/getMany", async (req, res) => {
   }
 });
 
+// Search for users
+router.get("/search", async (req, res) => {
+  const text = req.query.text
+  try {
+    // Find users whose names contain the search text, case-insentive
+    const users = await User.find({
+      $or: [
+        { firstName: { $regex: new RegExp(text, "i") } },
+        { lastName: { $regex: new RegExp(text, "i") } }
+      ]
+    }, { _id: 1, firstName: 1, lastName: 1, profilePictureUrl: 1 })
+    
+    // Handle successful database query
+    res.status(200).json(users);
+  } catch (error) {
+    // Handle error
+    return res.status(400).json({ 'message': error })
+  }
+})
+
+// Endpoints below this point require authorization
 router.use(requireAuth)
 
+// Update cover photo
 router.post("/update/coverPhoto", upload.single('coverPhoto'), async(req, res) => {
     const userId = req.userId
     try {
@@ -140,7 +162,7 @@ router.post("/update/coverPhoto", upload.single('coverPhoto'), async(req, res) =
         await user.save()
         return res.status(201).json({ 'message': 'Cover photo updated successfully'})     
     } catch (error) {
-        return res.status(400).json({ 'message': 'Failed to update cover photo', 'error': error.message })
+        return res.status(400).json({ 'message': error })
     }
 })
 
