@@ -102,7 +102,6 @@
     align-items: center;
     justify-content: space-between;
     font-size: 1.1rem;
-    margin-block: 10px;
     border-radius: 10px;
     background: white;
     border: none;
@@ -129,7 +128,7 @@
     border-radius: 50%;
     cursor: pointer; 
     transition: background-color 0.3s;
-    margin-right: 7px;
+    margin-right: 2px;
 }
 
 .profileContainer {
