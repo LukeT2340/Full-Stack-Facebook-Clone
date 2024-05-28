@@ -206,14 +206,14 @@ const ProfileOptions = ({profile}) => {
                     <p>Give feedback</p>
                 </div>
             </Nav.Link>
-            <button className={styles.optionContainer} onClick={logout}>
+            <Nav.Link className={styles.optionContainer} onClick={logout}>
                 <div className={styles.optionLeftPart}>
                     <div className={styles.icon}>
                         <FaSignOutAlt />
                     </div>
                     <p>Logout</p>
                 </div>
-            </button>
+            </Nav.Link>
         </div>
     )
 }
