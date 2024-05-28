@@ -11,10 +11,8 @@
 
 /* Right side of Login screen */
 .loginContainer {
-    border: 0.5px solid rgb(201, 201, 201); 
     padding: 1.3rem;
     border-radius: 0.5rem;
-    box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.1);
 }
 
 .loginContainer p {
