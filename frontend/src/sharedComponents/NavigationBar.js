@@ -38,7 +38,7 @@ const NavBarLeft = ({profile}) => {
 
     return (
         <Navbar.Collapse id="basic-navbar-nav" className="mx-3">
-            <Nav>
+            <Nav className={styles.profileOptionsContainer}>
                 <div className={`d-none d-md-flex ${styles.searchBarContainer}`}>
                     <FaSearch className={`${styles.searchIcon}`} />
                     <input 
@@ -49,7 +49,7 @@ const NavBarLeft = ({profile}) => {
                         onChange={handleSearchTextChange}
                     />   
                 </div>
-                <Nav.Link href={`/profile/${profile._id}`} className={`${styles.profileContainer} d-md-none d-sm-block`}>
+                <Nav.Link href={`/profile/${profile._id}`} className={`${styles.profileContainer}`}>
                     <img src={profile.profilePictureUrl} className={styles.profilePicture} alt="profile picture"></img>
                     <p>{profile.firstName} {profile.lastName}</p>
                 </Nav.Link>
