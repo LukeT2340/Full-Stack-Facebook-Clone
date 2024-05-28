@@ -18,7 +18,7 @@ const Chat = ({clientProfile, recipientId}) => {
       if (messagesEndRef.current) {
         messagesEndRef.current.scrollIntoView({ behavior: 'smooth' });
       }
-    }, [messages]);
+    }, [messages, isOpen]);
 
     // If the user we are chatting with changes, open the chat
     useEffect(() => {
