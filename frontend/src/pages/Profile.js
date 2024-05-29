@@ -32,6 +32,41 @@ const Profile = () => {
     )
 }
 
+// Top part of the profile page
+const ProfileTop = ({clientProfile, pageProfile}) => {
+    return (
+        <div className={`col-xl-7 col-lg-8 col-md-12`}>
+            <CoverPhoto pageProfile={pageProfile} clientProfile={clientProfile}/>
+            <div className={` ${styles.profileInfoContainer} d-flex flex-column flex-md-row`}>
+                <ProfilePictureAndName pageProfile={pageProfile} />
+                <AddStoryAndEditProfileButtons clientProfile={clientProfile} pageProfile={pageProfile} />
+            </div>
+        </div>
+    )
+}
+
+// Bottom part of the profile page
+const ProfileBottom = ({pageProfile, clientProfile}) => {
+    return (
+        <div className={styles.profileBottomBackground}>
+            <div className={`col-xl-7 col-lg-8 col-10`}>
+                <div className={`${styles.profileBottom} d-flex flex-column flex-md-row align-items-center`}>
+                    {/* Left side */}
+                    <div className="col-xl-5 col-lg-4 col-md-10 col-12 mx-2 mb-auto">
+                        <Intro profile={pageProfile}/>
+                    </div>
+
+                    {/* Right side */}
+                    <div className="col-xl-7 col-lg-8 col-md-10 col-12 mx-2">
+                        <UpdateStatus clientProfile={clientProfile} recipientProfile={pageProfile} />
+                        <Statuses pageProfile={pageProfile} clientProfile={clientProfile} onlyFetchOwnStatuses={true} />
+                    </div>
+                </div>
+            </div>
+        </div>
+    )
+}
+
 // Cover photo
 const CoverPhoto = ({pageProfile, clientProfile}) => {
     const { updateCoverPhoto, loading, error } = useUserDetails()
@@ -85,41 +120,6 @@ const CoverPhoto = ({pageProfile, clientProfile}) => {
     )
 }
 
-// Top part of the profile page
-const ProfileTop = ({clientProfile, pageProfile}) => {
-    return (
-        <div className={`col-xl-7 col-lg-8 col-md-12`}>
-            <CoverPhoto pageProfile={pageProfile} clientProfile={clientProfile}/>
-            <div className={` ${styles.profileInfoContainer} d-flex flex-column flex-md-row`}>
-                <ProfilePictureAndName pageProfile={pageProfile} />
-                <AddStoryAndEditProfileButtons clientProfile={clientProfile} pageProfile={pageProfile} />
-            </div>
-        </div>
-    )
-}
-
-// Bottom part of the profile page
-const ProfileBottom = ({pageProfile, clientProfile}) => {
-    return (
-        <div className={styles.profileBottomBackground}>
-            <div className={`col-xl-7 col-lg-8 col-10`}>
-                <div className={`${styles.profileBottom} d-flex flex-column flex-md-row align-items-center`}>
-                    {/* Left side */}
-                    <div className="col-xl-5 col-lg-4 col-md-10 col-12 mx-2 mb-auto">
-                        <Intro profile={pageProfile}/>
-                    </div>
-
-                    {/* Right side */}
-                    <div className="col-xl-7 col-lg-8 col-md-10 col-12 mx-2">
-                        <UpdateStatus clientProfile={clientProfile} recipientProfile={pageProfile} />
-                        <Statuses pageProfile={pageProfile} clientProfile={clientProfile} onlyFetchOwnStatuses={true} />
-                    </div>
-                </div>
-            </div>
-        </div>
-    )
-}
-
 // Profile picture and name at the top of the screen
 const ProfilePictureAndName = ({ pageProfile }) => {
     return (
@@ -167,7 +167,6 @@ const AddStoryAndEditProfileButtons = ({pageProfile, clientProfile}) => {
 }
 
 const Intro = ({profile}) => {
-
     return (
         <div className={styles.introContainer}>
             <h4>Intro</h4>
