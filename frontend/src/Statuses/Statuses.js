@@ -1,4 +1,3 @@
-import styles from "../styles/Statuses.module.css"
 import { useFetchStatuses } from "../hooks/useFetchStatuses"
 import Status from './Status';
 

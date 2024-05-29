@@ -2,7 +2,7 @@ import { FaArrowAltCircleUp } from 'react-icons/fa';
 import { useState } from 'react'
 import { Link } from 'react-router-dom';
 import { useComment } from '../hooks/useComment'
-import styles from "../styles/Statuses.module.css"
+import styles from "./Statuses.module.css"
 
 // Write new comment
 const NewComment = ({setComments, statusId, profile}) => {

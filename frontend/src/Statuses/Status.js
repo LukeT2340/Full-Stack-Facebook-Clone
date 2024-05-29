@@ -3,7 +3,7 @@ import { useLikeStatus } from '../hooks/useLikeStatus'
 import { useState } from 'react'
 import { Link } from 'react-router-dom';
 import { FaHeart, FaLaugh, FaThumbsUp, FaComment, FaShare, FaArrowAltCircleUp, FaCaretRight } from 'react-icons/fa';
-import styles from "../styles/Statuses.module.css"
+import styles from "./Statuses.module.css"
 import CommentSection from "./CommentSection";
 
 // Individual posts
