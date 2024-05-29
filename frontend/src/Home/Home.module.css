@@ -20,7 +20,9 @@
 /* Left Column */
 
 .leftContainer {
-
+    position: fixed;
+    display: flex;
+    flex-direction: column;
 }
 
 .profileContainer {
