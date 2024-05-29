@@ -1,4 +1,4 @@
-import styles from "../styles/NewStatusModal.module.css"
+import styles from "../sharedComponentsStyles/NewStatusModal.module.css"
 import { Form, Button, Modal, Dropdown, Nav} from 'react-bootstrap'
 import { FaImages, FaSmile, FaGlobe, FaUserPlus, FaLocationArrow, FaCaretRight } from 'react-icons/fa';
 import { useEffect, useState } from 'react'

@@ -1,6 +1,5 @@
 import { useSearch } from "../hooks/useSearch"
-import { useState } from 'react'
-import styles from "../styles/Search.module.css"
+import styles from "../sharedComponentsStyles/Search.module.css"
 import { Nav } from 'react-bootstrap'
 
 // Search for users

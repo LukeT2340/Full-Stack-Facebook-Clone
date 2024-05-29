@@ -1,6 +1,5 @@
 import { useContacts } from "../hooks/useContacts"
-import styles from "../styles/Contacts.module.css"
-import { useEffect, useState } from 'react'
+import styles from "../sharedComponentsStyles/Contacts.module.css"
 import { FaSearch, FaEllipsisH, FaCircle } from 'react-icons/fa'
 
 // Shows Contacts

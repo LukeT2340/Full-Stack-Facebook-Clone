@@ -3,7 +3,7 @@ import { Navbar, Nav } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import { useState, useEffect, useRef } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css'
-import styles from '../styles/NavigationBar.module.css'
+import styles from '../sharedComponentsStyles/NavigationBar.module.css'
 import { useLogout } from "../hooks/useLogout.js"
 import { FaComment, FaBell, FaSearch, FaCog, FaChevronRight, FaQuestionCircle, FaMoon, FaSignOutAlt, FaCommentSlash } from 'react-icons/fa';
 import Search from "./Search.js"

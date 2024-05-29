@@ -1,6 +1,6 @@
 import { useProfile } from "../hooks/useProfile"
 import { FaTimes } from 'react-icons/fa'
-import styles from '../styles/Chat.module.css'
+import styles from '../sharedComponentsStyles/Chat.module.css'
 import { Link } from 'react-router-dom'
 import { useMessage } from "../hooks/useMessage"
 import { useState, useEffect, useRef } from 'react';

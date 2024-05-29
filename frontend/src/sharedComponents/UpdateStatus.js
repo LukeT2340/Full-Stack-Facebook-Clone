@@ -1,6 +1,6 @@
 import { FaVideo, FaImages, FaSmile} from 'react-icons/fa';
 import { useState } from 'react'
-import styles from "../styles/UpdateStatus.module.css"
+import styles from "../sharedComponentsStyles/UpdateStatus.module.css"
 import { Link } from 'react-router-dom';
 import NewStatusModal from './NewStatusModal';
 
