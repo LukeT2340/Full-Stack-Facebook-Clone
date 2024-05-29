@@ -67,7 +67,7 @@ const Status = React.memo(({ status, clientsProfile }) => {
         return `${day} ${month} at ${hours}:${minutes}`;
     }
 
-    if (isPosterProfileLoading || isLoading|| isRecipientProfileLoading) {
+    if (isPosterProfileLoading || isRecipientProfileLoading) {
         return (
             <></>
         )
