@@ -135,6 +135,7 @@
     margin-block: 14px;
     border-radius: 8px;
     font-weight: 600;
+    color: black;
 }
 
 .introContainer button:hover {

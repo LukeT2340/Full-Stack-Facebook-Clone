@@ -3,6 +3,7 @@ import { FaCircle } from 'react-icons/fa'
 
 // Individual Contact
 const Contact = ({ contact, setChatRecipientId }) => {
+    // Fetch unread messages
 
     // Handle contact button clicked (open up chat with the contact)
     const handleContactButtonClicked = () => {
