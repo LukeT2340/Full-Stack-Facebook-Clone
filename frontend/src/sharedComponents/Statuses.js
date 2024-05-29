@@ -12,7 +12,7 @@ const Statuses = ({clientProfile, pageProfile, onlyFetchOwnStatuses}) => {
     const { statuses, areStatusesLoading } = useFetchStatuses(20, 1, onlyFetchOwnStatuses ? pageProfile._id : null) // Fetch 20 statuses
     if (areStatusesLoading) {
         return (
-            <></>
+            <div styles={{height: "500px", background: "white"}}></div>
         )
     }
 
