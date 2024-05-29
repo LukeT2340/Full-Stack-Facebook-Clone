@@ -59,7 +59,7 @@ const Chat = ({clientProfile, recipientId}) => {
                 value={text}
                 onChange={(e) => setText(e.target.value)}
                 placeholder="Aa"
-                onKeyPress={(event) => event.key === 'Enter' ? handleSendMessage() : null}
+                onKeyPress={(event) => event.key === 'Enter' && text.trim() != "" ? handleSendMessage() : null}
               />
               <button onClick={handleSendMessage}>Send</button>
             </div>
