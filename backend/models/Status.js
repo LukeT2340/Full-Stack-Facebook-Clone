@@ -12,7 +12,7 @@ const commentSchema = new Schema({
 const statusSchema = new Schema({
   userId: { type: Schema.Types.ObjectId, ref: 'User', required: true },
   recipientUserId: { type: Schema.Types.ObjectId, ref: 'User'},
-  text: { type: String, required: true },
+  text: { type: String },
   media: {
     type: { type: String, enum: ['image', 'video'] },
     url: { type: String },

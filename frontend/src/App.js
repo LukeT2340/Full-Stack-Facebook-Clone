@@ -2,11 +2,11 @@ import './App.css';
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import React, { useState } from 'react';
 import { useAuthContext } from './hooks/useAuthContext.js';
-import Home from './pages/Home.js';
+import Home from './Home/Home.js';
 import NavigationBar from './sharedComponents/NavigationBar.js';
 import Chat from './sharedComponents/Chat.js';
-import Profile from "./pages/Profile.js"
-import Login from './pages/Login.js';
+import Profile from "./Profile/Profile.js"
+import Login from './Login/Login.js';
 import { useProfile } from './hooks/useProfile';
 
 

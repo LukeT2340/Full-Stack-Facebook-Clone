@@ -1,25 +1,8 @@
-import styles from "../styles/Home.module.css"
-import { Nav } from 'react-bootstrap'
-import Contacts from "../sharedComponents/Contacts"
-import Statuses from "../sharedComponents/Statuses"
-import { Link } from 'react-router-dom';
-import UpdateStatus from "../sharedComponents/UpdateStatus";
 import { FaUserFriends, FaClock, FaBookmark, FaCalendar } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
+import { Nav } from 'react-bootstrap'
+import styles from "./Home.module.css"
 
-const Home = ({profile, setChatRecipientId}) => {    
-
-    if (!profile) {
-        <></>
-    }
-
-    return (
-        <div className={`${styles.homeContainer} d-flex justify-content-between justify-content-lg-center`}>
-            <Left profile={profile} />
-            <Middle profile={profile} />
-            <Right setChatRecipientId={setChatRecipientId}/>
-        </div>
-    )
-}
 
 // Left column of the home page
 const Left = ({profile}) => {
@@ -49,24 +32,4 @@ const Left = ({profile}) => {
     )
 }
 
-// Middle column of the home page
-const Middle = ({profile}) => {
-    return (
-        <div className={`${styles.middleContainer} mx-3`} style={{width: '600px'}}>
-            <UpdateStatus clientProfile={profile} recipientProfile={profile}/>
-            <Statuses clientProfile={profile}/>
-        </div>
-    )
-}
-
-// Right column of the home page
-const Right = ({setChatRecipientId}) => {
-    return (
-        <div className="d-md-block col-xl-2 col-lg-3 col-md-3 d-none d-sm-none ms-3">
-            <Contacts setChatRecipientId={setChatRecipientId}/>
-        </div>
-    )
-}
-
-export default Home
-
+export default Left
