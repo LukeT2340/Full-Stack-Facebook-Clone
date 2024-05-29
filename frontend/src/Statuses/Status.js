@@ -6,7 +6,7 @@ import { FaHeart, FaLaugh, FaThumbsUp, FaComment, FaShare, FaArrowAltCircleUp, F
 import styles from "./Statuses.module.css"
 import CommentSection from "./CommentSection";
 
-// Individual posts
+// Individual status
 const Status = ({ status, clientsProfile }) => {
     const { profile: posterProfile, isProfileLoading: isPosterProfileLoading } = useProfile(status.userId) // Fetch profile of person who's post it is
     const { profile: recipientProfile, isProfileLoading: isRecipientProfileLoading } = useProfile(status.recipientUserId) // Fetch profile of person who's post it is
