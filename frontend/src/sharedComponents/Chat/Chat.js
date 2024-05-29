@@ -1,9 +1,10 @@
-import { useProfile } from "../hooks/useProfile"
+import { useProfile } from "../../hooks/useProfile"
 import { FaTimes } from 'react-icons/fa'
-import styles from '../sharedComponentsStyles/Chat.module.css'
+import styles from './Chat.module.css'
 import { Link } from 'react-router-dom'
-import { useMessage } from "../hooks/useMessage"
+import { useMessage } from "../../hooks/useMessage"
 import { useState, useEffect, useRef } from 'react';
+import Message from "./Message"
 
 // Chat box (messenging)
 const Chat = ({clientProfile, recipientId}) => {
@@ -73,55 +74,6 @@ const Chat = ({clientProfile, recipientId}) => {
         </div>
       )
     )
-}
-
-// Individual message
-const Message = ( {message, clientProfile, recipientProfile} ) => {
-
-    // Convert date to user friendly type
-    const userFriendlyDate = (dateString) => {
-      const date = new Date(dateString);
-  
-      // Get day of the month
-      const day = date.getDate();
-  
-      // Get month name
-      const month = date.toLocaleString('default', { month: 'short' });
-  
-      // Get hours and minutes
-      const hours = date.getHours().toString().padStart(2, '0');
-      const minutes = date.getMinutes().toString().padStart(2, '0');
-  
-      // Get today's day
-      const todaysDate = new Date();
-      const todaysDay = todaysDate.getDate();
-
-      if (day === todaysDay) {
-        return `${hours}:${minutes}`
-      }
-
-      return `${day} ${month} at ${hours}:${minutes}`;
-  }
-
-  return (
-    <div className="d-flex flex-column">
-      <div className={styles.timestamp}>
-        <p>{userFriendlyDate(message.createdAt)}</p>
-      </div>
-      <div className={styles.messageContainer}>
-        {message.senderId === clientProfile._id ? (
-          <div className={`${styles.clientMessage} ms-auto`}>
-            <p>{message.text}</p>
-          </div>
-        ) : (
-          <div className={`${styles.theirMessage} me-auto`}>
-            <img className={styles.smallProfilePicture} alt="Profile picture" src={recipientProfile.profilePictureUrl}></img>
-            <p>{message.text}</p>
-          </div>
-        )}
-      </div>
-    </div>
-  )
 }
 
 export default Chat

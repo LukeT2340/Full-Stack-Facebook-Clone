@@ -1,4 +1,4 @@
-import Contacts from "../sharedComponents/Contacts"
+import Contacts from "../sharedComponents/Contacts/Contacts"
 
 // Right column of the home page
 const Right = ({setChatRecipientId}) => {

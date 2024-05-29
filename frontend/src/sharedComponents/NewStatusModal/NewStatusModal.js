@@ -1,9 +1,9 @@
-import styles from "../sharedComponentsStyles/NewStatusModal.module.css"
-import { Form, Button, Modal, Dropdown, Nav} from 'react-bootstrap'
-import { FaImages, FaSmile, FaGlobe, FaUserPlus, FaLocationArrow, FaCaretRight } from 'react-icons/fa';
+import styles from "./NewStatusModal.module.css"
+import { Form, Button, Modal } from 'react-bootstrap'
+import { FaImages, FaSmile, FaUserPlus, FaLocationArrow } from 'react-icons/fa';
 import { useEffect, useState } from 'react'
-import { useNewPost } from "../hooks/useNewPost"
-import { Link } from 'react-router-dom';
+import { useNewPost } from "../../hooks/useNewPost"
+import UserInfo from "./UserInfo";
 
 // Modal where users can post new statuses
 const NewStatusModal = ({ clientProfile, recipientProfile, show, handleClose }) => {
@@ -65,7 +65,7 @@ const NewStatusModal = ({ clientProfile, recipientProfile, show, handleClose }) 
                 <Form className={`d-flex flex-column`} onSubmit={handleSubmit}>
 
                     {/* Profile picture, name and visibility setting for status*/}
-                    <ModalUserInfo clientProfile={clientProfile} recipientProfile={recipientProfile} visibility={visibility} setVisibility={setVisibility} />
+                    <UserInfo clientProfile={clientProfile} recipientProfile={recipientProfile} visibility={visibility} setVisibility={setVisibility} />
                     <textarea
                         placeholder={clientProfile._id === recipientProfile._id ? `What's on your mind, ${clientProfile.firstName}?` : `Say something to ${recipientProfile.firstName}`}
                         rows={6}
@@ -111,44 +111,6 @@ const NewStatusModal = ({ clientProfile, recipientProfile, show, handleClose }) 
                 </Form>
             </Modal.Body>
         </Modal>
-    )
-}
-
-// Top part of modal that specifies the users' details
-const ModalUserInfo = ({clientProfile, recipientProfile, visibility, setVisibility}) => {
-
-    const handleVisibilityChange = (newVisibility) => {
-        setVisibility(newVisibility);
-    };
-    return (
-        <div className="d-flex">
-            <Link to={`/profile/${clientProfile._id}`}>
-                <img className={styles.profilePicture} src={clientProfile.profilePictureUrl}></img>
-            </Link>
-            <div className="d-flex flex-column">
-                <div className='d-flex align-items-center'>
-                    <p className="m-0 p-0">{clientProfile.firstName} {clientProfile.lastName}</p>
-                    {(clientProfile._id !== recipientProfile._id) && (
-                        <>
-                            <FaCaretRight />
-                            <p className="m-0 p-0">{recipientProfile.firstName} {recipientProfile.lastName}</p>
-                        </>
-                    )}
-                </div>
-                <Dropdown className={`${styles.visibilityDropdown}`}>
-                    <Dropdown.Toggle variant="light" id="visibility-dropdown" className="d-flex align-items-center">
-                        <FaGlobe className="me-1" />
-                        {visibility}
-                    </Dropdown.Toggle>
-
-                    <Dropdown.Menu>
-                        <Dropdown.Item onClick={() => handleVisibilityChange('Public')}>Public</Dropdown.Item>
-                        <Dropdown.Item onClick={() => handleVisibilityChange('Friends')}>Friends</Dropdown.Item>
-                        <Dropdown.Item onClick={() => handleVisibilityChange('Private')}>Private</Dropdown.Item>
-                    </Dropdown.Menu>
-                </Dropdown>                            
-            </div>
-        </div>
     )
 }
 

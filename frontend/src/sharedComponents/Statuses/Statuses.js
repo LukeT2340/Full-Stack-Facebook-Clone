@@ -1,4 +1,4 @@
-import { useFetchStatuses } from "../hooks/useFetchStatuses"
+import { useFetchStatuses } from "../../hooks/useFetchStatuses"
 import Status from './Status';
 
 

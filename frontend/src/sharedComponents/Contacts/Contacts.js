@@ -1,6 +1,7 @@
-import { useContacts } from "../hooks/useContacts"
-import styles from "../sharedComponentsStyles/Contacts.module.css"
+import { useContacts } from "../../hooks/useContacts"
+import styles from "./Contacts.module.css"
 import { FaSearch, FaEllipsisH, FaCircle } from 'react-icons/fa'
+import Contact from "./Contact";
 
 // Shows Contacts
 const Contacts = ({setChatRecipientId}) => {
@@ -30,25 +31,6 @@ const Contacts = ({setChatRecipientId}) => {
             ))}
         </div>
     );
-};
-
-// Individual Contact
-const Contact = ({ contact, setChatRecipientId }) => {
-
-    // Handle contact button clicked (open up chat with the contact)
-    const handleContactButtonClicked = () => {
-        setChatRecipientId(contact._id)
-    }
-
-    return (
-        <button className={styles.contactContainer} onClick={handleContactButtonClicked}>
-            <div className={styles.profilePicture}>
-                <img src={contact.profilePictureUrl} alt="profile picture" className={styles.profilePicture}></img>
-                <FaCircle className={styles.onlineIcon} />
-            </div>
-            <h5>{`${contact.firstName} ${contact.lastName}`}</h5>
-        </button>
-    )
 };
 
 export default Contacts;

@@ -1,7 +1,7 @@
 import CoverPhoto from './CoverPhoto.js'
 import styles from "./Profile.module.css"
 import { useAuthContext } from "../hooks/useAuthContext.js"
-import NewStatusModal from "../sharedComponents/NewStatusModal.js"
+import NewStatusModal from "../sharedComponents/NewStatusModal/NewStatusModal.js"
 import { FaPlus, FaPen, FaChevronDown } from 'react-icons/fa'
 import React, { useState } from 'react'
 

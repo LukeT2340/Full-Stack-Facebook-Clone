@@ -1,5 +1,5 @@
-import { useProfile } from "../hooks/useProfile"
-import { useLikeStatus } from '../hooks/useLikeStatus'
+import { useProfile } from "../../hooks/useProfile"
+import { useLikeStatus } from '../../hooks/useLikeStatus'
 import { useState } from 'react'
 import { Link } from 'react-router-dom';
 import { FaHeart, FaLaugh, FaThumbsUp, FaComment, FaShare, FaArrowAltCircleUp, FaCaretRight } from 'react-icons/fa';

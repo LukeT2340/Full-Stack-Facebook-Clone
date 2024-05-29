@@ -1,5 +1,5 @@
-import Statuses from "../Statuses/Statuses"
-import UpdateStatus from "../sharedComponents/UpdateStatus"
+import Statuses from "../sharedComponents/Statuses/Statuses"
+import UpdateStatus from "../sharedComponents/UpdateStatus/UpdateStatus"
 import styles from "./Home.module.css"
 
 // Middle column of the home page

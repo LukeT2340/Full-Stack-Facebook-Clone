@@ -1,5 +1,5 @@
 import styles from "./Statuses.module.css"
-import { useProfile } from "../hooks/useProfile"
+import { useProfile } from "../../hooks/useProfile"
 import { Link } from 'react-router-dom';
 
 // Individual comments

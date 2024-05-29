@@ -1,7 +1,7 @@
 import { FaArrowAltCircleUp } from 'react-icons/fa';
 import { useState } from 'react'
 import { Link } from 'react-router-dom';
-import { useComment } from '../hooks/useComment'
+import { useComment } from '../../hooks/useComment'
 import styles from "./Statuses.module.css"
 
 // Write new comment

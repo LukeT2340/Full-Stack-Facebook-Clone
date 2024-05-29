@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import { useAuthContext } from './hooks/useAuthContext.js';
 import Home from './Home/Home.js';
 import NavigationBar from './sharedComponents/NavigationBar/NavigationBar.js';
-import Chat from './sharedComponents/Chat.js';
+import Chat from './sharedComponents/Chat/Chat.js';
 import Profile from "./Profile/Profile.js"
 import Login from './Login/Login.js';
 import { useProfile } from './hooks/useProfile';

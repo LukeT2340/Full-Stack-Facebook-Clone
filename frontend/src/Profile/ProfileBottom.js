@@ -1,5 +1,5 @@
-import Statuses from "../Statuses/Statuses.js"
-import UpdateStatus from "../sharedComponents/UpdateStatus.js"
+import Statuses from "../sharedComponents/Statuses/Statuses.js"
+import UpdateStatus from "../sharedComponents/UpdateStatus/UpdateStatus.js"
 import styles from "./Profile.module.css"
 import Intro from "./Intro.js"
 
