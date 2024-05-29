@@ -3,7 +3,7 @@ import styles from "../styles/Statuses.module.css"
 import { useFetchStatuses } from "../hooks/useFetchStatuses"
 import { useProfile } from "../hooks/useProfile"
 import { useLikeStatus } from '../hooks/useLikeStatus'
-import { useState } from 'react'
+import React, { useState, useCallback } from 'react'
 import { useComment } from '../hooks/useComment'
 import { Link } from 'react-router-dom';
 
@@ -26,7 +26,7 @@ const Statuses = ({clientProfile, pageProfile, onlyFetchOwnStatuses}) => {
 }
 
 // Individual posts
-const Status = ({status, clientsProfile}) => {
+const Status = React.memo(({ status, clientsProfile }) => {
     const { profile: posterProfile, isProfileLoading: isPosterProfileLoading } = useProfile(status.userId) // Fetch profile of person who's post it is
     const { profile: recipientProfile, isProfileLoading: isRecipientProfileLoading } = useProfile(status.recipientUserId) // Fetch profile of person who's post it is
     const { unlikeStatus, likeStatus, isLiked, isLoading } = useLikeStatus(status._id) 
@@ -35,12 +35,12 @@ const Status = ({status, clientsProfile}) => {
     const [comments, setComments] = useState(status.comments)
 
     // Handle comment button clicked
-    const handleCommentButtonClicked = () => {
+    const handleCommentButtonClicked = useCallback(() => {
         setCommentSectionOpen(prev => !prev)
-    }
+    })
 
     // Handle like status button clicked
-    const handleLikeButtonClicked = async () => {
+    const handleLikeButtonClicked = useCallback(async () => {
         if (isLiked) {
             await unlikeStatus();
             setLikeCount(prevCount => prevCount - 1);
@@ -48,7 +48,7 @@ const Status = ({status, clientsProfile}) => {
             await likeStatus();
             setLikeCount(prevCount => prevCount + 1);
         }
-    };
+    })
 
     // Convert date to user friendly type
     const userFriendlyDate = (dateString) => {
@@ -137,7 +137,7 @@ const Status = ({status, clientsProfile}) => {
             <Comments setComments={setComments} statusId={status._id} comments={comments} open={commentSectionOpen} profile={clientsProfile}/>
         </div>
     )
-}
+})
 
 // Comment section
 const Comments = ({setComments, statusId, comments, open, profile}) => {
