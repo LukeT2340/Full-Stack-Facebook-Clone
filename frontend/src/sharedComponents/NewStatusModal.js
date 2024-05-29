@@ -35,10 +35,11 @@ const NewStatusModal = ({ clientProfile, recipientProfile, show, handleClose }) 
     
         // Proceed with handling the valid file
         const reader = new FileReader();
-            reader.onloadend = () => {
+        reader.onloadend = () => {
             setImagePreview(reader.result);
             setSelectedImage(file);
         };
+
         reader.readAsDataURL(file);
     };
 
@@ -60,7 +61,9 @@ const NewStatusModal = ({ clientProfile, recipientProfile, show, handleClose }) 
                 <Modal.Title className={styles.createPostText}>Create Post</Modal.Title>
             </Modal.Header>
             <Modal.Body>
+
                 <Form className={`d-flex flex-column`} onSubmit={handleSubmit}>
+
                     {/* Profile picture, name and visibility setting for status*/}
                     <ModalUserInfo clientProfile={clientProfile} recipientProfile={recipientProfile} visibility={visibility} setVisibility={setVisibility} />
                     <textarea
@@ -70,6 +73,7 @@ const NewStatusModal = ({ clientProfile, recipientProfile, show, handleClose }) 
                         value={text}
                         onChange={handleTextChange}
                     />
+
                     {/* Emoji 'button'*/}
                     <FaSmile size={22} color={'#00ccff'} className={styles.emojiIcon}/>
 
@@ -100,7 +104,7 @@ const NewStatusModal = ({ clientProfile, recipientProfile, show, handleClose }) 
                             </div>
                         </label>
                     </Form.Group>
-                    <Button type="submit" className={`${styles.postButton} mt-2`} disabled={text.trim() === "" || isLoading}>
+                    <Button type="submit" className={`${styles.postButton} mt-2`} disabled={(text.trim() === "" && !selectedImage) || isLoading}>
                         {/* Show loading text when isLoading */}
                         {isLoading ? 'Posting...' : 'Post'}
                     </Button>
