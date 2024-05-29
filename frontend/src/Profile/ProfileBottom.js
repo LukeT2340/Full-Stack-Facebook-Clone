@@ -1,4 +1,4 @@
-import Statuses from "../sharedComponents/Statuses.js"
+import Statuses from "../Statuses/Statuses.js"
 import UpdateStatus from "../sharedComponents/UpdateStatus.js"
 import styles from "./Profile.module.css"
 import Intro from "./Intro.js"

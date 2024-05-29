@@ -1,4 +1,4 @@
-import Statuses from "../sharedComponents/Statuses"
+import Statuses from "../Statuses/Statuses"
 import UpdateStatus from "../sharedComponents/UpdateStatus"
 import styles from "./Home.module.css"
 
