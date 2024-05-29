@@ -16,7 +16,7 @@ function App() {
   const [chatRecipientId, setChatRecipientId] = useState(null)
 
   if (isProfileLoading) {
-    return <>Loading...</>; 
+    return <></>; 
   }
 
   return (

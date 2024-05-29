@@ -28,7 +28,6 @@
 .profileContainer {
     display: flex;
     flex-direction: row;
-    align-items: center;
     margin-top: 15px;
     border-radius: 10px;
 }
