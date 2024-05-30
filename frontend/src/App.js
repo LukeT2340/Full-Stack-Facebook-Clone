@@ -13,6 +13,7 @@ import { useProfile } from './hooks/useProfile';
 function App() {
   const { user } = useAuthContext();
   const { profile, isProfileLoading } = useProfile(user ? user.user_id : null);
+  const [chatRecipientId, setChatRecipientId] = useState(null)
 
   if (isProfileLoading) {
     return <></>; 
@@ -24,6 +25,7 @@ function App() {
         {user && profile && (
           <>
             <NavigationBar profile={profile}/>
+            <Chat clientProfile={profile} recipientId={chatRecipientId} />
           </>
           )}
         <Routes>
@@ -38,8 +40,8 @@ function App() {
           {/* Pages only available to authenticated users */}
           {user && profile && (
             <>
-              <Route path="/home" element={<Home profile={profile} />} />
-              <Route path="/profile/:userId" element={<Profile />} />
+              <Route path="/home" element={<Home profile={profile} setChatRecipientId={setChatRecipientId} />} />
+              <Route path="/profile/:userId" element={<Profile setChatRecipientId={setChatRecipientId}/>} />
               <Route path="*" element={<Navigate to="/home" />} />
             </>
           )}
