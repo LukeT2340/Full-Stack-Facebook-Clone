@@ -33,5 +33,28 @@ router.get('/get', async (req, res) => {
     }
 });
 
+// Fetch unread count
+router.get('/fetchUnreadCount', async (req, res) => {
+    const { otherUserId } = req.query
+    const userId = req.userId
+
+    try {
+        // Fetch messages where senderId is otherUserId and recipientId is userId and isRead is false
+        const unreadMessages = await Message.find(
+            { 
+                senderId: otherUserId,
+                recipientId: userId,
+                isRead: false
+            }
+        )
+
+
+        // Count unread messages
+        const count = unreadMessages.length;
+        return res.status(200).json({ count }); 
+    } catch (error) {
+        return res.status(500).json({ error: "Failed to fetch unread messages count", details: error.message });
+    }
+})
 
 module.exports = router;
