@@ -8,10 +8,10 @@ import Message from "./Message"
 
 // Chat box (messenging)
 const Chat = ({clientProfile, recipientId}) => {
-    const { profile: recipientProfile, isLoading: isRecipientProfileLoading } = useProfile(recipientId)
-    const [text, setText] = useState('')
+    const { profile: recipientProfile, isLoading: isRecipientProfileLoading } = useProfile(recipientId) // Get the other user's profile info
+    const [text, setText] = useState('') 
     const [isOpen, setIsOpen] = useState(true)
-    const { messages, sendMessage, isFetching} = useMessage(recipientId)
+    const { messages, sendMessage, isFetching} = useMessage(recipientId) // Retrieve previous messages
     const messagesEndRef = useRef(null)
 
     // Scroll to bottom whenever messages change
@@ -31,6 +31,7 @@ const Chat = ({clientProfile, recipientId}) => {
         return 
     }
 
+    // Handle send message
     const handleSendMessage = () => {
         sendMessage(text)
         setText('')

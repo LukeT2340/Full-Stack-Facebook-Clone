@@ -13,7 +13,7 @@ const Home = ({profile, setChatRecipientId}) => {
         <div className={`${styles.homeContainer} d-flex justify-content-between justify-content-lg-center`}>
             <Left profile={profile} />
             <Middle profile={profile} />
-            <Right setChatRecipientId={setChatRecipientId}/>
+            <Right profile={profile} setChatRecipientId={setChatRecipientId}/>
         </div>
     )
 }

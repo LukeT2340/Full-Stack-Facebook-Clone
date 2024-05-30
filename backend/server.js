@@ -63,7 +63,7 @@ app.use('/profile', profileController)
 const server = http.createServer(app)
 const io = socketIo(server, {
   cors: {
-    origin: process.env.REACT_APP_URL, // React app URL
+    origin: process.env.REACT_APP_URL, 
     methods: ['GET', 'POST'],
     credentials: true,
   },
@@ -85,6 +85,7 @@ io.on('connection', (socket) => {
           text: data.text,
       })
       await message.save();
+      
       // Emit message only to the recipient's room
       io.to(roomId).emit('message', message); 
   })
