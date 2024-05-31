@@ -9,6 +9,7 @@ export const useMessage = (recipientId) => {
     const [isFetching, setIsFetching] = useState(false);
     const [errorFetching, setErrorFetching] = useState(null);
     const { user } = useAuthContext();
+    const token = user.token;
     const socket = useRef(null);
 
     // The room id is the concatenation of two users' sorted ids
@@ -45,7 +46,6 @@ export const useMessage = (recipientId) => {
             setIsFetching(true);
 
             try {
-                const token = user.token;
                 const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/message/get?recipientId=${recipientId}`, {
                     method: 'GET',
                     headers: {
@@ -85,11 +85,34 @@ export const useMessage = (recipientId) => {
         }
     };
 
+    // Mark messages as read
+    const markAsRead = async () => {
+        try {
+            const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/message/markAsRead?otherUserId=${recipientId}`, {
+                method: 'GET',
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json',
+                },
+            })
+            if (!response.ok) {
+                throw new Error('Failed to fetch messages');
+            }
+
+            // Set the messages as read locally
+            setMessages(messages.map((message)=> {
+                return { ...message, isRead: true };
+            }))
+        } catch {
+            // Handle error
+        }
+    }
 
     return { 
         messages, 
         isSending, 
         errorSending, 
+        markAsRead,
         sendMessage, 
         setMessages, 
         isFetching, 

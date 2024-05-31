@@ -11,7 +11,7 @@ const Chat = ({clientProfile, recipientId}) => {
     const { profile: recipientProfile, isLoading: isRecipientProfileLoading } = useProfile(recipientId) // Get the other user's profile info
     const [text, setText] = useState('') 
     const [isOpen, setIsOpen] = useState(true)
-    const { messages, sendMessage, isFetching} = useMessage(recipientId) // Retrieve previous messages
+    const { messages, markAsRead, sendMessage, isFetching} = useMessage(recipientId) // Retrieve previous messages
     const messagesEndRef = useRef(null)
 
     // Scroll to bottom whenever messages change
@@ -20,6 +20,10 @@ const Chat = ({clientProfile, recipientId}) => {
         messagesEndRef.current.scrollIntoView({ behavior: 'smooth' });
       }
     }, [messages, isOpen]);
+
+    useEffect(() => {
+      markAsRead()
+    }, [isOpen])
 
     // If the user we are chatting with changes, open the chat
     useEffect(() => {

@@ -5,11 +5,12 @@ import { useUnreadMessageCount } from "../../hooks/useUnreadMessageCount";
 // Individual Contact
 const Contact = ({ contact, setChatRecipientId }) => {
     // Fetch unread message count
-    const { unreadCount } = useUnreadMessageCount(contact._id)
+    const { unreadCount, setUnreadCount } = useUnreadMessageCount(contact._id)
 
 
     // Handle contact button clicked (open up chat with the contact)
     const handleContactButtonClicked = () => {
+        setUnreadCount(0)
         setChatRecipientId(contact._id)
     }
 

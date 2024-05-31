@@ -57,4 +57,26 @@ router.get('/fetchUnreadCount', async (req, res) => {
     }
 })
 
+// Mark messages as red
+router.get('/markAsRead', async (req, res) => {
+    const { otherUserId } = req.query;
+    const userId = req.userId;
+
+    try {
+        await Message.updateMany(
+            {
+                senderId: otherUserId,
+                recipientId: userId,
+                isRead: false
+            },
+            { $set: { isRead: true } }
+        );
+
+        res.status(200).send("Messages marked as read successfully.");
+    } catch (error) {
+        console.error("Error marking messages as read:", error);
+        res.status(500).send("Internal Server Error");
+    }
+});
+
 module.exports = router;

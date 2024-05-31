@@ -46,5 +46,5 @@ export const useUnreadMessageCount = (recipientId) => {
         getUnreadMessages()
     }, [recipientId])
 
-    return { loading, error, unreadCount }
+    return { loading, error, unreadCount, setUnreadCount }
 }
