@@ -20,6 +20,9 @@ router.get('/get', async (req, res) => {
 
     try {
         // Find messages between the sender and recipient
+        /* 
+            In reality, you'd want to fetch messages a bit at a time rather than load the whole conversation each time the users open the chat.
+        */
         const messages = await Message.find({
             $or: [
                 { senderId: userId, recipientId: recipientId },

@@ -48,7 +48,7 @@ const CoverPhoto = ({pageProfile, clientProfile}) => {
                     <Form.Control type="file" accept="image/*" onChange={handleCoverPhotoChange} className="d-none" id="coverPhoto"></Form.Control>
                     <label htmlFor="coverPhoto" className={`${styles.customFileInputButton}`}>
                         <FaCamera className="me-1"/>
-                        {loading ? `Loading...` : `Edit cover photo`}
+                        {loading ? `Updating...` : `Edit cover photo`}
                     </label>
                 </Form.Group>
             )}
