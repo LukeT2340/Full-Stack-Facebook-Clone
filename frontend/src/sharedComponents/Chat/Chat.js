@@ -5,22 +5,25 @@ import { Link } from 'react-router-dom'
 import { useMessage } from "../../hooks/useMessage"
 import { useState, useEffect, useRef } from 'react';
 import Message from "./Message"
+import { useChatContext } from "../../hooks/useChatContext"
 
 // Chat box (messenging)
-const Chat = ({clientProfile, recipientId}) => {
+const Chat = ({clientProfile}) => {
+    const { recipientId } = useChatContext()
     const { profile: recipientProfile, isLoading: isRecipientProfileLoading } = useProfile(recipientId) // Get the other user's profile info
     const [text, setText] = useState('') 
     const [isOpen, setIsOpen] = useState(true)
     const { messages, markAsRead, sendMessage, isFetching} = useMessage(recipientId) // Retrieve previous messages
     const messagesEndRef = useRef(null)
 
-    // Scroll to bottom whenever messages change
+    // Scroll to bottom whenever messages changes
     useEffect(() => {
       if (messagesEndRef.current) {
         messagesEndRef.current.scrollIntoView({ behavior: 'smooth' });
       }
     }, [messages, isOpen]);
 
+    // Mark messages as read when chat is opened
     useEffect(() => {
       markAsRead()
     }, [isOpen])

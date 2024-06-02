@@ -4,7 +4,7 @@ import { FaSearch, FaEllipsisH, FaCircle } from 'react-icons/fa'
 import Contact from "./Contact";
 
 // Shows Contacts
-const Contacts = ({setChatRecipientId}) => {
+const Contacts = () => {
     const { contacts, isLoading } = useContacts(20);
     if (isLoading) {
         return <>Loading...</>;
@@ -27,7 +27,7 @@ const Contacts = ({setChatRecipientId}) => {
                 </div>
             </div>
             {contacts.map((contact) => (
-                <Contact setChatRecipientId={setChatRecipientId} key={contact._id} contact={contact} />
+                <Contact key={contact._id} contact={contact} />
             ))}
             
         </div>

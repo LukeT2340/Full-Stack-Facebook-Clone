@@ -1,17 +1,19 @@
 import styles from "./Contacts.module.css"
 import { FaCircle } from 'react-icons/fa'
 import { useUnreadMessageCount } from "../../hooks/useUnreadMessageCount";
+import { useChatContext } from "../../hooks/useChatContext"
 
 // Individual Contact
-const Contact = ({ contact, setChatRecipientId }) => {
+const Contact = ({ contact }) => {
     // Fetch unread message count
     const { unreadCount, setUnreadCount } = useUnreadMessageCount(contact._id)
+    const { setRecipientId } = useChatContext()
 
 
     // Handle contact button clicked (open up chat with the contact)
     const handleContactButtonClicked = () => {
         setUnreadCount(0)
-        setChatRecipientId(contact._id)
+        setRecipientId(contact._id)
     }
 
     return (

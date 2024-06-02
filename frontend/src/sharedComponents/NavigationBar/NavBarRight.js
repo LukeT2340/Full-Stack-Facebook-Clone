@@ -49,6 +49,7 @@ const NavBarRight = ({profile}) => {
                     <Dropdown profile={profile} />
                 )}
             </div>
+            
         </Nav>
     );
 }
