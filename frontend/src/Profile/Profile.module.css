@@ -13,7 +13,7 @@
 .coverPhoto {
     position: absolute;
     width: inherit;
-    height: 30vh;
+    height: 220px;
     z-index: -5;
     object-fit: cover; 
     border-radius: 10px;
@@ -111,6 +111,7 @@
 /* Bottom */
 .profileBottom {
     min-height: 50vh;
+    margin: 0;
 }
 
 .introContainer {
@@ -147,6 +148,7 @@
     justify-content: center;
     align-items: center;
     width: 100%;
+    min-height: 100vh;
     height: 100%;
     background: #f1f2f5;
 }

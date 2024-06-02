@@ -31,7 +31,7 @@
     outline: none;
     font-weight: 600;
     padding-block: 7px;
-    min-width: 32vw;
+    width: 460px;
 }
 
 .postButton:disabled {
