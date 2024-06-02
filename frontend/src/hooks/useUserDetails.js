@@ -26,7 +26,7 @@ export const useUserDetails = () => {
             formData.append('coverPhoto', compressedFile)
 
             const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/profile/update/coverPhoto`,{
-                method: 'POST',
+                method: 'PUT',
                 headers: {
                     'Authorization': `Bearer ${token}`
                 },

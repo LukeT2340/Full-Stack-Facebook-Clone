@@ -145,7 +145,7 @@ router.get("/search", async (req, res) => {
 router.use(requireAuth)
 
 // Update cover photo
-router.post("/update/coverPhoto", upload.single('coverPhoto'), async(req, res) => {
+router.put("/update/coverPhoto", upload.single('coverPhoto'), async(req, res) => {
     const userId = req.userId
     try {
         // First find the user from the db
