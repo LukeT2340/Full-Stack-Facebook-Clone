@@ -10,6 +10,7 @@ const statusController = require('./routers/statusController')
 const messageController = require('./routers/messageController')
 const profileController = require('./routers/profileController')
 const cookieParser = require('cookie-parser')
+const logRequest = require('./middleware/logRequest')
 
 const app = express()
 
@@ -46,6 +47,9 @@ app.use(cors({
 
 // Use cookie parser
 app.use(cookieParser())
+
+// Log requests
+app.use(logRequest)
 
 // Use user routes
 app.use('/user', userController)
