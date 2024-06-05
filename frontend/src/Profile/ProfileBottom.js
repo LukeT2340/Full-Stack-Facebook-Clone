@@ -8,7 +8,7 @@ const ProfileBottom = ({pageProfile, clientProfile}) => {
     return (
         <div className={styles.profileBottomBackground}>
             <div className={`col-xl-7 col-lg-8 col-10`}>
-                <div className={`${styles.profileBottom} d-flex flex-column flex-md-row align-items-center`}>
+                <div className={`${styles.profileBottom} d-flex flex-column flex-md-row`}>
                     {/* Left side */}
                     <div className="col-xl-5 col-lg-4 col-md-10 col-12 mb-auto">
                         <Intro profile={pageProfile}/>
