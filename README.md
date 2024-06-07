@@ -14,7 +14,7 @@ Password: Password#1
 ## Features
 
 - User Authentication (Sign Up, Login, Logout)
-- Add Status Updates and post on other peoples' walls
+- Add status updates and post on other peoples' walls
 - Comment and Like on Statuses
 - Real-time messaging
 - Profile pages
