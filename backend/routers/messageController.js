@@ -51,7 +51,6 @@ router.get('/fetchUnreadCount', async (req, res) => {
             }
         )
 
-
         // Count unread messages
         const count = unreadMessages.length;
         return res.status(200).json({ count }); 
