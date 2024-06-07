@@ -36,6 +36,6 @@ Password: Password#1
 - **Other:**
   - JWT (JSON Web Tokens for authentication)
   - Multer (for file uploads)
-  - Socket.io for real time messaging
+  - Socket.io (for real time messaging)
 
 I know that building Facebook and Twitter clones is something a lot of CS students do and there are a million tutorials on Youtube of how to do it. You can be rest assured I did not follow any tutorial for this project. I designed it completely myself :). If I didn't know how to do something I'd google it or use ChatGPT. Thanks for your time!
