@@ -8,7 +8,7 @@ const Intro = ({profile}) => {
     return (
         <div className={`${styles.introContainer} me-md-4`}>
             { /* TODO: This component should differ depending on whether it is the user's profile or not */}
-            {user._id === profile._id ? (
+            {user.user_id === profile._id ? (
               <>
                 <h4>Intro</h4>
                 {profile.bio ? (
